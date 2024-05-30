@@ -1,7 +1,11 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 
-export default function App() {
+type AppProps = {
+  offersAmount: number;
+}
+
+export default function App({offersAmount}: AppProps): React.JSX.Element {
   return (
-    <MainScreen />
+    <MainScreen offersAmount={offersAmount} />
   );
 }

@@ -1,4 +1,4 @@
-export default function PlaceCard() {
+export default function PlaceCard(): React.JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
