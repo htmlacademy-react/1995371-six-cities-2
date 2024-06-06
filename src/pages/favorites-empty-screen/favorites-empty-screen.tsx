@@ -1,4 +1,4 @@
-export default function FavoritesEmptyScreen() {
+export default function FavoritesEmptyScreen(): React.JSX.Element {
   return (
     <div className="page page--favorites-empty">
       <header className="header">

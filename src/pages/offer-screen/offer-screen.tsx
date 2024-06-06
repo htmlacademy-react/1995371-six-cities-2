@@ -1,4 +1,4 @@
-export default function OfferScreen() {
+export default function OfferScreen(): React.JSX.Element {
   return (
     <div className="page">
       <header className="header">

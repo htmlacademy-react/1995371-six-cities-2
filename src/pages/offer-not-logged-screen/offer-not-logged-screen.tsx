@@ -1,4 +1,4 @@
-export default function OfferNotLoggedScreen() {
+export default function OfferNotLoggedScreen(): React.JSX.Element {
   return (
     <div className="page">
       <header className="header">

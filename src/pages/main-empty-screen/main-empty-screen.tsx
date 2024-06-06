@@ -1,4 +1,4 @@
-export default function MainEmptyScreen() {
+export default function MainEmptyScreen(): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">

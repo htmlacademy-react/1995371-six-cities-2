@@ -1,4 +1,4 @@
-export default function FavoritesScreen() {
+export default function FavoritesScreen(): React.JSX.Element {
   return (
     <div className="page">
       <header className="header">
