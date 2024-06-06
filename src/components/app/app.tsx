@@ -26,15 +26,15 @@ export default function App({offersAmount}: AppProps): React.JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesScreen />}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <FavoritesScreen />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Offer}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <OfferScreen />
-            </PrivateRoute>
-          }
+          element={<OfferScreen />}
         />
         <Route
           path="*"
