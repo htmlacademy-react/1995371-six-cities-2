@@ -1,12 +1,15 @@
 import React from 'react';
-import PlaceCard from '../../components/place-card/place-card';
+
+import { Offers } from '../../types/offers';
+
 import Logo from '../../components/logo/logo';
+import PlacesList from '../../components/places-list/places-list';
 
 type MainScreenProps = {
-  offersAmount: number;
+  offers: Offers;
 }
 
-export default function MainScreen({offersAmount}: MainScreenProps): React.JSX.Element {
+export default function MainScreen({offers}: MainScreenProps): React.JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,7 +98,7 @@ export default function MainScreen({offersAmount}: MainScreenProps): React.JSX.E
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: offersAmount}, (_, index) => <PlaceCard key={index} />)}
+                <PlacesList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">

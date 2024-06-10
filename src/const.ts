@@ -1,5 +1,14 @@
+const AVATAR_TEMP_URL = 'https://i.pravatar.cc/128';
+
 const Setting = {
   OffersAmount: 5,
+} as const;
+
+const AccommodationType = {
+  Apartment: 'apartment',
+  PrivateRoom: 'room',
+  House: 'house',
+  Hotel: 'hotel'
 } as const;
 
 enum AppRoute {
@@ -15,4 +24,10 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export { Setting, AppRoute, AuthorizationStatus };
+export {
+  AVATAR_TEMP_URL,
+  Setting,
+  AccommodationType,
+  AppRoute,
+  AuthorizationStatus
+};
