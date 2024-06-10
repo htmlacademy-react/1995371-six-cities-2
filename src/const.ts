@@ -11,6 +11,16 @@ const AccommodationType = {
   Hotel: 'hotel'
 } as const;
 
+const PlaceCardModeOption = {
+  Default: 'default',
+  Favorite: 'favorite'
+} as const;
+
+const FilterType = {
+  Favorite: 'isFavorite',
+  City: 'city'
+} as const;
+
 enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -28,6 +38,8 @@ export {
   AVATAR_TEMP_URL,
   Setting,
   AccommodationType,
+  PlaceCardModeOption,
+  FilterType,
   AppRoute,
   AuthorizationStatus
 };

@@ -20,9 +20,7 @@ export default function App({offers}: AppProps): React.JSX.Element {
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen
-              offers={offers}
-            />
+            <MainScreen offers={offers} />
           }
         />
         <Route
@@ -32,8 +30,8 @@ export default function App({offers}: AppProps): React.JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen offers={offers} />
             </PrivateRoute>
           }
         />

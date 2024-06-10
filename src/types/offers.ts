@@ -46,6 +46,8 @@ export interface Offer extends OfferBase {
   maxAdults: number;
 }
 
+export type SomeOffer = OfferShort | Offer;
+
 export type OfferFull = OfferShort & Offer;
 
 export type Offers = OfferFull[];
