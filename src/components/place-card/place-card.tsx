@@ -4,14 +4,23 @@ import { getInteger } from '../../utils';
 
 type PlaceCardProps = {
   offer: OfferShort;
+  onMouseOver: (id: string) => void;
 }
 
-export default function PlaceCard({offer}: PlaceCardProps): React.JSX.Element {
+export default function PlaceCard({offer, onMouseOver}: PlaceCardProps): React.JSX.Element {
   const bookmarkButtonClassName = `place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`;
   const ratingWidthValue = `${2 * getInteger(offer.rating)}0%`;
 
+  const handleMouseOverEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+    evt.preventDefault();
+    onMouseOver(offer.id);
+  };
+
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOverCapture={handleMouseOverEvent}
+    >
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
