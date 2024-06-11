@@ -21,11 +21,17 @@ const FilterType = {
   City: 'city'
 } as const;
 
+const HeaderModeOption = {
+  LoginScreen: 'loginScreen',
+  Default: 'default'
+} as const;
+
 enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id'
+  Offer = '/offer/:id',
+  OfferBase = '/offer/'
 }
 
 enum AuthorizationStatus {
@@ -40,6 +46,7 @@ export {
   AccommodationType,
   PlaceCardModeOption,
   FilterType,
+  HeaderModeOption,
   AppRoute,
   AuthorizationStatus
 };

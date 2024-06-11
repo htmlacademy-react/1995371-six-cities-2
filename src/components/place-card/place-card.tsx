@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+
 import { PlaceCardMode } from '../../types/common';
 import { OfferShort } from '../../types/offers';
 
-import { PlaceCardModeOption } from '../../const';
+import { PlaceCardModeOption, AppRoute } from '../../const';
 import { getInteger } from '../../utils/utils';
 
 type PlaceCardProps = {
@@ -59,7 +61,7 @@ export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.OfferBase}${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
