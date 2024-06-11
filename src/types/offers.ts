@@ -21,7 +21,7 @@ export type Host = {
 
 export type Images = string[];
 
-export interface OfferBase {
+export type Offer = {
   id: string;
   title: string;
   type: Accommodation;
@@ -31,13 +31,7 @@ export interface OfferBase {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-}
-
-export interface OfferShort extends OfferBase {
   previewImage: string;
-}
-
-export interface Offer extends OfferBase {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -46,8 +40,4 @@ export interface Offer extends OfferBase {
   maxAdults: number;
 }
 
-export type SomeOffer = OfferShort | Offer;
-
-export type OfferFull = OfferShort & Offer;
-
-export type Offers = OfferFull[];
+export type Offers = Offer[];

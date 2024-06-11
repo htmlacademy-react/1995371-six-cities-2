@@ -32,6 +32,11 @@ const RatingViewModeOption = {
   Reviews: 'reviews'
 } as const;
 
+const BookmarkButtonModeOption = {
+  Card: 'place-card',
+  Offer: 'offer'
+} as const;
+
 enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -54,6 +59,7 @@ export {
   PlaceCardModeOption,
   HeaderModeOption,
   RatingViewModeOption,
+  BookmarkButtonModeOption,
   AppRoute,
   AuthorizationStatus
 };

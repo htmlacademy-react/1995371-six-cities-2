@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
 
 import { PlaceCardMode } from '../../types/common';
-import { OfferShort } from '../../types/offers';
+import { Offer } from '../../types/offers';
 
 import { PlaceCardModeOption, AppRoute } from '../../const';
 import Rating from '../shared/rating/rating';
+import BookmarkButton from '../shared/bookmark-button/bookmark-button';
 
 type PlaceCardProps = {
-  offer: OfferShort;
+  offer: Offer;
   cardMode: PlaceCardMode;
   onMouseOver: (id: string) => void;
 }
 
-export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps): React.JSX.Element {
+export default function PlaceCard({
+  offer,
+  cardMode,
+  onMouseOver
+}: PlaceCardProps): React.JSX.Element {
   const isFavoriteMode = cardMode === PlaceCardModeOption.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
@@ -43,15 +48,7 @@ export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`button place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton offer={offer}/>
         </div>
         <Rating offerRating={offer.rating} />
         <h2 className="place-card__name">

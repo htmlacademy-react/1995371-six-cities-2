@@ -1,3 +1,14 @@
+import { Offer, Offers } from '../../types/offers';
+
+import { BookmarkButtonModeOption } from '../../const';
+import Rating from '../shared/rating/rating';
+import BookmarkButton from '../shared/bookmark-button/bookmark-button';
+
+type PlaceOfferProps = {
+  offers: Offers;
+  currentOfferId: string;
+}
+
 function Gallery() {
   return (
     <div className="offer__gallery">
@@ -74,7 +85,54 @@ function ReviewForm() {
   );
 }
 
-export default function PlaceOffer() {
+function ReviewsSection() {
+  return (
+    <section className="offer__reviews reviews">
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <ul className="reviews__list">
+        <li className="reviews__item">
+          <div className="reviews__user user">
+            <div className="reviews__avatar-wrapper user__avatar-wrapper">
+              <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+            </div>
+            <span className="reviews__user-name">
+              Max
+            </span>
+          </div>
+          <div className="reviews__info">
+            <div className="reviews__rating rating">
+              <div className="reviews__stars rating__stars">
+                <span style={{width: '80%'}}></span>
+                <span className="visually-hidden">Rating</span>
+              </div>
+            </div>
+            <p className="reviews__text">
+              A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+            </p>
+            <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+          </div>
+        </li>
+      </ul>
+      <ReviewForm />
+    </section>
+  );
+}
+
+function OfferMark(): React.JSX.Element {
+  return(
+    <div className="offer__mark">
+      <span>Premium</span>
+    </div>
+  );
+}
+
+export default function PlaceOffer({
+  offers,
+  currentOfferId
+}: PlaceOfferProps): React.JSX.Element {
+  const currentOffer = offers.find((offer) => offer.id === currentOfferId) as Offer;
+  const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
+
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
@@ -82,27 +140,12 @@ export default function PlaceOffer() {
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          <div className="offer__mark">
-            <span>Premium</span>
-          </div>
+          {offerMark}
           <div className="offer__name-wrapper">
-            <h1 className="offer__name">
-              Beautiful &amp; luxurious studio at great location
-            </h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <h1 className="offer__name">{currentOffer.title}</h1>
+            <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonModeOption.Offer}/>
           </div>
-          <div className="offer__rating rating">
-            <div className="offer__stars rating__stars">
-              <span style={{width: '80%'}}></span>
-              <span className="visually-hidden">Rating</span>
-            </div>
-            <span className="offer__rating-value rating__value">4.8</span>
-          </div>
+          <Rating offerRating={currentOffer.rating}/>
           <ul className="offer__features">
             <li className="offer__feature offer__feature--entire">
               Apartment
@@ -175,34 +218,7 @@ export default function PlaceOffer() {
               </p>
             </div>
           </div>
-          <section className="offer__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-            <ul className="reviews__list">
-              <li className="reviews__item">
-                <div className="reviews__user user">
-                  <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                    <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                  </div>
-                  <span className="reviews__user-name">
-                    Max
-                  </span>
-                </div>
-                <div className="reviews__info">
-                  <div className="reviews__rating rating">
-                    <div className="reviews__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <p className="reviews__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                </div>
-              </li>
-            </ul>
-            <ReviewForm />
-          </section>
+          <ReviewsSection />
         </div>
       </div>
       <section className="offer__map map"></section>
