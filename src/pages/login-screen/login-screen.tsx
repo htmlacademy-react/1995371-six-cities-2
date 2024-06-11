@@ -1,10 +1,16 @@
+import { Offers } from '../../types/offers';
+
 import { HeaderModeOption } from '../../const';
 import Header from '../../components/header/header';
 
-export default function LoginScreen(): React.JSX.Element {
+type LoginScreenProps = {
+  offers: Offers;
+}
+
+export default function LoginScreen({offers}: LoginScreenProps): React.JSX.Element {
   return (
     <div className="page page--gray page--login">
-      <Header headerMode={HeaderModeOption.LoginScreen}/>
+      <Header headerMode={HeaderModeOption.LoginScreen} offers={offers}/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

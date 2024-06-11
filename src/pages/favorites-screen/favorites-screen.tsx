@@ -43,7 +43,7 @@ export default function FavoritesScreen({offers}: FavoritesScreenProps): React.J
 
   return (
     <div className="page">
-      <Header />
+      <Header offers={offers}/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

@@ -24,7 +24,7 @@ export default function OfferScreen({
 
   return (
     <div className="page">
-      <Header />
+      <Header offers={offers}/>
       <main className="page__main page__main--offer">
         <PlaceOffer
           offers={offers}
