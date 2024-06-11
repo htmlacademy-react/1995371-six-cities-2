@@ -6,6 +6,7 @@ import { Offer } from '../../types/offers';
 import { PlaceCardModeOption, AppRoute } from '../../const';
 import Rating from '../shared/rating/rating';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
+import OfferPrice from '../shared/offer-price/offer-price';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -44,10 +45,7 @@ export default function PlaceCard({
       </div>
       <div className={`place-card__info ${isFavoriteMode ? 'favorites__card-info' : ''}`}>
         <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
-          </div>
+          <OfferPrice offerPrice={offer.price} />
           <BookmarkButton offer={offer}/>
         </div>
         <Rating offerRating={offer.rating} />
