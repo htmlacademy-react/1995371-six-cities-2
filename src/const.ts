@@ -64,22 +64,6 @@ const RatingStarTitle = {
   Terribly: 'terribly',
 } as const;
 
-// enum RatingStarInfo {
-//   Perfect = 'perfect',
-//   Good = 'good',
-//   NotBad = 'not bad',
-//   Badly = 'badly',
-//   Terribly = 'terribly',
-// }
-
-// const RatingStarValue = {
-//   'perfect': 5,
-//   'good': 4,
-//   'not bad': 3,
-//   'badly': 2,
-//   'terribly': 1,
-// } as const;
-
 const RatingStarValue = {
   [RatingStarTitle.Perfect]: 5,
   [RatingStarTitle.Good]: 4,

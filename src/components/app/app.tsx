@@ -31,7 +31,7 @@ export default function App({
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginScreen />}
+          element={<LoginScreen offers={offers} />}
         />
         <Route
           path={AppRoute.Favorites}

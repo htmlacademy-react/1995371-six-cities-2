@@ -2,10 +2,7 @@ import { Filter } from '../types/common';
 import { Offers, Offer } from '../types/offers';
 
 import { FilterType } from '../const';
-
-function isString(value: unknown): value is string {
-  return typeof value === 'string';
-}
+import { isString }from './utils';
 
 const FilterFunction = {
   [FilterType.Favorite]: () => (offer: Offer) => offer.isFavorite,
