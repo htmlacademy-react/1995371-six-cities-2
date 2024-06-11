@@ -1,18 +1,38 @@
 import { Filter } from '../types/common';
-import { Offers, SomeOffer } from '../types/offers';
+import { Offers, Offer } from '../types/offers';
 
 import { FilterType } from '../const';
 
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
 const FilterFunction = {
-  [FilterType.Favorite]: () => (offer: SomeOffer) => offer.isFavorite,
-  [FilterType.City]: (city: string) => (offer: SomeOffer) => offer.city.name === city
+  [FilterType.Favorite]: () => (offer: Offer) => offer.isFavorite,
+  [FilterType.City]: (city: string) => (offer: Offer) => offer.city.name === city
 } as const;
 
 const getFilteredOffers = <T>(
   offers: Offers,
   filterType: Filter,
   filterTag?: T
-) => offers.filter(FilterFunction[filterType](filterTag));
+) => {
+  let filterFunction = (offer: Offer): boolean => offer !== undefined;
+
+  switch (filterType) {
+    case FilterType.City:
+      if (filterTag && isString(filterTag)) {
+        filterFunction = FilterFunction[filterType](filterTag);
+      }
+      break;
+
+    case FilterType.Favorite:
+      filterFunction = FilterFunction[filterType]();
+      break;
+  }
+
+  return offers.filter(filterFunction);
+};
 
 const getCityFilteredOffers = (
   offers: Offers,
