@@ -10,28 +10,18 @@ type PlaceOfferProps = {
   currentOfferId: string;
 }
 
+type GalleryProps = {
+  imageUrls: string[];
+}
 
-function Gallery() {
+function Gallery({imageUrls}: GalleryProps): React.JSX.Element {
   return (
     <div className="offer__gallery">
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
-      </div>
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-      </div>
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio" />
-      </div>
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio" />
-      </div>
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio" />
-      </div>
-      <div className="offer__image-wrapper">
-        <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />
-      </div>
+      {imageUrls.map((url) => (
+        <div className="offer__image-wrapper" key={url}>
+          <img className="offer__image" src={url} alt="Photo studio" />
+        </div>
+      ))}
     </div>
   );
 }
@@ -210,7 +200,7 @@ export default function PlaceOffer({
   return (
     <section className="offer">
       <div className="offer__gallery-container container">
-        <Gallery />
+        <Gallery imageUrls={currentOffer.images}/>
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">

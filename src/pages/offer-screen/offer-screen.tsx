@@ -1,12 +1,17 @@
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
+import { offers } from '../../mocks/offers';
 
 export default function OfferScreen(): React.JSX.Element {
+  const params = useParams();
+  const currenOfferId = params.id as string;
+
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--offer">
-        <PlaceOffer />
+        <PlaceOffer offers={offers} currentOfferId={currenOfferId}/>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
