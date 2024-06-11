@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Offers } from '../../types/offers';
+import { ReviewsPack } from '../../types/reviews';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -11,9 +13,13 @@ import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 
 type AppProps = {
   offers: Offers;
+  reviewsPack: ReviewsPack;
 }
 
-export default function App({offers}: AppProps): React.JSX.Element {
+export default function App({
+  offers,
+  reviewsPack
+}: AppProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -37,7 +43,12 @@ export default function App({offers}: AppProps): React.JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferScreen offers={offers} />}
+          element={
+            <OfferScreen
+              offers={offers}
+              reviewsPack={reviewsPack}
+            />
+          }
         />
         <Route
           path="*"

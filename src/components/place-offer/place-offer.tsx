@@ -1,4 +1,5 @@
 import { Accommodation, Offer, Offers } from '../../types/offers';
+import { Reviews } from '../../types/reviews';
 
 import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const';
 import Rating from '../shared/rating/rating';
@@ -9,6 +10,7 @@ import ReviewsSection from '../reviews-section/reviews-section';
 type PlaceOfferProps = {
   offers: Offers;
   currentOfferId: string;
+  reviews: Reviews;
 }
 
 type GalleryProps = {
@@ -106,7 +108,8 @@ function HostModule({offer}: HostModuleProps): React.JSX.Element {
 
 export default function PlaceOffer({
   offers,
-  currentOfferId
+  currentOfferId,
+  reviews
 }: PlaceOfferProps): React.JSX.Element {
   const currentOffer = offers.find((offer) => offer.id === currentOfferId) as Offer;
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
@@ -135,7 +138,7 @@ export default function PlaceOffer({
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewModeOption.Offer}/>
           {goodsModule}
           <HostModule offer={currentOffer}/>
-          <ReviewsSection offerId={currentOffer.id}/>
+          <ReviewsSection offerId={currentOffer.id} reviews={reviews}/>
         </div>
       </div>
       <section className="offer__map map"></section>

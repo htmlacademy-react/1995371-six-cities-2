@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import { Offers } from '../../types/offers';
+import { ReviewsPack } from '../../types/reviews';
 
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
@@ -8,19 +9,28 @@ import PlacesList from '../../components/places-list/places-list';
 
 type OfferScreenProps = {
   offers: Offers;
+  reviewsPack: ReviewsPack;
 }
 
-export default function OfferScreen({offers}: OfferScreenProps): React.JSX.Element {
+export default function OfferScreen({
+  offers,
+  reviewsPack
+}: OfferScreenProps): React.JSX.Element {
   const params = useParams();
   const currentOfferId = params.id as string;
 
+  const reviews = reviewsPack[currentOfferId];
   const similaPlaces = offers.filter((offer) => offer.id !== currentOfferId);
 
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--offer">
-        <PlaceOffer offers={offers} currentOfferId={currentOfferId}/>
+        <PlaceOffer
+          offers={offers}
+          currentOfferId={currentOfferId}
+          reviews={reviews}
+        />
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
