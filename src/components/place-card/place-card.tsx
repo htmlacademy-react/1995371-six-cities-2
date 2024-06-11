@@ -4,7 +4,7 @@ import { PlaceCardMode } from '../../types/common';
 import { OfferShort } from '../../types/offers';
 
 import { PlaceCardModeOption, AppRoute } from '../../const';
-import { getInteger } from '../../utils/utils';
+import Rating from '../shared/rating/rating';
 
 type PlaceCardProps = {
   offer: OfferShort;
@@ -15,7 +15,6 @@ type PlaceCardProps = {
 export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps): React.JSX.Element {
   const isFavoriteMode = cardMode === PlaceCardModeOption.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
-  const ratingWidthValue = `${2 * getInteger(offer.rating)}0%`;
 
   const handleMouseOverEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>): void => {
     evt.preventDefault();
@@ -28,7 +27,7 @@ export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps
       onMouseOverCapture={!isFavoriteMode ? handleMouseOverEvent : undefined}
     >
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
-        <a href="#">
+        <Link to={`${AppRoute.OfferBase}${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -36,7 +35,7 @@ export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps
             height={isFavoriteMode ? '110' : '200'}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className={`place-card__info ${isFavoriteMode ? 'favorites__card-info' : ''}`}>
         <div className="place-card__price-wrapper">
@@ -54,12 +53,7 @@ export default function PlaceCard({offer, cardMode, onMouseOver}: PlaceCardProps
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: ratingWidthValue}}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating offerRating={offer.rating} />
         <h2 className="place-card__name">
           <Link to={`${AppRoute.OfferBase}${offer.id}`}>{offer.title}</Link>
         </h2>
