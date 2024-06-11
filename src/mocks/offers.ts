@@ -24,7 +24,7 @@ const offers: Offers = [
     'isFavorite': false,
     'isPremium': true,
     'rating': 4.4,
-    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'description': 'Private balconies this exclusive residence offers the ultimate in privacy and luxury The sleek and modern design combined with the panoramic city views creates a truly unparalleled living experience',
     'bedrooms': 3,
     'goods': [
       'Heating'
@@ -35,7 +35,10 @@ const offers: Offers = [
       'isPro': false
     },
     'images': [
-      'https://url-to-image/image.png'
+      'https://13.design.htmlacademy.pro/static/hotel/12.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/5.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/7.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/1.jpg'
     ],
     'maxAdults': 4
   },
@@ -61,7 +64,7 @@ const offers: Offers = [
     'isFavorite': true,
     'isPremium': false,
     'rating': 2.8,
-    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'description': 'The building is fairly rounded in shape. The house is half surrounded by wooden sunscreens structures. The second floor is smaller than the first, which allowed for several balconies on the sides of the house. This floor has roughly the same style as the floor below.',
     'bedrooms': 3,
     'goods': [
       'Heating'
@@ -72,7 +75,9 @@ const offers: Offers = [
       'isPro': true
     },
     'images': [
-      'https://url-to-image/image.png'
+      'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/15.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/10.jpg'
     ],
     'maxAdults': 4
   },
@@ -98,7 +103,7 @@ const offers: Offers = [
     'isFavorite': true,
     'isPremium': false,
     'rating': 3.9,
-    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'description': 'From the outside this house looks posh and extravagant. It has been built with white cedar wood and has fir wooden decorations. Tall, large windows let in plenty of light and have been added to the house in a fairly asymmetrical pattern. The house is equipped with an average kitchen and three bathrooms, it also has a fairly small living room, three bedrooms, a small dining room, a library and a cozy basement.',
     'bedrooms': 3,
     'goods': [
       'Heating'
@@ -109,7 +114,9 @@ const offers: Offers = [
       'isPro': true
     },
     'images': [
-      'https://url-to-image/image.png'
+      'https://13.design.htmlacademy.pro/static/hotel/18.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/20.jpg'
     ],
     'maxAdults': 4
   },
@@ -146,7 +153,9 @@ const offers: Offers = [
       'isPro': false
     },
     'images': [
-      'https://url-to-image/image.png'
+      'https://13.design.htmlacademy.pro/static/hotel/16.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/3.jpg',
+      'https://13.design.htmlacademy.pro/static/hotel/2.jpg'
     ],
     'maxAdults': 4
   },
