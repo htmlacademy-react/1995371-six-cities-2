@@ -1,6 +1,6 @@
 import { AccommodationType } from '../const';
 
-export type Accommodation = typeof AccommodationType.Apartment | typeof AccommodationType.Hotel | typeof AccommodationType.House | typeof AccommodationType.PrivateRoom;
+export type Accommodation = typeof AccommodationType.Apartment | typeof AccommodationType.Hotel | typeof AccommodationType.House | typeof AccommodationType.Room;
 
 export type Location = {
   latitude: number;

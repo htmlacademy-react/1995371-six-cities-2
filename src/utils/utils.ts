@@ -1,3 +1,4 @@
-const getInteger = (number: number): number => Math.round(number);
+const roundToInteger = (number: number): number => Math.round(number);
+const parseInteger = (value: string) => parseInt(value, 10);
 
-export { getInteger };
+export { roundToInteger, parseInteger };

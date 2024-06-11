@@ -5,7 +5,7 @@ const offers: Offers = [
   {
     'id': '37fc5e64-0f59-46a7-b57f-d85caeae73cb',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
-    'type': 'room',
+    'type': 'Private room',
     'price': 137,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/12.jpg',
     'city': {
@@ -27,7 +27,14 @@ const offers: Offers = [
     'description': 'Private balconies this exclusive residence offers the ultimate in privacy and luxury The sleek and modern design combined with the panoramic city views creates a truly unparalleled living experience',
     'bedrooms': 3,
     'goods': [
-      'Heating'
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Coffee machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
     ],
     'host': {
       'name': 'Oliver Conner',
@@ -45,7 +52,7 @@ const offers: Offers = [
   {
     'id': 'ad4abd3a-5935-4e14-b5b4-f9ad2f26f45a',
     'title': 'Tile House',
-    'type': 'hotel',
+    'type': 'Hotel',
     'price': 341,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
     'city': {
@@ -67,7 +74,12 @@ const offers: Offers = [
     'description': 'The building is fairly rounded in shape. The house is half surrounded by wooden sunscreens structures. The second floor is smaller than the first, which allowed for several balconies on the sides of the house. This floor has roughly the same style as the floor below.',
     'bedrooms': 3,
     'goods': [
-      'Heating'
+      'Wi-Fi',
+      'Towels',
+      'Heating',
+      'Kitchen',
+      'Cabel TV',
+      'Fridge',
     ],
     'host': {
       'name': 'Mary Martinez',
@@ -84,7 +96,7 @@ const offers: Offers = [
   {
     'id': '5bacd8cb-0b3f-440b-bf3d-fcc1d4f4c5ec',
     'title': 'The house among olive ',
-    'type': 'house',
+    'type': 'House',
     'price': 888,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/19.jpg',
     'city': {
@@ -106,7 +118,14 @@ const offers: Offers = [
     'description': 'From the outside this house looks posh and extravagant. It has been built with white cedar wood and has fir wooden decorations. Tall, large windows let in plenty of light and have been added to the house in a fairly asymmetrical pattern. The house is equipped with an average kitchen and three bathrooms, it also has a fairly small living room, three bedrooms, a small dining room, a library and a cozy basement.',
     'bedrooms': 3,
     'goods': [
-      'Heating'
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Kitchen',
+      'Cabel TV',
+      'Fridge',
     ],
     'host': {
       'name': 'Michael Ramsey',
@@ -123,7 +142,7 @@ const offers: Offers = [
   {
     'id': 'd7a375b7-f2a3-4a46-9f51-ea9208292722',
     'title': 'Tile House',
-    'type': 'house',
+    'type': 'House',
     'price': 834,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': {
@@ -145,7 +164,13 @@ const offers: Offers = [
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'bedrooms': 3,
     'goods': [
-      'Heating'
+      'Wi-Fi',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Kitchen',
+      'Dishwasher',
+      'Fridge',
     ],
     'host': {
       'name': 'William Allison',

@@ -5,10 +5,10 @@ const Setting = {
 } as const;
 
 const AccommodationType = {
-  Apartment: 'apartment',
-  PrivateRoom: 'room',
-  House: 'house',
-  Hotel: 'hotel'
+  Apartment: 'Apartment',
+  Room: 'Private room',
+  House: 'House',
+  Hotel: 'Hotel'
 } as const;
 
 const FilterType = {
@@ -56,6 +56,38 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+const RatingStarTitle = {
+  Perfect: 'perfect',
+  Good: 'good',
+  NotBad: 'not bad',
+  Badly: 'badly',
+  Terribly: 'terribly',
+} as const;
+
+// enum RatingStarInfo {
+//   Perfect = 'perfect',
+//   Good = 'good',
+//   NotBad = 'not bad',
+//   Badly = 'badly',
+//   Terribly = 'terribly',
+// }
+
+// const RatingStarValue = {
+//   'perfect': 5,
+//   'good': 4,
+//   'not bad': 3,
+//   'badly': 2,
+//   'terribly': 1,
+// } as const;
+
+const RatingStarValue = {
+  [RatingStarTitle.Perfect]: 5,
+  [RatingStarTitle.Good]: 4,
+  [RatingStarTitle.NotBad]: 3,
+  [RatingStarTitle.Badly]: 2,
+  [RatingStarTitle.Terribly]: 1,
+} as const;
+
 export {
   AVATAR_TEMP_URL,
   Setting,
@@ -67,5 +99,7 @@ export {
   BookmarkButtonModeOption,
   PriceViewModeOption,
   AppRoute,
-  AuthorizationStatus
+  AuthorizationStatus,
+  RatingStarTitle,
+  RatingStarValue
 };

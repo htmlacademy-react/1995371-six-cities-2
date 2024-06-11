@@ -1,0 +1,43 @@
+import { parseInteger } from '../../../utils/utils';
+
+type RatingStarButtonProps = {
+  title: string;
+  value: number;
+  isChecked: boolean;
+  onRatingChange: (newValue: number) => void;
+}
+
+export default function RatingStarButton({
+  title,
+  value,
+  isChecked,
+  onRatingChange}: RatingStarButtonProps): React.JSX.Element {
+  const idValue = `${value}-star${value === 1 ? '' : 's'}`;
+
+  const handleRatingChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    onRatingChange(parseInteger(evt.target.value));
+  };
+
+  return (
+    <>
+      <input
+        className="form__rating-input visually-hidden"
+        name="rating"
+        value={value}
+        id={idValue}
+        checked={isChecked}
+        onChange={handleRatingChange}
+        type="radio"
+      />
+      <label
+        htmlFor={idValue}
+        className="reviews__rating-label form__rating-label"
+        title={title}
+      >
+        <svg className="form__star-image" width="37" height="33">
+          <use xlinkHref="#icon-star"></use>
+        </svg>
+      </label>
+    </>
+  );
+}
