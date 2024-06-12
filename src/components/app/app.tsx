@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { Offers } from '../../types/offers';
+import { ReviewsPack } from '../../types/reviews';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -9,32 +12,43 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 
 type AppProps = {
-  offersAmount: number;
+  offers: Offers;
+  reviewsPack: ReviewsPack;
 }
 
-export default function App({offersAmount}: AppProps): React.JSX.Element {
+export default function App({
+  offers,
+  reviewsPack
+}: AppProps): React.JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen offersAmount={offersAmount} />}
+          element={
+            <MainScreen offers={offers} />
+          }
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginScreen />}
+          element={<LoginScreen offers={offers} />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen offers={offers} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferScreen />}
+          element={
+            <OfferScreen
+              offers={offers}
+              reviewsPack={reviewsPack}
+            />
+          }
         />
         <Route
           path="*"
