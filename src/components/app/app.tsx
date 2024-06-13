@@ -4,6 +4,8 @@ import { Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
+
+import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -22,6 +24,7 @@ export default function App({
 }: AppProps): React.JSX.Element {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           path={AppRoute.Main}
