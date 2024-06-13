@@ -1,3 +1,8 @@
+export type reviewState = {
+  rating: number;
+  reviewText: string;
+}
+
 export type User = {
   name: string;
   avatarUrl: string;

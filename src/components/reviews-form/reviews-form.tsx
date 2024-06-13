@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { reviewInitStateValue } from '../../utils/review-utils';
 import RatingChooser from '../rating-chooser/rating-chooser';
 
 type ReviewFormProps = {
@@ -7,37 +8,33 @@ type ReviewFormProps = {
 }
 
 export default function ReviewForm({offerId}: ReviewFormProps): React.JSX.Element {
-  const getInitState = () => ({
-    offerId: offerId,
-    rating: 0,
-    reviewText: '',
-  });
 
-  const [reviewsData, setReviewData] = useState(getInitState());
+  const [reviewData, setReviewData] = useState({...reviewInitStateValue});
 
-  if (offerId !== reviewsData.offerId) {
-    setReviewData(getInitState());
-  }
+  useEffect(() => {
+    setReviewData({...reviewInitStateValue});
+  },
+  [offerId]);
 
   const handleRatingChange = (newRatingValue: number) => {
-    setReviewData({...reviewsData, rating: newRatingValue});
+    setReviewData({...reviewData, rating: newRatingValue});
   };
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <RatingChooser
-        currentRatingValue={reviewsData.rating}
+        currentRatingValue={reviewData.rating}
         onRatingChange={handleRatingChange}
       />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
-        value={reviewsData.reviewText}
+        value={reviewData.reviewText}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-          setReviewData({...reviewsData, reviewText: evt.target.value});
+          setReviewData({...reviewData, reviewText: evt.target.value});
         }}
       />
       <div className="reviews__button-wrapper">
