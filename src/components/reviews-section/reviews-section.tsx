@@ -1,6 +1,6 @@
 import { Reviews } from '../../types/reviews';
 
-import { RatingViewModeOption } from '../../const';
+import { RatingViewModeOption } from '../../const/const';
 import ReviewForm from '../reviews-form/reviews-form';
 import Rating from '../shared/rating/rating';
 

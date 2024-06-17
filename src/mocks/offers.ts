@@ -1,4 +1,4 @@
-import { AVATAR_TEMP_URL } from '../const';
+import { AVATAR_TEMP_URL } from '../const/const';
 import { Offers } from '../types/offers';
 
 const offers: Offers = [

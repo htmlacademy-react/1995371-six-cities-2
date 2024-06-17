@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Offers } from '../../../types/offers';
-import { AppRoute } from '../../../const';
+import { AppRoute } from '../../../const/const';
 import { getFavoriteOffers } from '../../../utils/filter-utils';
 
 type ProfileLinkProps = {

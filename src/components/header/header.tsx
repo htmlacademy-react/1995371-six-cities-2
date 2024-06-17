@@ -1,7 +1,7 @@
 import { HeaderMode } from '../../types/common';
 import { Offers } from '../../types/offers';
 
-import { AuthorizationStatus, HeaderModeOption } from '../../const';
+import { AuthorizationStatus, HeaderModeOption } from '../../const/const';
 import Logo from './logo/logo';
 import ProfileLink from './links/profile-link';
 import SignOutLink from './links/sign-out-link';

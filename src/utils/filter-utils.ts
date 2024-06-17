@@ -1,7 +1,7 @@
 import { Filter } from '../types/common';
 import { Offers, Offer } from '../types/offers';
 
-import { FilterType } from '../const';
+import { FilterType } from '../const/const';
 import { isString }from './utils';
 
 const FilterFunction = {

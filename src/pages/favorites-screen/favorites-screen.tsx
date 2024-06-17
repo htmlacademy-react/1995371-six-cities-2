@@ -1,6 +1,6 @@
 import { Offers } from '../../types/offers';
 
-import { PlaceCardModeOption } from '../../const';
+import { PlaceCardModeOption } from '../../const/const';
 import { getCityFilteredOffers, getFavoriteOffers } from '../../utils/filter-utils';
 
 import Header from '../../components/header/header';

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { PlaceCardMode } from '../../types/common';
 import { Offer } from '../../types/offers';
 
-import { PlaceCardModeOption, AppRoute } from '../../const';
+import { PlaceCardModeOption, AppRoute } from '../../const/const';
 import Rating from '../shared/rating/rating';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
 import OfferPrice from '../shared/offer-price/offer-price';

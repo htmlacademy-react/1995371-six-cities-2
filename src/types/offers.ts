@@ -1,4 +1,4 @@
-import { AccommodationType } from '../const';
+import { AccommodationType } from '../const/const';
 
 export type Accommodation = typeof AccommodationType.Apartment | typeof AccommodationType.Hotel | typeof AccommodationType.House | typeof AccommodationType.Room;
 

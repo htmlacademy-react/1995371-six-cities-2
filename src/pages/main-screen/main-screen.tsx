@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Offers } from '../../types/offers';
 
+import { DEFAULT_CITY } from '../../const/city';
+
 import Header from '../../components/header/header';
 import PlacesList from '../../components/places-list/places-list';
+import Map from '../../components/ map/map';
 
 type MainScreenProps = {
   offers: Offers;
 }
 
 export default function MainScreen({offers}: MainScreenProps): React.JSX.Element {
+  const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
+
   return (
     <div className="page page--gray page--main">
       <Header offers={offers}/>
@@ -76,7 +81,9 @@ export default function MainScreen({offers}: MainScreenProps): React.JSX.Element
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={currentCity} points={offers} />
+              </section>
             </div>
           </div>
         </div>

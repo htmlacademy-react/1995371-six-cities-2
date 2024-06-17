@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { reviewInitStateValue } from '../../utils/review-utils';
+import { reviewInitStateValue } from '../../const/review-const';
 import RatingChooser from '../rating-chooser/rating-chooser';
 
 type ReviewFormProps = {

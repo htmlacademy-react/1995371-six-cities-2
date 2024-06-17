@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Offers } from '../../types/offers';
 import { PlaceCardMode } from '../../types/common';
 
-import { PlaceCardModeOption } from '../../const';
+import { PlaceCardModeOption } from '../../const/const';
 import { getFavoriteOffers } from '../../utils/filter-utils';
 import PlaceCard from '../../components/place-card/place-card';
 

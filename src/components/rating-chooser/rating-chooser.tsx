@@ -1,4 +1,4 @@
-import { RatingStarTitle, RatingStarValue } from '../../const';
+import { RatingStarTitle, RatingStarValue } from '../../const/const';
 import RatingStarButton from './rating-star-button/rating-star-button';
 
 type RatingChooserProps = {

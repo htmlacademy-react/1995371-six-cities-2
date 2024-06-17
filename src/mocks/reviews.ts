@@ -1,6 +1,6 @@
 import { ReviewsPack } from '../types/reviews';
 
-import { AVATAR_TEMP_URL } from '../const';
+import { AVATAR_TEMP_URL } from '../const/const';
 
 const reviewsPack: ReviewsPack = {
   '37fc5e64-0f59-46a7-b57f-d85caeae73cb': [

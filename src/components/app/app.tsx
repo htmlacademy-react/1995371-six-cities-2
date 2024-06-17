@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
