@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { PlaceCardMode } from '../../types/common';
 import { Offer } from '../../types/offers';
@@ -55,7 +56,12 @@ export default function PlaceCard({
           />
         </Link>
       </div>
-      <div className={`place-card__info ${isFavoriteMode ? 'favorites__card-info' : ''}`}>
+      <div
+        className={classNames(
+          'place-card__info',
+          {'favorites__card-info': isFavoriteMode}
+        )}
+      >
         <div className="place-card__price-wrapper">
           <OfferPrice offerPrice={offer.price} />
           <BookmarkButton offer={offer}/>

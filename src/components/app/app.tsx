@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
+import { CityPackType } from '../../types/city';
 
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
@@ -16,11 +17,13 @@ import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 type AppProps = {
   offers: Offers;
   reviewsPack: ReviewsPack;
+  cityPack: CityPackType;
 }
 
 export default function App({
   offers,
-  reviewsPack
+  reviewsPack,
+  cityPack
 }: AppProps): React.JSX.Element {
   return (
     <BrowserRouter>
@@ -29,7 +32,7 @@ export default function App({
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen offers={offers} />
+            <MainScreen offers={offers} cityPack={cityPack}/>
           }
         />
         <Route

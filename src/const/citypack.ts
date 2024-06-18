@@ -1,4 +1,4 @@
-const City = {
+const CityPack = {
   Paris: {
     name: 'Paris',
     location: {
@@ -49,6 +49,4 @@ const City = {
   },
 } as const;
 
-const DEFAULT_CITY = City.Amsterdam;
-
-export { City, DEFAULT_CITY };
+export { CityPack };
