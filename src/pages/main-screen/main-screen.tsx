@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Offers } from '../../types/offers';
 
 import { DEFAULT_CITY } from '../../const/city';
+import { getOffer } from '../../utils/offers-utils';
 
 import Header from '../../components/header/header';
 import PlacesList from '../../components/places-list/places-list';
@@ -14,6 +15,23 @@ type MainScreenProps = {
 
 export default function MainScreen({offers}: MainScreenProps): React.JSX.Element {
   const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
+  const [activeOfferId, setActiveOfferId] = useState('');
+
+  const handleCardMouseEnter = (newId: string) => {
+    if (newId === activeOfferId) {
+      return;
+    }
+
+    setActiveOfferId(newId);
+  };
+
+  const handleCardMouseLeave = (newId?: string) => {
+    if (newId === activeOfferId) {
+      return;
+    }
+
+    setActiveOfferId(newId ? newId : '');
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -77,12 +95,12 @@ export default function MainScreen({offers}: MainScreenProps): React.JSX.Element
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList offers={offers} />
+                <PlacesList offers={offers} onCardMouseEnter={handleCardMouseEnter} onCardMouseLeave={handleCardMouseLeave} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currentCity} points={offers} />
+                <Map city={currentCity} points={offers} selectedPoint={getOffer(offers, activeOfferId)}/>
               </section>
             </div>
           </div>

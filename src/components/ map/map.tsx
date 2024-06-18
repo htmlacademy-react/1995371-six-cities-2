@@ -59,5 +59,5 @@ export default function Map({
 
   }, [map, points, selectedPoint]);
 
-  return <div style={{height: '556px'}} ref={mapRef}></div>;
+  return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
