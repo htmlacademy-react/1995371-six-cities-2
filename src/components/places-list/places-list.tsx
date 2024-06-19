@@ -5,7 +5,7 @@ import { PlaceCardMode } from '../../types/common';
 
 import { PlaceCardModeOption } from '../../const/const';
 import { getFavoriteOffers } from '../../utils/filter-utils';
-import PlaceCard from '../../components/place-card/place-card';
+import PlaceCard from './place-card/place-card';
 
 type PlacesListProps = {
   offers: Offers;

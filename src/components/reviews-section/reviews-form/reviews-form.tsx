@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { reviewInitStateValue } from '../../const/review-const';
-import RatingChooser from '../rating-chooser/rating-chooser';
+import { reviewInitStateValue } from '../../../const/review-const';
+import RatingChooser from '../../rating-chooser/rating-chooser';
 
 type ReviewFormProps = {
   offerId: string;
