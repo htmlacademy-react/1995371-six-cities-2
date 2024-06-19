@@ -1,5 +1,7 @@
-import { AVATAR_TEMP_URL } from '../const/const';
 import { Offers } from '../types/offers';
+
+import { AVATAR_TEMP_URL } from '../const/const';
+import { CityPack } from '../const/citypack';
 
 const offers: Offers = [
   {
@@ -8,14 +10,7 @@ const offers: Offers = [
     'type': 'Private room',
     'price': 137,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/12.jpg',
-    'city': {
-      'name': 'Amsterdam',
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 13
-      }
-    },
+    'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3909553943508,
       'longitude': 4.85309666406198,
@@ -55,14 +50,7 @@ const offers: Offers = [
     'type': 'Hotel',
     'price': 341,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
-    'city': {
-      'name': 'Amsterdam',
-      'location': {
-        'latitude': 52.3609553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 13
-      }
-    },
+    'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3609553943508,
       'longitude': 4.85309666406198,
@@ -99,14 +87,7 @@ const offers: Offers = [
     'type': 'House',
     'price': 888,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/19.jpg',
-    'city': {
-      'name': 'Amsterdam',
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.929309666406198,
-        'zoom': 13
-      }
-    },
+    'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3909553943508,
       'longitude': 4.929309666406198,
@@ -145,14 +126,7 @@ const offers: Offers = [
     'type': 'House',
     'price': 834,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/3.jpg',
-    'city': {
-      'name': 'Amsterdam',
-      'location': {
-        'latitude': 52.3809553943508,
-        'longitude': 4.939309666406198,
-        'zoom': 13
-      }
-    },
+    'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3809553943508,
       'longitude': 4.939309666406198,
