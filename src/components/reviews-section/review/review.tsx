@@ -1,7 +1,7 @@
-import { Review } from '../../types/reviews';
+import { Review } from '../../../types/reviews';
 
-import { RatingViewModeOption } from '../../const/const';
-import Rating from '../shared/rating/rating';
+import { RatingViewModeOption } from '../../../const/const';
+import Rating from '../../shared/rating/rating';
 
 type ReviewProps = {
   review: Review;
