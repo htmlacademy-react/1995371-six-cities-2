@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Offers } from '../../../types/offers';
-import { AppRoute } from '../../../const';
+import { AppRoute } from '../../../const/const';
 import { getFavoriteOffers } from '../../../utils/filter-utils';
 
 type ProfileLinkProps = {
@@ -26,9 +26,8 @@ export default function ProfileLink({
     );
 
   return (
-    <Link className="header__nav-link header__nav-link--profile"to={isAuthorized ? AppRoute.Favorites : AppRoute.Login}>
-      <div className="header__avatar-wrapper user__avatar-wrapper">
-      </div>
+    <Link className="header__nav-link header__nav-link--profile" to={isAuthorized ? AppRoute.Favorites : AppRoute.Login}>
+      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
       {ProfileLinkInner}
     </Link>
   );

@@ -1,7 +1,7 @@
 import { Accommodation, Offer, Offers } from '../../types/offers';
 import { Reviews } from '../../types/reviews';
 
-import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const';
+import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/const';
 import Rating from '../shared/rating/rating';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
 import OfferPrice from '../shared/offer-price/offer-price';

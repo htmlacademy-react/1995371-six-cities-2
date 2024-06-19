@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import { offers } from './mocks/offers';
 import { reviewsPack } from './mocks/reviews';
+import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
 
@@ -15,6 +16,7 @@ root.render(
     <App
       offers={offers}
       reviewsPack={reviewsPack}
+      cityPack={CityPack}
     />
   </React.StrictMode>
 );

@@ -42,20 +42,6 @@ const PriceViewModeOption = {
   Offer: 'offer',
 } as const;
 
-enum AppRoute {
-  Main = '/',
-  Login = '/login',
-  Favorites = '/favorites',
-  Offer = '/offer/:id',
-  OfferBase = '/offer/'
-}
-
-enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN'
-}
-
 const RatingStarTitle = {
   Perfect: 'perfect',
   Good: 'good',
@@ -72,6 +58,20 @@ const RatingStarValue = {
   [RatingStarTitle.Terribly]: 1,
 } as const;
 
+enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+  OfferBase = '/offer/'
+}
+
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN'
+}
+
 export {
   AVATAR_TEMP_URL,
   Setting,
@@ -82,8 +82,8 @@ export {
   RatingViewModeOption,
   BookmarkButtonModeOption,
   PriceViewModeOption,
-  AppRoute,
-  AuthorizationStatus,
   RatingStarTitle,
-  RatingStarValue
+  RatingStarValue,
+  AppRoute,
+  AuthorizationStatus
 };

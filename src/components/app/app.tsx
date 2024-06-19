@@ -2,8 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
+import { CityPackType } from '../../types/city';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
+
+import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
 import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -14,19 +17,22 @@ import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 type AppProps = {
   offers: Offers;
   reviewsPack: ReviewsPack;
+  cityPack: CityPackType;
 }
 
 export default function App({
   offers,
-  reviewsPack
+  reviewsPack,
+  cityPack
 }: AppProps): React.JSX.Element {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           path={AppRoute.Main}
           element={
-            <MainScreen offers={offers} />
+            <MainScreen offers={offers} cityPack={cityPack}/>
           }
         />
         <Route

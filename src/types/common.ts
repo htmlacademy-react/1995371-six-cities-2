@@ -5,7 +5,7 @@ import {
   RatingViewModeOption,
   BookmarkButtonModeOption,
   PriceViewModeOption
-} from '../const';
+} from '../const/const';
 
 export type Filter = typeof FilterType.City | typeof FilterType.Favorite;
 export type PlaceCardMode = typeof PlaceCardModeOption.Default | typeof PlaceCardModeOption.Favorite;

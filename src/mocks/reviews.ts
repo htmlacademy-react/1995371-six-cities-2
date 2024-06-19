@@ -1,6 +1,6 @@
 import { ReviewsPack } from '../types/reviews';
 
-import { AVATAR_TEMP_URL } from '../const';
+import { AVATAR_TEMP_URL } from '../const/const';
 
 const reviewsPack: ReviewsPack = {
   '37fc5e64-0f59-46a7-b57f-d85caeae73cb': [
@@ -110,23 +110,12 @@ const reviewsPack: ReviewsPack = {
       'rating': 4
     },
     {
-      'id': '9b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
-      'date': '2019-05-08T14:13:56.569Z',
-      'user': {
-        'name': 'Oliver Conner9',
-        'avatarUrl': AVATAR_TEMP_URL,
-        'isPro': true
-      },
-      'comment': '9A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'rating': 5
-    },
-    {
       'id': '10b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
       'date': '2019-05-08T14:13:56.569Z',
       'user': {
         'name': 'Oliver Conner10',
         'avatarUrl': AVATAR_TEMP_URL,
-        'isPro': false
+        'isPro': true
       },
       'comment': '10A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       'rating': 5
@@ -140,7 +129,7 @@ const reviewsPack: ReviewsPack = {
         'isPro': false
       },
       'comment': '11A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'rating': 4
+      'rating': 5
     },
     {
       'id': '12b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
@@ -148,9 +137,20 @@ const reviewsPack: ReviewsPack = {
       'user': {
         'name': 'Oliver Conner12',
         'avatarUrl': AVATAR_TEMP_URL,
-        'isPro': true
+        'isPro': false
       },
       'comment': '12A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+      'rating': 4
+    },
+    {
+      'id': '13b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
+      'date': '2019-05-08T14:13:56.569Z',
+      'user': {
+        'name': 'Oliver Conner13',
+        'avatarUrl': AVATAR_TEMP_URL,
+        'isPro': true
+      },
+      'comment': '13A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
       'rating': 4
     }
   ],

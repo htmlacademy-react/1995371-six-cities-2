@@ -1,6 +1,6 @@
 import { Offers } from '../../types/offers';
 
-import { HeaderModeOption } from '../../const';
+import { HeaderModeOption } from '../../const/const';
 import Header from '../../components/header/header';
 
 type LoginScreenProps = {

@@ -1,36 +1,49 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { PlaceCardMode } from '../../types/common';
 import { Offer } from '../../types/offers';
 
-import { PlaceCardModeOption, AppRoute } from '../../const';
+import { PlaceCardModeOption, AppRoute } from '../../const/const';
 import Rating from '../shared/rating/rating';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
 import OfferPrice from '../shared/offer-price/offer-price';
+import { useRef } from 'react';
 
 type PlaceCardProps = {
   offer: Offer;
   cardMode: PlaceCardMode;
-  onMouseOver: (id: string) => void;
+  onMouseEnter: (id: string) => void;
+  onMouseLeave: (id?: string) => void;
 }
 
 export default function PlaceCard({
   offer,
   cardMode,
-  onMouseOver
+  onMouseEnter,
+  onMouseLeave
 }: PlaceCardProps): React.JSX.Element {
+  const cardRef = useRef<HTMLElement | null>(null);
+
   const isFavoriteMode = cardMode === PlaceCardModeOption.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
-  const handleMouseOverEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+  const handleMouseEnterEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
     evt.preventDefault();
-    onMouseOver(offer.id);
+    onMouseEnter(offer.id);
+  };
+
+  const handleMouseLeaveEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    evt.preventDefault();
+    onMouseLeave();
   };
 
   return (
     <article
       className={`place-card ${classNamePrefix}__card`}
-      onMouseOverCapture={!isFavoriteMode ? handleMouseOverEvent : undefined}
+      onMouseEnter={handleMouseEnterEvent}
+      onMouseLeave={handleMouseLeaveEvent}
+      ref={cardRef}
     >
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
         <Link to={`${AppRoute.OfferBase}${offer.id}`}>
@@ -43,7 +56,12 @@ export default function PlaceCard({
           />
         </Link>
       </div>
-      <div className={`place-card__info ${isFavoriteMode ? 'favorites__card-info' : ''}`}>
+      <div
+        className={classNames(
+          'place-card__info',
+          {'favorites__card-info': isFavoriteMode}
+        )}
+      >
         <div className="place-card__price-wrapper">
           <OfferPrice offerPrice={offer.price} />
           <BookmarkButton offer={offer}/>
