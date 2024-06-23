@@ -1,117 +1,32 @@
-import { Accommodation, Offer, Offers } from '../../types/offers';
+import { Offer, Offers } from '../../types/offers';
 import { Reviews } from '../../types/reviews';
 
 import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/const';
-import Rating from '../shared/rating/rating';
+
+import Gallery from './gallery/gallery';
+import OfferMark from './offer-mark/offer-mark';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
+import Rating from '../shared/rating/rating';
+import FeaturesList from './features-list/features-list';
 import OfferPrice from '../shared/offer-price/offer-price';
+import GoodsInsideModule from './goods-inside-module/goods-inside-module';
+import HostModule from './host-module/host-module';
 import ReviewsSection from '../reviews-section/reviews-section';
+import Map from '../ map/map';
 
 type PlaceOfferProps = {
-  offers: Offers;
-  currentOfferId: string;
+  currentOffer: Offer;
+  nearbyOffers: Offers;
+  hoveredCardOffer: Offer | undefined;
   reviews: Reviews;
 }
 
-type GalleryProps = {
-  imageUrls: string[];
-}
-
-function Gallery({imageUrls}: GalleryProps): React.JSX.Element {
-  return (
-    <div className="offer__gallery">
-      {imageUrls.map((url) => (
-        <div className="offer__image-wrapper" key={url}>
-          <img className="offer__image" src={url} alt="Photo studio" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function OfferMark(): React.JSX.Element {
-  return(
-    <div className="offer__mark">
-      <span>Premium</span>
-    </div>
-  );
-}
-
-type FeaturesListProps = {
-  accommodationType: Accommodation;
-  bedroomsAmount: number;
-  maxAdultsAmount: number;
-}
-
-function FeaturesList({
-  accommodationType,
-  bedroomsAmount,
-  maxAdultsAmount
-}: FeaturesListProps) {
-  return (
-    <ul className="offer__features">
-      <li className="offer__feature offer__feature--entire" key="accommodationType">{accommodationType}</li>
-      <li className="offer__feature offer__feature--bedrooms" key="bedroomsAmount">{`${bedroomsAmount} ${bedroomsAmount === 1 ? 'Bedroom' : 'Bedrooms'}`}</li>
-      <li className="offer__feature offer__feature--adults" key="maxAdultsAmount">{`Max ${maxAdultsAmount} ${maxAdultsAmount === 1 ? 'adult' : 'adults'}`}</li>
-    </ul>
-  );
-}
-
-
-type GoodsListProps = {
-  goods: string[];
-}
-
-function GoodsList({goods}: GoodsListProps): React.JSX.Element {
-  return (
-    <ul className="offer__inside-list">
-      {goods.map((goodsItem) => (<li className="offer__inside-item" key={goodsItem}>{goodsItem}</li>))}
-    </ul>
-  );
-}
-
-type GoodsInsideModuleProps = {
-  goods: string[];
-}
-
-function GoodsInsideModule({goods}: GoodsInsideModuleProps): React.JSX.Element {
-  return (
-    <div className="offer__inside">
-      <h2 className="offer__inside-title">What&apos;s inside</h2>
-      <GoodsList goods={goods}/>
-    </div>
-  );
-}
-
-type HostModuleProps = {
-  offer: Offer;
-}
-
-function HostModule({offer}: HostModuleProps): React.JSX.Element {
-  const hostStatus = offer.host.isPro ? (<span className="offer__user-status">Pro</span>) : null;
-  return (
-    <div className="offer__host">
-      <h2 className="offer__host-title">Meet the host</h2>
-      <div className="offer__host-user user">
-        <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-          <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
-        </div>
-        <span className="offer__user-name">{offer.host.name}</span>
-        {hostStatus}
-      </div>
-      <div className="offer__description">
-        <p className="offer__text">{offer.description}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function PlaceOffer({
-  offers,
-  currentOfferId,
+  currentOffer,
+  nearbyOffers,
+  hoveredCardOffer,
   reviews
 }: PlaceOfferProps): React.JSX.Element {
-  const currentOffer = offers.find((offer) => offer.id === currentOfferId) as Offer;
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
   const goodsModule = currentOffer.goods.length > 0
     ? (<GoodsInsideModule goods={currentOffer.goods}/>)
@@ -141,7 +56,9 @@ export default function PlaceOffer({
           <ReviewsSection offerId={currentOffer.id} reviews={reviews}/>
         </div>
       </div>
-      <section className="offer__map map"></section>
+      <section className="offer__map map">
+        <Map city={currentOffer.city} points={nearbyOffers} selectedPoint={hoveredCardOffer}/>
+      </section>
     </section>
   );
 }

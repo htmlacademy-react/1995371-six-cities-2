@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { PlaceCardMode } from '../../types/common';
-import { Offer } from '../../types/offers';
+import { PlaceCardMode } from '../../../types/common';
+import { Offer } from '../../../types/offers';
 
-import { PlaceCardModeOption, AppRoute } from '../../const/const';
-import Rating from '../shared/rating/rating';
-import BookmarkButton from '../shared/bookmark-button/bookmark-button';
-import OfferPrice from '../shared/offer-price/offer-price';
+import { PlaceCardModeOption, AppRoute } from '../../../const/const';
+import Rating from '../../shared/rating/rating';
+import BookmarkButton from '../../shared/bookmark-button/bookmark-button';
+import OfferPrice from '../../shared/offer-price/offer-price';
 import { useRef } from 'react';
 
 type PlaceCardProps = {
