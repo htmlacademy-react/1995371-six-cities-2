@@ -1,7 +1,7 @@
 import { Offer, Offers } from '../../types/offers';
 import { Reviews } from '../../types/reviews';
 
-import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/const';
+import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
 import OfferMark from './offer-mark/offer-mark';

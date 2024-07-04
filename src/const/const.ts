@@ -16,32 +16,6 @@ const FilterType = {
   City: 'city'
 } as const;
 
-const PlaceCardModeOption = {
-  Default: 'default',
-  Favorite: 'favorite'
-} as const;
-
-const HeaderModeOption = {
-  LoginScreen: 'loginScreen',
-  Default: 'default'
-} as const;
-
-const RatingViewModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-  Reviews: 'reviews'
-} as const;
-
-const BookmarkButtonModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-} as const;
-
-const PriceViewModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-} as const;
-
 const RatingStarTitle = {
   Perfect: 'perfect',
   Good: 'good',
@@ -77,11 +51,6 @@ export {
   Setting,
   AccommodationType,
   FilterType,
-  PlaceCardModeOption,
-  HeaderModeOption,
-  RatingViewModeOption,
-  BookmarkButtonModeOption,
-  PriceViewModeOption,
   RatingStarTitle,
   RatingStarValue,
   AppRoute,

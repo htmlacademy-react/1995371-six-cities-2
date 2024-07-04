@@ -1,6 +1,7 @@
 import { Review } from '../../../types/reviews';
 
-import { RatingViewModeOption } from '../../../const/const';
+import { RatingViewModeOption } from '../../../const/mode';
+import { huminizeDateString } from '../../../utils/date-utils';
 import Rating from '../../shared/rating/rating';
 
 type ReviewProps = {
@@ -25,7 +26,7 @@ export default function ReviewItem({review}: ReviewProps): React.JSX.Element {
       <div className="reviews__info">
         <Rating offerRating={review.rating} ratingViewMode={RatingViewModeOption.Reviews}/>
         <p className="reviews__text">{review.comment}</p>
-        <time className="reviews__time" dateTime={review.date}>April 2019</time>
+        <time className="reviews__time" dateTime={review.date}>{huminizeDateString(review.date)}</time>
       </div>
     </li>
   );
