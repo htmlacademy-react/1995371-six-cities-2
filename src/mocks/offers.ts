@@ -1,4 +1,4 @@
-import { Offers } from '../types/offers';
+import { Offers, FullOffersPack } from '../types/offers';
 
 import { AVATAR_TEMP_URL } from '../const/const';
 import { CityPack } from '../const/citypack';
@@ -10,6 +10,72 @@ const offers: Offers = [
     'type': 'Private room',
     'price': 137,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/12.jpg',
+    'city': CityPack.Amsterdam,
+    'location': {
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 4.4,
+  },
+  {
+    'id': 'ad4abd3a-5935-4e14-b5b4-f9ad2f26f45a',
+    'title': 'Tile House',
+    'type': 'Hotel',
+    'price': 341,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
+    'city': CityPack.Amsterdam,
+    'location': {
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': false,
+    'rating': 2.8,
+  },
+  {
+    'id': '5bacd8cb-0b3f-440b-bf3d-fcc1d4f4c5ec',
+    'title': 'The house among olive ',
+    'type': 'House',
+    'price': 888,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/19.jpg',
+    'city': CityPack.Amsterdam,
+    'location': {
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': false,
+    'rating': 3.9,
+  },
+  {
+    'id': 'd7a375b7-f2a3-4a46-9f51-ea9208292722',
+    'title': 'Tile House',
+    'type': 'House',
+    'price': 834,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/3.jpg',
+    'city': CityPack.Amsterdam,
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.2,
+  },
+];
+
+const fullOffers: FullOffersPack = {
+  '37fc5e64-0f59-46a7-b57f-d85caeae73cb': {
+    'id': '37fc5e64-0f59-46a7-b57f-d85caeae73cb',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'Private room',
+    'price': 137,
     'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3909553943508,
@@ -44,12 +110,11 @@ const offers: Offers = [
     ],
     'maxAdults': 4
   },
-  {
+  'ad4abd3a-5935-4e14-b5b4-f9ad2f26f45a': {
     'id': 'ad4abd3a-5935-4e14-b5b4-f9ad2f26f45a',
     'title': 'Tile House',
     'type': 'Hotel',
     'price': 341,
-    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/8.jpg',
     'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3609553943508,
@@ -81,12 +146,11 @@ const offers: Offers = [
     ],
     'maxAdults': 4
   },
-  {
+  '5bacd8cb-0b3f-440b-bf3d-fcc1d4f4c5ec': {
     'id': '5bacd8cb-0b3f-440b-bf3d-fcc1d4f4c5ec',
     'title': 'The house among olive ',
     'type': 'House',
     'price': 888,
-    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/19.jpg',
     'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3909553943508,
@@ -120,12 +184,11 @@ const offers: Offers = [
     ],
     'maxAdults': 4
   },
-  {
+  'd7a375b7-f2a3-4a46-9f51-ea9208292722': {
     'id': 'd7a375b7-f2a3-4a46-9f51-ea9208292722',
     'title': 'Tile House',
     'type': 'House',
     'price': 834,
-    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/3.jpg',
     'city': CityPack.Amsterdam,
     'location': {
       'latitude': 52.3809553943508,
@@ -158,6 +221,6 @@ const offers: Offers = [
     ],
     'maxAdults': 4
   },
-];
+};
 
-export { offers };
+export { offers, fullOffers };

@@ -11,8 +11,10 @@ export type Host = {
 
 export type Images = string[];
 
-export type Offer = {
-  id: string;
+export type Id = string;
+
+type OfferBase = {
+  id: Id;
   title: string;
   type: Accommodation;
   price: number;
@@ -21,7 +23,13 @@ export type Offer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
+}
+
+export type Offer = OfferBase & {
   previewImage: string;
+}
+
+export type OfferFull = OfferBase & {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -31,3 +39,4 @@ export type Offer = {
 }
 
 export type Offers = Offer[];
+export type FullOffersPack = {[key: Id]: OfferFull};
