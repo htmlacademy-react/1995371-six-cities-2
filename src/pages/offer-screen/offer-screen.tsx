@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-import { Offers } from '../../types/offers';
+import { FullOffersPack, Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
-import { getOffer } from '../../utils/offers-utils';
+import { getFullOffer, getOffer } from '../../utils/offers-utils';
 
 import Error404Screen from '../error-404-screen/error-404-screen';
 import Header from '../../components/header/header';
@@ -12,18 +12,20 @@ import PlacesList from '../../components/places-list/places-list';
 
 type OfferScreenProps = {
   offers: Offers;
+  fullOffersPack: FullOffersPack;
   reviewsPack: ReviewsPack;
 }
 
 export default function OfferScreen({
   offers,
+  fullOffersPack,
   reviewsPack
 }: OfferScreenProps): React.JSX.Element {
   const params = useParams();
   const [hoveredCardOfferID, setHoveredCardOfferID] = useState<string>('');
 
   const currentOfferId = params.id;
-  const currentOffer = getOffer(offers, currentOfferId);
+  const currentOffer = getFullOffer(fullOffersPack, currentOfferId);
 
   if (!currentOfferId || !currentOffer) {
     return <Error404Screen />;

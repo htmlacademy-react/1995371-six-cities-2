@@ -70,7 +70,7 @@ const offers: Offers = [
   },
 ];
 
-const fullOffers: FullOffersPack = {
+const fullOffersPack: FullOffersPack = {
   '37fc5e64-0f59-46a7-b57f-d85caeae73cb': {
     'id': '37fc5e64-0f59-46a7-b57f-d85caeae73cb',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',
@@ -223,4 +223,4 @@ const fullOffers: FullOffersPack = {
   },
 };
 
-export { offers, fullOffers };
+export { offers, fullOffersPack };

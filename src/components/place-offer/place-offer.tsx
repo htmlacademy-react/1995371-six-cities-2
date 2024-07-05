@@ -1,4 +1,4 @@
-import { Offer, Offers } from '../../types/offers';
+import { Offer, OfferFull, Offers } from '../../types/offers';
 import { Reviews } from '../../types/reviews';
 
 import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/mode';
@@ -15,7 +15,7 @@ import ReviewsSection from '../reviews-section/reviews-section';
 import Map from '../ map/map';
 
 type PlaceOfferProps = {
-  currentOffer: Offer;
+  currentOffer: OfferFull;
   nearbyOffers: Offers;
   hoveredCardOffer: Offer | undefined;
   reviews: Reviews;

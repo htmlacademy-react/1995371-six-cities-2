@@ -13,7 +13,7 @@ export type Images = string[];
 
 export type Id = string;
 
-type OfferBase = {
+export type OfferBase = {
   id: Id;
   title: string;
   type: Accommodation;
