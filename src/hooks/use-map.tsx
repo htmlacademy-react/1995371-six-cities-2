@@ -35,10 +35,6 @@ export default function useMap(
     setMap(mapInstance);
     isRenderedRef.current = true;
 
-    // return () => {
-    //   mapInstance.removeLayer(layer);
-    // };
-
   }, [mapRef, city]);
 
   return map;
