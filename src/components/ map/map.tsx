@@ -39,6 +39,8 @@ export default function Map({
       return;
     }
 
+    map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+
     const markerLayer = layerGroup().addTo(map);
     points.forEach((point) => {
       const marker = new Marker({
