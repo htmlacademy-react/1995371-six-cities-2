@@ -57,7 +57,7 @@ export default function Map({
       map.removeLayer(markerLayer);
     };
 
-  }, [map, points, selectedPoint]);
+  }, [map, city, points, selectedPoint]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
