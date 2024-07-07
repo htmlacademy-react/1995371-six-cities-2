@@ -1,6 +1,6 @@
 import { RatingViewMode } from '../../../types/common';
 
-import { RatingViewModeOption } from '../../../const/const';
+import { RatingViewModeOption } from '../../../const/mode';
 import { roundToInteger } from '../../../utils/utils';
 
 type RatingProps = {

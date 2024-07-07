@@ -1,6 +1,6 @@
 import { PriceViewMode } from '../../../types/common';
 
-import { PriceViewModeOption } from '../../../const/const';
+import { PriceViewModeOption } from '../../../const/mode';
 
 type OfferPriceProps = {
   offerPrice: number;

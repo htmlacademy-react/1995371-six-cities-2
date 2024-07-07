@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import { Offers } from '../../types/offers';
-import { CityPackType } from '../../types/city';
+import { City, CityPackType } from '../../types/city';
 
-import { DEFAULT_CITY } from '../../mocks/city';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getOffer } from '../../utils/offers-utils';
 
 import Header from '../../components/header/header';
@@ -11,15 +10,20 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 import PlacesList from '../../components/places-list/places-list';
 import Map from '../../components/ map/map';
 import LocationsList from '../../components/locations-list/locations-list';
+import { updateCurrentCity, updateOffersList } from '../../store/action';
+import { getCityFilteredOffers } from '../../utils/filter-utils';
+import { Offers } from '../../types/offers';
 
 type MainScreenProps = {
-  offers: Offers;
   cityPack: CityPackType;
+  offers: Offers;
 }
 
-export default function MainScreen({offers, cityPack}: MainScreenProps): React.JSX.Element {
-  const [currentCity, setCurrentCity] = useState(DEFAULT_CITY);
+export default function MainScreen({cityPack, offers}: MainScreenProps): React.JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState('');
+  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const cityOffers = useAppSelector((state) => state.offers);
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === activeOfferId) {
@@ -37,29 +41,38 @@ export default function MainScreen({offers, cityPack}: MainScreenProps): React.J
     setActiveOfferId(newId ? newId : '');
   };
 
+  const handleCityChange = (newCity: City) => {
+    if (newCity.name === currentCity.name) {
+      return;
+    }
+
+    dispatch(updateCurrentCity({newCity}));
+    dispatch(updateOffersList({newOffers: getCityFilteredOffers(offers, newCity.name)}));
+  };
+
   return (
     <div className="page page--gray page--main">
-      <Header offers={offers}/>
+      <Header offers={cityOffers}/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList cityPack={cityPack} currentCity={currentCity}/>
+            <LocationsList cityPack={cityPack} currentCity={currentCity} onCityChange={handleCityChange}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in {currentCity.name}</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList offers={offers} onCardMouseEnter={handleCardMouseEnter} onCardMouseLeave={handleCardMouseLeave} />
+                <PlacesList offers={cityOffers} onCardMouseEnter={handleCardMouseEnter} onCardMouseLeave={handleCardMouseLeave} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currentCity} points={offers} selectedPoint={getOffer(offers, activeOfferId)}/>
+                <Map city={currentCity} points={cityOffers} selectedPoint={getOffer(cityOffers, activeOfferId)}/>
               </section>
             </div>
           </div>

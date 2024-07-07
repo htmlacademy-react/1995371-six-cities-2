@@ -1,10 +1,10 @@
 import { BookmarkButtonMode } from '../../../types/common';
-import { Offer } from '../../../types/offers';
+import { OfferBase } from '../../../types/offers';
 
-import { BookmarkButtonModeOption } from '../../../const/const';
+import { BookmarkButtonModeOption } from '../../../const/mode';
 
 type BookmarkButtonProps = {
-  offer: Offer;
+  offer: OfferBase;
   bookmarkButtonMode?: BookmarkButtonMode;
 }
 

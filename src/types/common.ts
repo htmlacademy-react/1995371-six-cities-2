@@ -1,11 +1,14 @@
 import {
   FilterType,
+} from '../const/const';
+
+import {
   PlaceCardModeOption,
   HeaderModeOption,
   RatingViewModeOption,
   BookmarkButtonModeOption,
   PriceViewModeOption
-} from '../const/const';
+} from '../const/mode';
 
 export type Filter = typeof FilterType.City | typeof FilterType.Favorite;
 export type PlaceCardMode = typeof PlaceCardModeOption.Default | typeof PlaceCardModeOption.Favorite;

@@ -39,6 +39,8 @@ export default function Map({
       return;
     }
 
+    map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+
     const markerLayer = layerGroup().addTo(map);
     points.forEach((point) => {
       const marker = new Marker({
@@ -57,7 +59,7 @@ export default function Map({
       map.removeLayer(markerLayer);
     };
 
-  }, [map, points, selectedPoint]);
+  }, [map, city, points, selectedPoint]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

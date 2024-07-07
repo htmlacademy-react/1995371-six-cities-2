@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Offers } from '../../types/offers';
+import { FullOffersPack, Offers } from '../../types/offers';
 import { ReviewsPack } from '../../types/reviews';
 import { CityPackType } from '../../types/city';
 
@@ -16,12 +16,14 @@ import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 
 type AppProps = {
   offers: Offers;
+  fullOffersPack: FullOffersPack;
   reviewsPack: ReviewsPack;
   cityPack: CityPackType;
 }
 
 export default function App({
   offers,
+  fullOffersPack,
   reviewsPack,
   cityPack
 }: AppProps): React.JSX.Element {
@@ -52,6 +54,7 @@ export default function App({
           element={
             <OfferScreen
               offers={offers}
+              fullOffersPack={fullOffersPack}
               reviewsPack={reviewsPack}
             />
           }
