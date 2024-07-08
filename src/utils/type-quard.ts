@@ -1,5 +1,5 @@
 import { SortName } from '../types/sort';
-import { SortPack } from '../const/sortpack';
+import { SortPack } from '../const/sort';
 import { CityPackType } from '../types/city';
 import { CityPack } from '../const/citypack';
 

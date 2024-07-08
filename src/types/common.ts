@@ -7,7 +7,8 @@ import {
   HeaderModeOption,
   RatingViewModeOption,
   BookmarkButtonModeOption,
-  PriceViewModeOption
+  PriceViewModeOption,
+  ClassnameActionModeOption
 } from '../const/mode';
 
 export type Filter = typeof FilterType.City | typeof FilterType.Favorite;
@@ -16,3 +17,5 @@ export type HeaderMode = typeof HeaderModeOption.LoginScreen | typeof HeaderMode
 export type RatingViewMode = typeof RatingViewModeOption.Card | typeof RatingViewModeOption.Offer | typeof RatingViewModeOption.Reviews;
 export type BookmarkButtonMode = typeof BookmarkButtonModeOption.Card | typeof BookmarkButtonModeOption.Offer;
 export type PriceViewMode = typeof PriceViewModeOption.Card | typeof PriceViewModeOption.Offer;
+
+export type ClassnameActionMode = keyof typeof ClassnameActionModeOption;

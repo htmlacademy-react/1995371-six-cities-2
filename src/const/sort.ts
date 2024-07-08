@@ -1,11 +1,10 @@
 import { Offers } from '../types/offers';
 
+const SORT_OPTIONS_OPEN_CLASSNAME = 'places__options--opened';
+
 const sortToHigherPrice = (offers: Offers) => offers.slice().sort((currentOffer, nextOffer): number => currentOffer.price - nextOffer.price);
-
 const sortToLowerPrice = (offers: Offers) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.price - currentOffer.price);
-
 const sortToLowerRating = (offers: Offers) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.rating - currentOffer.rating);
-
 const sortPopular = (offers: Offers) => offers;
 
 const SortPack = {
@@ -31,4 +30,4 @@ const SortPack = {
   }
 } as const;
 
-export { SortPack };
+export { SORT_OPTIONS_OPEN_CLASSNAME, SortPack };
