@@ -1,17 +1,8 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { isString } from '../../utils/utils';
 import { resetOffersList, updateOffersList } from '../../store/action';
+import { isKnownSortName } from '../../utils/type-quard';
 import { SortPack } from '../../const/sortpack';
-import { SortName } from '../../types/sort';
-
-const isKnownSortName = (sortName: string | undefined): sortName is SortName => {
-  if (!isString(sortName)) {
-    return isString(sortName);
-  }
-
-  return Object.keys(SortPack).some((sort) => sort === sortName);
-};
 
 export default function PlacesSorting(): React.JSX.Element {
   const defaultSort: string = SortPack.Popular.Alias;

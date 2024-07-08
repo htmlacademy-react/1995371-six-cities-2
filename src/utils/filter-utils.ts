@@ -1,8 +1,7 @@
 import { Filter } from '../types/common';
 import { Offers, Offer } from '../types/offers';
-
+import { isString } from './type-quard';
 import { FilterType } from '../const/const';
-import { isString }from './utils';
 
 const FilterFunction = {
   [FilterType.Favorite]: () => (offer: Offer) => offer.isFavorite,

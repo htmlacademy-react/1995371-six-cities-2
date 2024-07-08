@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { City, CityPackType } from '../../types/city';
-import { isString } from '../../utils/utils';
+import { isKnownCityName } from '../../utils/type-quard';
 
 type LocationsListProps = {
   cityPack: CityPackType;
@@ -11,13 +11,6 @@ type LocationsListProps = {
 export default function LocationsList({cityPack, currentCity, onCityChange}: LocationsListProps): React.JSX.Element {
   const cities: City[] = Array.from(Object.values(cityPack));
 
-  const isKnownCityName = (cityName: string | undefined): cityName is keyof CityPackType => {
-    if (!isString(cityName)) {
-      return isString(cityName);
-    }
-
-    return Object.keys(cityPack).some((city) => city === cityName);
-  };
 
   const handleCityButtonClick = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
     evt.preventDefault();
