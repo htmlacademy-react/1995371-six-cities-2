@@ -45,7 +45,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
       return;
     }
 
-    dispatch(updateCurrentCity({newCity}));
+    dispatch(updateCurrentCity(newCity));
     dispatch(updateCityOffersList());
   };
 
