@@ -22,6 +22,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.currentCity);
   const cityOffers = useAppSelector((state) => state.cityOffers);
+  const isLoading = useAppSelector((state) => state.isLoading);
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === activeOfferId) {
@@ -68,7 +69,12 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
               <b className="places__found">{cityOffers.length} places to stay in {currentCity.name}</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList offers={cityOffers} onCardMouseEnter={handleCardMouseEnter} onCardMouseLeave={handleCardMouseLeave} />
+                <PlacesList
+                  offers={cityOffers}
+                  isLoading={isLoading}
+                  onCardMouseEnter={handleCardMouseEnter}
+                  onCardMouseLeave={handleCardMouseLeave}
+                />
               </div>
             </section>
             <div className="cities__right-section">

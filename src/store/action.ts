@@ -7,3 +7,4 @@ export const updateCurrentCity = createAction<{newCity: City}>('updateCurrentCit
 export const updateCityOffersList = createAction('updateCityOffersList');
 export const loadOffersList = createAction<Offers>('loadOffersList');
 export const updateSortType = createAction<{newSort: SortName}>('updateSortType');
+export const setIsloading = createAction<{isLoading: boolean}>('setIsloading');

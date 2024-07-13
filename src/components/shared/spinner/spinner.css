@@ -1,0 +1,36 @@
+.spinner {
+  margin: 4em;
+  padding: 4em;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 3em;
+  color: #4481c3;
+}
+
+.spinner__text {
+  font-size: 1.5em;
+}
+
+.spinner__element {
+  width: 6em;
+  height: 6em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-block;
+  border: 0.6em solid #4481c3;
+  border-right-color: transparent;
+  animation: spinnerAnim 1s linear infinite;
+}
+
+@keyframes spinnerAnim {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

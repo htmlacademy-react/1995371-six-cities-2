@@ -6,9 +6,11 @@ import { PlaceCardMode } from '../../types/common';
 import { PlaceCardModeOption } from '../../const/mode';
 import { getFavoriteOffers } from '../../utils/filter-utils';
 import PlaceCard from './place-card/place-card';
+import Spinner from '../shared/spinner/spinner';
 
 type PlacesListProps = {
   offers: Offers;
+  isLoading?: boolean;
   cardMode?: PlaceCardMode;
   onCardMouseEnter?: (newId: string) => void;
   onCardMouseLeave?: (newId?: string) => void;
@@ -16,6 +18,7 @@ type PlacesListProps = {
 
 export default function PlacesList({
   offers,
+  isLoading,
   cardMode = PlaceCardModeOption.Default,
   onCardMouseEnter,
   onCardMouseLeave
@@ -37,7 +40,7 @@ export default function PlacesList({
   const filteredOffers = isFavorite ? getFavoriteOffers(offers) : offers;
 
   return (
-    <>
+    <>{isLoading && <Spinner description='Ищем лучшие варианты'></Spinner>}
       {filteredOffers.map((offer): React.JSX.Element => (
         <PlaceCard
           offer={offer}
