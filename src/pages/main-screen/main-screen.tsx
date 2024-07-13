@@ -13,6 +13,7 @@ import LocationsList from '../../components/locations-list/locations-list';
 import { updateCurrentCity, updateOffersList } from '../../store/action';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import { Offers } from '../../types/offers';
+import { Helmet } from 'react-helmet-async';
 
 type MainScreenProps = {
   cityPack: CityPackType;
@@ -52,6 +53,9 @@ export default function MainScreen({cityPack, offers}: MainScreenProps): React.J
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Six cities</title>
+      </Helmet>
       <Header offers={cityOffers}/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
