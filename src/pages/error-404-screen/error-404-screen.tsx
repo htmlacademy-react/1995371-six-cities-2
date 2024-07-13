@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 export default function Error404Screen(): React.JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Six cities. Page not found</title>
+      </Helmet>
       <main className="page__main">
         <div
           className="container"

@@ -9,6 +9,7 @@ import Error404Screen from '../error-404-screen/error-404-screen';
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
 import PlacesList from '../../components/places-list/places-list';
+import { Helmet } from 'react-helmet-async';
 
 type OfferScreenProps = {
   offers: Offers;
@@ -53,6 +54,9 @@ export default function OfferScreen({
 
   return (
     <div className="page">
+      <Helmet>
+        <title>Six cities. Offer</title>
+      </Helmet>
       <Header offers={offers}/>
       <main className="page__main page__main--offer">
         <PlaceOffer

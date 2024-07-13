@@ -2,6 +2,7 @@ import { Offers } from '../../types/offers';
 
 import { HeaderModeOption } from '../../const/mode';
 import Header from '../../components/header/header';
+import { Helmet } from 'react-helmet-async';
 
 type LoginScreenProps = {
   offers: Offers;
@@ -10,6 +11,9 @@ type LoginScreenProps = {
 export default function LoginScreen({offers}: LoginScreenProps): React.JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>Six cities. Login</title>
+      </Helmet>
       <Header headerMode={HeaderModeOption.LoginScreen} offers={offers}/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
