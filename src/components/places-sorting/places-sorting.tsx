@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SortActionMode, SortName } from '../../types/sort';
-import { resetOffersList, updateOffersList } from '../../store/action';
+import { resetCityOffersList, loadSortedCityOffersList } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isKnownSortName } from '../../utils/type-quard';
 import { SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
@@ -13,7 +13,13 @@ export default function PlacesSorting(): React.JSX.Element {
   const sortOptionsListRef = useRef(null);
 
   const dispatch = useAppDispatch();
-  const cityOffers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const cityOffers = useAppSelector((state) => state.cityOffers);
+
+  useEffect(() => {
+    setActiveSort(defaultSort);
+  }, [currentCity, defaultSort]);
+
   const handleSortOptionsList = (action: SortActionMode = SortActionModeOption.Close) => {
     switch (action) {
       case SortActionModeOption.Open:
@@ -39,11 +45,11 @@ export default function PlacesSorting(): React.JSX.Element {
 
     switch (newSort) {
       case SortPack.Popular.Alias:
-        dispatch(resetOffersList());
+        dispatch(resetCityOffersList());
         break;
 
       default:
-        dispatch(updateOffersList({newOffers: SortPack[newSort].SortFunction(cityOffers)}));
+        dispatch(loadSortedCityOffersList(SortPack[newSort].SortFunction(cityOffers)));
         break;
     }
 
