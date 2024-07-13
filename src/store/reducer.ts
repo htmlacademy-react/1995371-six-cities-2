@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../mocks/city';
-import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType } from './action';
+import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { City } from '../types/city';
 import { Offers } from '../types/offers';
@@ -15,6 +15,7 @@ type InitialState = {
   nearbyOffers: [] | Offers;
   currentOffer: null;
   sortType: SortName;
+  isLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -23,7 +24,8 @@ const initialState: InitialState = {
   cityOffers: [],
   nearbyOffers: [],
   currentOffer: null,
-  sortType: defaultSort
+  sortType: defaultSort,
+  isLoading: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -54,5 +56,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffersList, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setIsloading, (state, action) => {
+      state.isLoading = action.payload.isLoading;
     });
 });
