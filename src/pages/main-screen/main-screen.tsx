@@ -10,21 +10,18 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 import PlacesList from '../../components/places-list/places-list';
 import Map from '../../components/ map/map';
 import LocationsList from '../../components/locations-list/locations-list';
-import { updateCurrentCity, updateOffersList } from '../../store/action';
-import { getCityFilteredOffers } from '../../utils/filter-utils';
-import { Offers } from '../../types/offers';
+import { updateCurrentCity, updateCityOffersList } from '../../store/action';
 import { Helmet } from 'react-helmet-async';
 
 type MainScreenProps = {
   cityPack: CityPackType;
-  offers: Offers;
 }
 
-export default function MainScreen({cityPack, offers}: MainScreenProps): React.JSX.Element {
+export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState('');
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.currentCity);
-  const cityOffers = useAppSelector((state) => state.offers);
+  const cityOffers = useAppSelector((state) => state.cityOffers);
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === activeOfferId) {
@@ -48,7 +45,7 @@ export default function MainScreen({cityPack, offers}: MainScreenProps): React.J
     }
 
     dispatch(updateCurrentCity({newCity}));
-    dispatch(updateOffersList({newOffers: getCityFilteredOffers(offers, newCity.name)}));
+    dispatch(updateCityOffersList());
   };
 
   return (

@@ -8,6 +8,9 @@ import { reviewsPack } from './mocks/reviews';
 import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
+import { fetchOffersAction } from './store/api-action';
+
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

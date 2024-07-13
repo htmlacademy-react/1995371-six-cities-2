@@ -36,7 +36,7 @@ export default function App({
           <Route
             path={AppRoute.Main}
             element={
-              <MainScreen offers={offers} cityPack={cityPack}/>
+              <MainScreen cityPack={cityPack}/>
             }
           />
           <Route
