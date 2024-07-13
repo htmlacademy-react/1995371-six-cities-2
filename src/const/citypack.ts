@@ -1,3 +1,5 @@
+import { City } from '../types/city';
+
 const CityPack = {
   Paris: {
     name: 'Paris',
@@ -49,4 +51,6 @@ const CityPack = {
   },
 } as const;
 
-export { CityPack };
+const DEFAULT_CITY: City = CityPack.Paris;
+
+export { CityPack, DEFAULT_CITY };

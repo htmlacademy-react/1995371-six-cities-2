@@ -12,10 +12,10 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setIsloading({isLoading: true}));
+    dispatch(setIsloading(true));
     const {data} = await api.get<Offers>(APIRoute.Offers);
+    dispatch(setIsloading(false));
     dispatch(loadOffersList(data));
     dispatch(updateCityOffersList());
-    dispatch(setIsloading({isLoading: false}));
   }
 );

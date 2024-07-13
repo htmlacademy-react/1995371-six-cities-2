@@ -15,7 +15,7 @@ export default function PlacesSorting(): React.JSX.Element {
   const currentSortType = useAppSelector((state) => state.sortType);
 
   useEffect(() => {
-    dispatch(updateSortType({newSort: defaultSort}));
+    dispatch(updateSortType(defaultSort));
     dispatch(updateCityOffersList());
   }, [currentCity, dispatch]);
 
@@ -42,7 +42,7 @@ export default function PlacesSorting(): React.JSX.Element {
       return;
     }
 
-    dispatch(updateSortType({newSort}));
+    dispatch(updateSortType(newSort));
     dispatch(updateCityOffersList());
     handleSortOptionsList();
   }

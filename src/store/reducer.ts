@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { DEFAULT_CITY } from '../mocks/city';
-import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading } from './action';
+import { DEFAULT_CITY } from '../const/citypack';
+import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { City } from '../types/city';
 import { Offers } from '../types/offers';
@@ -16,6 +16,7 @@ type InitialState = {
   currentOffer: null;
   sortType: SortName;
   isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -25,17 +26,18 @@ const initialState: InitialState = {
   nearbyOffers: [],
   currentOffer: null,
   sortType: defaultSort,
-  isLoading: false
+  isLoading: false,
+  error: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(updateCurrentCity, (state, action) => {
-      state.currentCity = action.payload.newCity;
+      state.currentCity = action.payload;
     })
     .addCase(updateSortType, (state, action) => {
       const currentSortType = state.sortType;
-      const newSortType = action.payload.newSort;
+      const newSortType = action.payload;
 
       if(!newSortType || newSortType === currentSortType || !isKnownSortName(newSortType)) {
         return;
@@ -58,6 +60,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(setIsloading, (state, action) => {
-      state.isLoading = action.payload.isLoading;
+      state.isLoading = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
