@@ -5,7 +5,10 @@ import { APIRoute } from '../const/api';
 import { Offers } from '../types/offers';
 import { loadOffersList, setauthorizationstatus, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
-import { AuthorizationStatus } from '../const/const';
+import { AppRoute, AuthorizationStatus } from '../const/const';
+import { TAuthData, TUserInfo } from '../types/api';
+import { saveToken } from '../services/token';
+import { redirect } from 'react-router-dom';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: TAppDispatch;
@@ -38,5 +41,19 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     } catch {
       dispatch(setauthorizationstatus(AuthorizationStatus.NoAuth));
     }
+  }
+);
+
+export const loginAction = createAsyncThunk<void, TAuthData, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.UserLogin,
+  async ({email, password}, {dispatch, extra: api}) => {
+    const {data: {token}} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
+    saveToken(token);
+    dispatch(checkAuthAction());
+    dispatch(redirect(AppRoute.Main));
   }
 );
