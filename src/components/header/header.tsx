@@ -6,19 +6,19 @@ import { HeaderMode } from '../../const/mode';
 import Logo from './logo/logo';
 import ProfileLink from './links/profile-link';
 import SignOutLink from './links/sign-out-link';
+import { useAppSelector } from '../../hooks';
 
 type HeaderProps = {
-  authorizationStatus?: string;
   headerMode?: THeaderMode;
   offers: Offers;
 }
 
 export default function Header({
-  authorizationStatus = AuthorizationStatus.Auth,
   headerMode = HeaderMode.Default,
   offers
 }: HeaderProps): React.JSX.Element {
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
   const signOutElement = isAuthorized
     ? (
       <li className="header__nav-item">

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../const/citypack';
-import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError } from './action';
+import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError, setauthorizationstatus } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
 import { Offers } from '../types/offers';
@@ -68,5 +68,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setauthorizationstatus, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });

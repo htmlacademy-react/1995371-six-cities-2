@@ -4,7 +4,7 @@ import { TFullOffersPack, Offers } from '../../types/offers';
 import { TReviewsPack } from '../../types/reviews';
 import { TCityPackType } from '../../types/city';
 
-import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { AppRoute } from '../../const/const';
 
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
@@ -28,6 +28,7 @@ export default function App({
   reviewsPack,
   cityPack
 }: AppProps): React.JSX.Element {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -46,7 +47,7 @@ export default function App({
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute>
                 <FavoritesScreen offers={offers} />
               </PrivateRoute>
             }
