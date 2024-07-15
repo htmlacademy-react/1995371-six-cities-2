@@ -10,7 +10,8 @@ enum Action {
 
 enum APIAction {
   DataFetchOffers = 'data/fetchOffers',
-  UserCheckAuth = 'user/checkAuth'
+  UserCheckAuth = 'user/checkAuth',
+  UserLogin = 'user/login'
 }
 
 export { Action, APIAction };
