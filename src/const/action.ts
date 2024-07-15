@@ -4,7 +4,8 @@ enum Action {
   LoadOffersList= 'loadOffersList',
   UpdateCityOffersList= 'updateCityOffersList',
   SetIsloading = 'setIsloading',
-  SetError= 'setError'
+  SetError= 'setError',
+  SetAuthorizationStatus = 'setAuthorizationStatus'
 }
 
 enum APIAction {

@@ -1,19 +1,19 @@
-import { Filter } from '../types/common';
-import { Offers, Offer } from '../types/offers';
+import { TFilter } from '../types/common';
+import { Offers, TOffer } from '../types/offers';
 import { isString } from './type-quard';
 import { FilterType } from '../const/const';
 
 const FilterFunction = {
-  [FilterType.Favorite]: () => (offer: Offer) => offer.isFavorite,
-  [FilterType.City]: (city: string) => (offer: Offer) => offer.city.name === city
+  [FilterType.Favorite]: () => (offer: TOffer) => offer.isFavorite,
+  [FilterType.City]: (city: string) => (offer: TOffer) => offer.city.name === city
 } as const;
 
 const getFilteredOffers = <T>(
   offers: Offers,
-  filterType: Filter,
+  filterType: TFilter,
   filterTag?: T
 ) => {
-  let filterFunction = (offer: Offer): boolean => offer !== undefined;
+  let filterFunction = (offer: TOffer): boolean => offer !== undefined;
 
   switch (filterType) {
     case FilterType.City:

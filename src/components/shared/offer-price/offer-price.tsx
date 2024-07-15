@@ -1,15 +1,15 @@
-import { PriceViewMode } from '../../../types/common';
+import { TPriceViewMode } from '../../../types/common';
 
-import { PriceViewModeOption } from '../../../const/mode';
+import { PriceViewMode } from '../../../const/mode';
 
 type OfferPriceProps = {
   offerPrice: number;
-  priceViewMode?: PriceViewMode;
+  priceViewMode?: TPriceViewMode;
 }
 
 export default function OfferPrice({
   offerPrice,
-  priceViewMode = PriceViewModeOption.Card
+  priceViewMode = PriceViewMode.Card
 }: OfferPriceProps): React.JSX.Element {
   return (
     <div className={`${priceViewMode}__price`}>

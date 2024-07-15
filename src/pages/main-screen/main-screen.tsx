@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { City, CityPackType } from '../../types/city';
+import { TCity, TCityPackType } from '../../types/city';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getOffer } from '../../utils/offers-utils';
@@ -14,7 +14,7 @@ import { updateCurrentCity, updateCityOffersList } from '../../store/action';
 import { Helmet } from 'react-helmet-async';
 
 type MainScreenProps = {
-  cityPack: CityPackType;
+  cityPack: TCityPackType;
 }
 
 export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
@@ -40,7 +40,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
     setActiveOfferId(newId ? newId : '');
   };
 
-  const handleCityChange = (newCity: City) => {
+  const handleCityChange = (newCity: TCity) => {
     if (newCity.name === currentCity.name) {
       return;
     }

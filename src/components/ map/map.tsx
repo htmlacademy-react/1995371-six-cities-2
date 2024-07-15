@@ -2,15 +2,15 @@ import { useEffect, useRef } from 'react';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { City } from '../../types/city';
-import { Point, Points } from '../../types/map';
+import { TCity } from '../../types/city';
+import { TPoint, TPoints } from '../../types/map';
 import useMap from '../../hooks/use-map';
 
 
 type MapProps = {
-  city: City;
-  points: Points;
-  selectedPoint?: Point | undefined;
+  city: TCity;
+  points: TPoints;
+  selectedPoint?: TPoint | undefined;
 }
 
 const defaultCustomIcon = new Icon({

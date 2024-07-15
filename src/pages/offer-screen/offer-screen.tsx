@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-import { FullOffersPack, Offers } from '../../types/offers';
-import { ReviewsPack } from '../../types/reviews';
+import { TFullOffersPack, Offers } from '../../types/offers';
+import { TReviewsPack } from '../../types/reviews';
 import { getFullOffer, getOffer } from '../../utils/offers-utils';
 
 import Error404Screen from '../error-404-screen/error-404-screen';
@@ -13,8 +13,8 @@ import { Helmet } from 'react-helmet-async';
 
 type OfferScreenProps = {
   offers: Offers;
-  fullOffersPack: FullOffersPack;
-  reviewsPack: ReviewsPack;
+  fullOffersPack: TFullOffersPack;
+  reviewsPack: TReviewsPack;
 }
 
 export default function OfferScreen({
