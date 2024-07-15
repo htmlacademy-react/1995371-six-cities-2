@@ -1,42 +1,42 @@
 import { AccommodationType } from '../const/const';
-import { City, Location } from './city';
+import { TCity, TLocation } from './city';
 
-export type Accommodation = typeof AccommodationType.Apartment | typeof AccommodationType.Hotel | typeof AccommodationType.House | typeof AccommodationType.Room;
+export type TAccommodation = AccommodationType;
 
-export type Host = {
+export type THost = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 };
 
-export type Images = string[];
+export type TImages = string[];
 
-export type Id = string;
+export type TId = string;
 
-export type OfferBase = {
-  id: Id;
+export type TOfferBase = {
+  id: TId;
   title: string;
-  type: Accommodation;
+  type: TAccommodation;
   price: number;
-  city: City;
-  location: Location;
+  city: TCity;
+  location: TLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
 }
 
-export type Offer = OfferBase & {
+export type TOffer = TOfferBase & {
   previewImage: string;
 }
 
-export type OfferFull = OfferBase & {
+export type TOfferFull = TOfferBase & {
   description: string;
   bedrooms: number;
   goods: string[];
-  host: Host;
-  images: Images;
+  host: THost;
+  images: TImages;
   maxAdults: number;
 }
 
-export type Offers = Offer[];
-export type FullOffersPack = {[key: Id]: OfferFull};
+export type Offers = TOffer[];
+export type TFullOffersPack = {[key: TId]: TOfferFull};

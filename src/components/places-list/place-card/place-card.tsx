@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { PlaceCardMode } from '../../../types/common';
-import { Offer } from '../../../types/offers';
+import { TPlaceCardMode } from '../../../types/common';
+import { TOffer } from '../../../types/offers';
 
 import { AppRoute } from '../../../const/const';
-import { PlaceCardModeOption } from '../../../const/mode';
+import { PlaceCardMode } from '../../../const/mode';
 import Rating from '../../shared/rating/rating';
 import BookmarkButton from '../../shared/bookmark-button/bookmark-button';
 import OfferPrice from '../../shared/offer-price/offer-price';
 import { useRef } from 'react';
 
 type PlaceCardProps = {
-  offer: Offer;
-  cardMode: PlaceCardMode;
+  offer: TOffer;
+  cardMode: TPlaceCardMode;
   onMouseEnter: (id: string) => void;
   onMouseLeave: (id?: string) => void;
 }
@@ -26,7 +26,7 @@ export default function PlaceCard({
 }: PlaceCardProps): React.JSX.Element {
   const cardRef = useRef<HTMLElement | null>(null);
 
-  const isFavoriteMode = cardMode === PlaceCardModeOption.Favorite;
+  const isFavoriteMode = cardMode === PlaceCardMode.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
   const handleMouseEnterEvent = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {

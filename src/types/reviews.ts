@@ -1,24 +1,24 @@
-export type reviewState = {
+export type TReviewState = {
   rating: number;
   reviewText: string;
 }
 
-export type User = {
+export type TUser = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
 
-export type Review = {
+export type TReview = {
   id: string;
   date: string;
-  user: User;
+  user: TUser;
   comment: string;
   rating: number;
 }
 
-export type Reviews = Review[]
+export type TReviews = TReview[]
 
-export type ReviewsPack = {
-  [id: string]: Reviews;
+export type TReviewsPack = {
+  [id: string]: TReviews;
 }

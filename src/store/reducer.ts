@@ -2,24 +2,27 @@ import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../const/citypack';
 import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
-import { City } from '../types/city';
+import { TCity } from '../types/city';
 import { Offers } from '../types/offers';
-import { SortName } from '../types/sort';
+import { TSortName } from '../types/sort';
+import { AuthorizationStatus } from '../const/const';
 import { defaultSort, SortPack } from '../const/sort';
 import { isKnownSortName } from '../utils/type-quard';
+import { TAuthorizationStatus } from '../types/common';
 
-type InitialState = {
-  currentCity: City;
-  offers: [] | Offers;
-  cityOffers: [] | Offers;
-  nearbyOffers: [] | Offers;
+type TInitialState = {
+  currentCity: TCity;
+  offers: Offers;
+  cityOffers: Offers;
+  nearbyOffers: Offers;
   currentOffer: null;
-  sortType: SortName;
+  sortType: TSortName;
   isLoading: boolean;
   error: string | null;
+  authorizationStatus: TAuthorizationStatus;
 }
 
-const initialState: InitialState = {
+const initialState: TInitialState = {
   currentCity: DEFAULT_CITY,
   offers: [],
   cityOffers: [],
@@ -27,7 +30,8 @@ const initialState: InitialState = {
   currentOffer: null,
   sortType: defaultSort,
   isLoading: false,
-  error: null
+  error: null,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 export const reducer = createReducer(initialState, (builder) => {

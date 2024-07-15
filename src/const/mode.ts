@@ -1,45 +1,45 @@
-const ClassnameActionModeOption = {
-  Add: 'Add',
-  Remove: 'Remove'
-} as const;
+enum ClassnameActionMode {
+  Add = 'Add',
+  Remove = 'Remove'
+}
 
-const SortActionModeOption = {
-  Open: 'Open',
-  Close: 'Close'
-} as const;
+enum SortActionMode {
+  Open = 'Open',
+  Close = 'Close'
+}
 
-const PlaceCardModeOption = {
-  Default: 'default',
-  Favorite: 'favorite'
-} as const;
+enum PlaceCardMode {
+  Default = 'default',
+  Favorite = 'favorite'
+}
 
-const HeaderModeOption = {
-  LoginScreen: 'loginScreen',
-  Default: 'default'
-} as const;
+enum HeaderMode {
+  LoginScreen = 'loginScreen',
+  Default = 'default'
+}
 
-const RatingViewModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-  Reviews: 'reviews'
-} as const;
+enum RatingViewMode {
+  Card = 'place-card',
+  Offer = 'offer',
+  Reviews = 'reviews'
+}
 
-const BookmarkButtonModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-} as const;
+enum BookmarkButtonMode {
+  Card = 'place-card',
+  Offer = 'offer',
+}
 
-const PriceViewModeOption = {
-  Card: 'place-card',
-  Offer: 'offer',
-} as const;
+enum PriceViewMode {
+  Card = 'place-card',
+  Offer = 'offer',
+}
 
 export {
-  ClassnameActionModeOption,
-  SortActionModeOption,
-  PlaceCardModeOption,
-  HeaderModeOption,
-  RatingViewModeOption,
-  BookmarkButtonModeOption,
-  PriceViewModeOption,
+  ClassnameActionMode,
+  SortActionMode,
+  PlaceCardMode,
+  HeaderMode,
+  RatingViewMode,
+  BookmarkButtonMode,
+  PriceViewMode,
 };

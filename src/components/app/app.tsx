@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { FullOffersPack, Offers } from '../../types/offers';
-import { ReviewsPack } from '../../types/reviews';
-import { CityPackType } from '../../types/city';
+import { TFullOffersPack, Offers } from '../../types/offers';
+import { TReviewsPack } from '../../types/reviews';
+import { TCityPackType } from '../../types/city';
 
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
@@ -17,9 +17,9 @@ import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
   offers: Offers;
-  fullOffersPack: FullOffersPack;
-  reviewsPack: ReviewsPack;
-  cityPack: CityPackType;
+  fullOffersPack: TFullOffersPack;
+  reviewsPack: TReviewsPack;
+  cityPack: TCityPackType;
 }
 
 export default function App({

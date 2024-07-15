@@ -1,6 +1,6 @@
-import { SortActionModeOption } from '../const/mode';
+import { SortActionMode } from '../const/mode';
 import { SortPack } from '../const/sort';
 
-export type SortType = typeof SortPack;
-export type SortName = keyof SortType;
-export type SortActionMode = keyof typeof SortActionModeOption;
+export type TSortType = typeof SortPack;
+export type TSortName = keyof TSortType;
+export type TSortActionMode = SortActionMode;

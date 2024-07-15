@@ -1,4 +1,4 @@
-import { Offers, FullOffersPack } from '../types/offers';
+import { Offers, TFullOffersPack } from '../types/offers';
 
 import { AVATAR_TEMP_URL } from '../const/const';
 import { CityPack } from '../const/citypack';
@@ -70,7 +70,7 @@ const offers: Offers = [
   },
 ];
 
-const fullOffersPack: FullOffersPack = {
+const fullOffersPack: TFullOffersPack = {
   '37fc5e64-0f59-46a7-b57f-d85caeae73cb': {
     'id': '37fc5e64-0f59-46a7-b57f-d85caeae73cb',
     'title': 'Penthouse, 4-5 rooms + 5 balconies',

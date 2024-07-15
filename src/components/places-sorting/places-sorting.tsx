@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { SortActionMode, } from '../../types/sort';
+import { TSortActionMode, } from '../../types/sort';
 import { updateSortType, updateCityOffersList } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isKnownSortName } from '../../utils/type-quard';
 import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
-import { ClassnameActionModeOption, SortActionModeOption } from '../../const/mode';
+import { ClassnameActionMode, SortActionMode } from '../../const/mode';
 import { handleClassName } from '../../utils/utils';
 
 export default function PlacesSorting(): React.JSX.Element {
@@ -19,20 +19,20 @@ export default function PlacesSorting(): React.JSX.Element {
     dispatch(updateCityOffersList());
   }, [currentCity, dispatch]);
 
-  function handleSortOptionsList(action: SortActionMode = SortActionModeOption.Close) {
+  function handleSortOptionsList(action: TSortActionMode = SortActionMode.Close) {
     switch (action) {
-      case SortActionModeOption.Open:
-        handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME, ClassnameActionModeOption.Add);
+      case SortActionMode.Open:
+        handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME, ClassnameActionMode.Add);
         break;
 
-      case SortActionModeOption.Close:
+      case SortActionMode.Close:
         handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME);
         break;
     }
   }
 
   function handleSortTypeClick() {
-    handleSortOptionsList(SortActionModeOption.Open);
+    handleSortOptionsList(SortActionMode.Open);
   }
 
   function handleSortItemClick(evt: React.MouseEvent<HTMLLIElement, MouseEvent>) {

@@ -1,14 +1,14 @@
 import { CityPack } from '../const/citypack';
 
-export type Location = {
+export type TLocation = {
   latitude: number;
   longitude: number;
   zoom: number;
 };
 
-export type City = {
+export type TCity = {
   name: string;
-  location: Location;
+  location: TLocation;
 };
 
-export type CityPackType = typeof CityPack;
+export type TCityPackType = typeof CityPack;

@@ -1,7 +1,7 @@
-import { Offer, OfferFull, Offers } from '../../types/offers';
-import { Reviews } from '../../types/reviews';
+import { TOffer, TOfferFull, Offers } from '../../types/offers';
+import { TReviews } from '../../types/reviews';
 
-import { BookmarkButtonModeOption, PriceViewModeOption } from '../../const/mode';
+import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
 import OfferMark from './offer-mark/offer-mark';
@@ -15,10 +15,10 @@ import ReviewsSection from '../reviews-section/reviews-section';
 import Map from '../ map/map';
 
 type PlaceOfferProps = {
-  currentOffer: OfferFull;
+  currentOffer: TOfferFull;
   nearbyOffers: Offers;
-  hoveredCardOffer: Offer | undefined;
-  reviews: Reviews;
+  hoveredCardOffer: TOffer | undefined;
+  reviews: TReviews;
 }
 
 export default function PlaceOffer({
@@ -42,7 +42,7 @@ export default function PlaceOffer({
           {offerMark}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{currentOffer.title}</h1>
-            <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonModeOption.Offer}/>
+            <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonMode.Offer}/>
           </div>
           <Rating offerRating={currentOffer.rating}/>
           <FeaturesList
@@ -50,7 +50,7 @@ export default function PlaceOffer({
             bedroomsAmount={currentOffer.bedrooms}
             maxAdultsAmount={currentOffer.maxAdults}
           />
-          <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewModeOption.Offer}/>
+          <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
           {goodsModule}
           <HostModule offer={currentOffer}/>
           <ReviewsSection offerId={currentOffer.id} reviews={reviews}/>

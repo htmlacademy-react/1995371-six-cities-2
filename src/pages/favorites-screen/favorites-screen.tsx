@@ -1,6 +1,6 @@
 import { Offers } from '../../types/offers';
 
-import { PlaceCardModeOption } from '../../const/mode';
+import { PlaceCardMode } from '../../const/mode';
 import { getCityFilteredOffers, getFavoriteOffers } from '../../utils/filter-utils';
 
 import Header from '../../components/header/header';
@@ -35,7 +35,7 @@ export default function FavoritesScreen({offers}: FavoritesScreenProps): React.J
           </div>
         </div>
         <div className="favorites__places">
-          <PlacesList offers={filteredOffers} cardMode={PlaceCardModeOption.Favorite}/>
+          <PlacesList offers={filteredOffers} cardMode={PlaceCardMode.Favorite}/>
         </div>
       </li>
     );
