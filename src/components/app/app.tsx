@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { TFullOffersPack, Offers } from '../../types/offers';
 import { TReviewsPack } from '../../types/reviews';
@@ -14,6 +14,8 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 import { HelmetProvider } from 'react-helmet-async';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   offers: Offers;
@@ -31,7 +33,7 @@ export default function App({
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route
@@ -67,7 +69,7 @@ export default function App({
             element={<Error404Screen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
