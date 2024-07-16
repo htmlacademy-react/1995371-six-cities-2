@@ -3,12 +3,11 @@ import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
 import { APIRoute } from '../const/api';
 import { Offers } from '../types/offers';
-import { loadOffersList, setauthorizationstatus, setIsloading, updateCityOffersList } from './action';
+import { loadOffersList, redirectToRoute, setauthorizationstatus, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
 import { AppRoute, AuthorizationStatus } from '../const/const';
 import { TAuthData, TUserInfo } from '../types/api';
 import { saveToken } from '../services/token';
-import { redirect } from 'react-router-dom';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: TAppDispatch;
@@ -54,6 +53,6 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
     const {data: {token}} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(checkAuthAction());
-    dispatch(redirect(AppRoute.Main));
+    dispatch(redirectToRoute(AppRoute.Main));
   }
 );
