@@ -9,7 +9,8 @@ import {
   setError,
   setauthorizationstatus,
   loadCurrentOffer,
-  loadCurrentOfferReviews
+  loadCurrentOfferReviews,
+  loadNearbyOffers
 } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
@@ -90,5 +91,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadCurrentOfferReviews, (state, action) => {
       state.currentOfferReviews = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
     });
 });

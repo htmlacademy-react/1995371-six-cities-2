@@ -17,3 +17,4 @@ export const setauthorizationstatus = createAction<TAuthorizationStatus>(Action.
 export const redirectToRoute = createAction<TRedirectRouteProps>(Action.RedirectToRoute);
 export const loadCurrentOffer = createAction<TOfferFull | null>(Action.LoadCurrentOffer);
 export const loadCurrentOfferReviews = createAction<TReviews>(Action.LoadCurrentOfferReviews);
+export const loadNearbyOffers = createAction<TOffers>(Action.LoadNearbyOffers);
