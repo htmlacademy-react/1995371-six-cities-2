@@ -1,20 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { reviewInitStateValue } from '../../../const/review-const';
 import RatingChooser from '../../rating-chooser/rating-chooser';
 
-type ReviewFormProps = {
-  offerId: string;
-}
-
-export default function ReviewForm({offerId}: ReviewFormProps): React.JSX.Element {
+export default function ReviewForm(): React.JSX.Element {
 
   const [reviewData, setReviewData] = useState({...reviewInitStateValue});
-
-  useEffect(() => {
-    setReviewData({...reviewInitStateValue});
-  },
-  [offerId]);
 
   const handleRatingChange = (newRatingValue: number) => {
     setReviewData({...reviewData, rating: newRatingValue});

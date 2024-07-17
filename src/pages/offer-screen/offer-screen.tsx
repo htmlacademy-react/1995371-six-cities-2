@@ -1,37 +1,46 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-import { TReviewsPack } from '../../types/reviews';
 import { getOffer } from '../../utils/offers-utils';
 
-import Error404Screen from '../error-404-screen/error-404-screen';
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
 import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const/const';
+import { fetchCurrentOfferAction } from '../../store/api-action';
+import Spinner from '../../components/shared/spinner/spinner';
+import { loadCurrentOffer, loadCurrentOfferReviews } from '../../store/action';
 
-type OfferScreenProps = {
-  reviewsPack: TReviewsPack;
-}
-
-export default function OfferScreen({
-  reviewsPack
-}: OfferScreenProps): React.JSX.Element {
+export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
   const [hoveredCardOfferID, setHoveredCardOfferID] = useState<string>('');
-
   const currentOfferId = params.id;
   const offers = useAppSelector((store) => store.offers);
   const currentOffer = useAppSelector((store) => store.currentOffer);
+  const reviews = useAppSelector((store) => store.currentOfferReviews);
 
-  if (!currentOfferId || !currentOffer) {
-    return <Error404Screen />;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!currentOfferId) {
+      return;
+    }
+
+    dispatch(fetchCurrentOfferAction({offerId: currentOfferId}));
+    return () => {
+      dispatch(loadCurrentOffer(null));
+      dispatch(loadCurrentOfferReviews([]));
+    };
+  }, [currentOfferId, dispatch]);
+
+  if (!currentOfferId) {
+    return <Navigate to={AppRoute.Page404} />;
   }
 
   const nearbyOffers = offers.filter((offer) => offer.id !== currentOfferId);
   const hoveredCardOffer = getOffer(offers, hoveredCardOfferID);
-  const reviews = reviewsPack[currentOfferId];
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === hoveredCardOfferID) {
@@ -56,12 +65,16 @@ export default function OfferScreen({
       </Helmet>
       <Header offers={offers}/>
       <main className="page__main page__main--offer">
-        <PlaceOffer
-          currentOffer={currentOffer}
-          nearbyOffers={nearbyOffers}
-          hoveredCardOffer={hoveredCardOffer}
-          reviews={reviews}
-        />
+        {currentOffer
+          ? (
+            <PlaceOffer
+              currentOffer={currentOffer}
+              nearbyOffers={nearbyOffers}
+              hoveredCardOffer={hoveredCardOffer}
+              reviews={reviews}
+            />
+          )
+          : <Spinner description='Загружаем информацию о предложении'/>}
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
