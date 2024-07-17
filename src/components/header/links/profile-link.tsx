@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import { Offers } from '../../../types/offers';
+import { TOffers } from '../../../types/offers';
 import { AppRoute } from '../../../const/const';
 import { getFavoriteOffers } from '../../../utils/filter-utils';
 
 type ProfileLinkProps = {
   isAuthorized: boolean;
-  offers: Offers;
+  offers: TOffers;
 }
 
 export default function ProfileLink({

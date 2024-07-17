@@ -10,3 +10,7 @@ export type TUserInfo = {
   email: string;
   token: string;
 };
+
+export type TOfferId = {
+  offerId: string;
+}

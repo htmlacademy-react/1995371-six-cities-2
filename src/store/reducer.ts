@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../const/citypack';
-import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError, setauthorizationstatus } from './action';
+import { loadOffersList, updateCurrentCity, updateCityOffersList, updateSortType, setIsloading, setError, setauthorizationstatus, loadCurrentOffer } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
-import { Offers } from '../types/offers';
+import { TOfferFull, TOffers } from '../types/offers';
 import { TSortName } from '../types/sort';
 import { AuthorizationStatus } from '../const/const';
 import { defaultSort, SortPack } from '../const/sort';
@@ -12,10 +12,10 @@ import { TAuthorizationStatus } from '../types/common';
 
 type TInitialState = {
   currentCity: TCity;
-  offers: Offers;
-  cityOffers: Offers;
-  nearbyOffers: Offers;
-  currentOffer: null;
+  offers: TOffers;
+  cityOffers: TOffers;
+  nearbyOffers: TOffers;
+  currentOffer: TOfferFull | null;
   sortType: TSortName;
   isLoading: boolean;
   error: string | null;
@@ -71,5 +71,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setauthorizationstatus, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(loadCurrentOffer, (state, action) => {
+      state.currentOffer = action.payload;
     });
 });

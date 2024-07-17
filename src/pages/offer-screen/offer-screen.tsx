@@ -1,32 +1,29 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
-import { TFullOffersPack, Offers } from '../../types/offers';
 import { TReviewsPack } from '../../types/reviews';
-import { getFullOffer, getOffer } from '../../utils/offers-utils';
+import { getOffer } from '../../utils/offers-utils';
 
 import Error404Screen from '../error-404-screen/error-404-screen';
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
 import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 
 type OfferScreenProps = {
-  offers: Offers;
-  fullOffersPack: TFullOffersPack;
   reviewsPack: TReviewsPack;
 }
 
 export default function OfferScreen({
-  offers,
-  fullOffersPack,
   reviewsPack
 }: OfferScreenProps): React.JSX.Element {
   const params = useParams();
   const [hoveredCardOfferID, setHoveredCardOfferID] = useState<string>('');
 
   const currentOfferId = params.id;
-  const currentOffer = getFullOffer(fullOffersPack, currentOfferId);
+  const offers = useAppSelector((store) => store.offers);
+  const currentOffer = useAppSelector((store) => store.currentOffer);
 
   if (!currentOfferId || !currentOffer) {
     return <Error404Screen />;

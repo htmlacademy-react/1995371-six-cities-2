@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
 import { APIRoute } from '../const/api';
-import { Offers } from '../types/offers';
-import { loadOffersList, redirectToRoute, setauthorizationstatus, setIsloading, updateCityOffersList } from './action';
+import { TOffers, TOfferFull } from '../types/offers';
+import { loadCurrentOffer, loadOffersList, redirectToRoute, setauthorizationstatus, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
 import { AppRoute, AuthorizationStatus } from '../const/const';
-import { TAuthData, TUserInfo } from '../types/api';
+import { TAuthData, TOfferId, TUserInfo } from '../types/api';
 import { saveToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -18,12 +18,24 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setIsloading(true));
     try {
-      const {data} = await api.get<Offers>(APIRoute.Offers);
+      const {data} = await api.get<TOffers>(APIRoute.Offers);
       dispatch(loadOffersList(data));
       dispatch(updateCityOffersList());
     } finally {
       dispatch(setIsloading(false));
     }
+  }
+);
+
+export const fetchCurrentOfferAction = createAsyncThunk<void, TOfferId, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(APIAction.DataFetchCurrentOffer,
+  async ({offerId}, {dispatch, extra: api}) => {
+    const route = `${APIRoute.Offers}/${offerId}`;
+    const {data} = await api.get<TOfferFull>(route);
+    dispatch(loadCurrentOffer(data));
   }
 );
 
