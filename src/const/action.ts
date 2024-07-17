@@ -6,11 +6,13 @@ enum Action {
   SetIsloading = 'setIsloading',
   SetError= 'setError',
   SetAuthorizationStatus = 'setAuthorizationStatus',
-  RedirectToRoute = 'redirectToRoute'
+  RedirectToRoute = 'redirectToRoute',
+  LoadCurrentOffer = 'loadCurrentOffer'
 }
 
 enum APIAction {
   DataFetchOffers = 'data/fetchOffers',
+  DataFetchCurrentOffer = 'data/fetchCurrentOffer',
   UserCheckAuth = 'user/checkAuth',
   UserLogin = 'user/login'
 }

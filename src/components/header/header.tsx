@@ -1,5 +1,5 @@
 import { THeaderMode } from '../../types/common';
-import { Offers } from '../../types/offers';
+import { TOffers } from '../../types/offers';
 
 import { AuthorizationStatus } from '../../const/const';
 import { HeaderMode } from '../../const/mode';
@@ -10,7 +10,7 @@ import { useAppSelector } from '../../hooks';
 
 type HeaderProps = {
   headerMode?: THeaderMode;
-  offers: Offers;
+  offers: TOffers;
 }
 
 export default function Header({

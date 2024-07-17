@@ -1,4 +1,4 @@
-import { TOffer, TOfferFull, Offers } from '../../types/offers';
+import { TOffer, TOfferFull, TOffers } from '../../types/offers';
 import { TReviews } from '../../types/reviews';
 
 import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
@@ -16,7 +16,7 @@ import Map from '../ map/map';
 
 type PlaceOfferProps = {
   currentOffer: TOfferFull;
-  nearbyOffers: Offers;
+  nearbyOffers: TOffers;
   hoveredCardOffer: TOffer | undefined;
   reviews: TReviews;
 }

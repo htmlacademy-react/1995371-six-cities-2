@@ -1,5 +1,5 @@
 import { TFilter } from '../types/common';
-import { Offers, TOffer } from '../types/offers';
+import { TOffers, TOffer } from '../types/offers';
 import { isString } from './type-quard';
 import { FilterType } from '../const/const';
 
@@ -9,7 +9,7 @@ const FilterFunction = {
 } as const;
 
 const getFilteredOffers = <T>(
-  offers: Offers,
+  offers: TOffers,
   filterType: TFilter,
   filterTag?: T
 ) => {
@@ -31,12 +31,12 @@ const getFilteredOffers = <T>(
 };
 
 const getCityFilteredOffers = (
-  offers: Offers,
+  offers: TOffers,
   city: string
 ) => getFilteredOffers<string>(offers, FilterType.City, city);
 
 const getFavoriteOffers = (
-  offers: Offers
+  offers: TOffers
 ) => getFilteredOffers(offers, FilterType.Favorite);
 
 export {

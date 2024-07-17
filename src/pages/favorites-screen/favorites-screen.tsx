@@ -1,4 +1,4 @@
-import { Offers } from '../../types/offers';
+import { TOffers } from '../../types/offers';
 
 import { PlaceCardMode } from '../../const/mode';
 import { getCityFilteredOffers, getFavoriteOffers } from '../../utils/filter-utils';
@@ -7,15 +7,13 @@ import Header from '../../components/header/header';
 import FooterLogo from '../../components/footer-logo/footer-logo';
 import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 
-type FavoritesScreenProps = {
-  offers: Offers;
-}
-
-export default function FavoritesScreen({offers}: FavoritesScreenProps): React.JSX.Element {
+export default function FavoritesScreen(): React.JSX.Element {
+  const offers = useAppSelector((store) => store.offers);
   const favoriteOffers = getFavoriteOffers(offers);
   const cities = new Set(favoriteOffers.map((offer) => offer.city.name));
-  const cityOffers = new Map<string, Offers>();
+  const cityOffers = new Map<string, TOffers>();
 
   cities.forEach((city) => cityOffers.set(
     city,
@@ -23,7 +21,7 @@ export default function FavoritesScreen({offers}: FavoritesScreenProps): React.J
   ));
 
   const locationItemsLists = Array.from(cities).map((city) => {
-    const filteredOffers = cityOffers.get(city) as Offers;
+    const filteredOffers = cityOffers.get(city) as TOffers;
 
     return (
       <li className="favorites__locations-items" key={city}>

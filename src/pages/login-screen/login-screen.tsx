@@ -1,5 +1,3 @@
-import { Offers } from '../../types/offers';
-
 import { HeaderMode } from '../../const/mode';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
@@ -9,12 +7,9 @@ import { loginAction } from '../../store/api-action';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 
-type LoginScreenProps = {
-  offers: Offers;
-}
-
-export default function LoginScreen({offers}: LoginScreenProps): React.JSX.Element {
+export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
+  const offers = useAppSelector((store) => store.offers);
   const currentAuthorizationStatus = useAppSelector((store) => store.authorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);

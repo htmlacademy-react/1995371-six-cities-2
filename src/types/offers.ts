@@ -38,5 +38,5 @@ export type TOfferFull = TOfferBase & {
   maxAdults: number;
 }
 
-export type Offers = TOffer[];
+export type TOffers = TOffer[];
 export type TFullOffersPack = {[key: TId]: TOfferFull};
