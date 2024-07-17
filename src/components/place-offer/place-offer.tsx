@@ -53,7 +53,7 @@ export default function PlaceOffer({
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
           {goodsModule}
           <HostModule offer={currentOffer}/>
-          <ReviewsSection offerId={currentOffer.id} reviews={reviews}/>
+          <ReviewsSection reviews={reviews}/>
         </div>
       </div>
       <section className="offer__map map">

@@ -7,7 +7,8 @@ enum Action {
   SetError= 'setError',
   SetAuthorizationStatus = 'setAuthorizationStatus',
   RedirectToRoute = 'redirectToRoute',
-  LoadCurrentOffer = 'loadCurrentOffer'
+  LoadCurrentOffer = 'loadCurrentOffer',
+  LoadCurrentOfferReviews ='loadCurrentOfferReviews'
 }
 
 enum APIAction {

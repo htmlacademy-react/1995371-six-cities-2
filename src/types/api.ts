@@ -1,3 +1,5 @@
+import { AppRoute } from '../const/const';
+
 export type TAuthData = {
   email: string;
   password: string;
@@ -13,4 +15,9 @@ export type TUserInfo = {
 
 export type TOfferId = {
   offerId: string;
+}
+
+export type TRedirectRouteProps = {
+  route: AppRoute;
+  parameter?: string;
 }

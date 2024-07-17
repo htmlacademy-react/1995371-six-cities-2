@@ -1,9 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { TReviewsPack } from '../../types/reviews';
 import { TCityPackType } from '../../types/city';
-
 import { AppRoute } from '../../const/const';
 
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
@@ -17,12 +15,10 @@ import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 type AppProps = {
-  reviewsPack: TReviewsPack;
   cityPack: TCityPackType;
 }
 
 export default function App({
-  reviewsPack,
   cityPack
 }: AppProps): React.JSX.Element {
 
@@ -52,14 +48,16 @@ export default function App({
           <Route
             path={AppRoute.Offer}
             element={
-              <OfferScreen
-                reviewsPack={reviewsPack}
-              />
+              <OfferScreen />
             }
           />
           <Route
-            path="*"
+            path={AppRoute.Page404}
             element={<Error404Screen />}
+          />
+          <Route
+            path="*"
+            element={<Navigate to={AppRoute.Page404} />}
           />
         </Routes>
       </HistoryRouter>
