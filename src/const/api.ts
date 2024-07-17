@@ -4,7 +4,8 @@ const REQUEST_TIMEOUT = 5000;
 enum APIRoute {
   Offers = '/offers',
   Login = '/login',
-  Comments = '/comments'
+  Comments = '/comments',
+  NearbyOffers = '/nearby'
 }
 
 export {

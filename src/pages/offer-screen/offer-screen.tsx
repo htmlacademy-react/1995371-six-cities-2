@@ -9,9 +9,9 @@ import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const/const';
-import { fetchCurrentOfferAction } from '../../store/api-action';
+import { fetchOfferScreenInfo } from '../../store/api-action';
 import Spinner from '../../components/shared/spinner/spinner';
-import { loadCurrentOffer, loadCurrentOfferReviews } from '../../store/action';
+import { loadCurrentOffer, loadCurrentOfferReviews, loadNearbyOffers } from '../../store/action';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
@@ -20,6 +20,7 @@ export default function OfferScreen(): React.JSX.Element {
   const offers = useAppSelector((store) => store.offers);
   const currentOffer = useAppSelector((store) => store.currentOffer);
   const reviews = useAppSelector((store) => store.currentOfferReviews);
+  const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
 
   const dispatch = useAppDispatch();
 
@@ -28,10 +29,11 @@ export default function OfferScreen(): React.JSX.Element {
       return;
     }
 
-    dispatch(fetchCurrentOfferAction({offerId: currentOfferId}));
+    dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
     return () => {
       dispatch(loadCurrentOffer(null));
       dispatch(loadCurrentOfferReviews([]));
+      dispatch(loadNearbyOffers([]));
     };
   }, [currentOfferId, dispatch]);
 
@@ -39,7 +41,6 @@ export default function OfferScreen(): React.JSX.Element {
     return <Navigate to={AppRoute.Page404} />;
   }
 
-  const nearbyOffers = offers.filter((offer) => offer.id !== currentOfferId);
   const hoveredCardOffer = getOffer(offers, hoveredCardOfferID);
 
   const handleCardMouseEnter = (newId: string) => {
