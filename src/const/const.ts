@@ -1,4 +1,5 @@
 const AVATAR_TEMP_URL = 'https://i.pravatar.cc/128';
+const SHOWED_NEARBY_OFFERS_AMOUNT = 3;
 
 const Setting = {
   OffersAmount: 5,
@@ -49,6 +50,7 @@ enum AuthorizationStatus {
 
 export {
   AVATAR_TEMP_URL,
+  SHOWED_NEARBY_OFFERS_AMOUNT,
   Setting,
   RatingStarTitle,
   RatingStarValue,

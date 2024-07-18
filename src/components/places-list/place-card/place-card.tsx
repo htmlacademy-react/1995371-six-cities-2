@@ -10,6 +10,8 @@ import Rating from '../../shared/rating/rating';
 import BookmarkButton from '../../shared/bookmark-button/bookmark-button';
 import OfferPrice from '../../shared/offer-price/offer-price';
 import { useRef } from 'react';
+import { useAppDispatch } from '../../../hooks';
+import { fetchOfferScreenInfo } from '../../../store/api-action';
 
 type PlaceCardProps = {
   offer: TOffer;
@@ -25,6 +27,7 @@ export default function PlaceCard({
   onMouseLeave
 }: PlaceCardProps): React.JSX.Element {
   const cardRef = useRef<HTMLElement | null>(null);
+  const dispatch = useAppDispatch();
 
   const isFavoriteMode = cardMode === PlaceCardMode.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
@@ -47,7 +50,10 @@ export default function PlaceCard({
       ref={cardRef}
     >
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
-        <Link to={`${AppRoute.OfferBase}/${offer.id}`}>
+        <Link to={`${AppRoute.OfferBase}/${offer.id}`} onClick={(evt) => {
+          evt.preventDefault();
+          dispatch(fetchOfferScreenInfo({offerId: offer.id}));
+        }}>
           <img
             className="place-card__image"
             src={offer.previewImage}
