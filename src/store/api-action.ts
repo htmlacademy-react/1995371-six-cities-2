@@ -80,6 +80,7 @@ export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
       await dispatch((fetchCurrentOfferAction({offerId})));
       await dispatch((fetchCurrentOfferReviewsAction({offerId})));
       await dispatch((fetchNearbyOffersAction({offerId})));
+      dispatch(redirectToRoute({route: AppRoute.OfferBase, parameter: offerId}));
     } catch {
       dispatch(redirectToRoute({route: AppRoute.Page404}));
     }

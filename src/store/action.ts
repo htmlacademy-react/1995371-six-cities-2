@@ -5,7 +5,7 @@ import { TSortName } from '../types/sort';
 import { Action } from '../const/action';
 import { TAuthorizationStatus } from '../types/common';
 import { TReviews } from '../types/reviews';
-import { TRedirectRouteProps } from '../types/api';
+import { TRedirectRoute } from '../types/api';
 
 export const updateCurrentCity = createAction<TCity>(Action.UpdateCurrentCity);
 export const updateSortType = createAction<TSortName>(Action.UpdateSortType);
@@ -14,7 +14,7 @@ export const updateCityOffersList = createAction(Action.UpdateCityOffersList);
 export const setIsloading = createAction<boolean>(Action.SetIsloading);
 export const setError = createAction<string | null>(Action.SetError);
 export const setauthorizationstatus = createAction<TAuthorizationStatus>(Action.SetAuthorizationStatus);
-export const redirectToRoute = createAction<TRedirectRouteProps>(Action.RedirectToRoute);
+export const redirectToRoute = createAction<TRedirectRoute>(Action.RedirectToRoute);
 export const loadCurrentOffer = createAction<TOfferFull | null>(Action.LoadCurrentOffer);
 export const loadCurrentOfferReviews = createAction<TReviews>(Action.LoadCurrentOfferReviews);
 export const loadNearbyOffers = createAction<TOffers>(Action.LoadNearbyOffers);

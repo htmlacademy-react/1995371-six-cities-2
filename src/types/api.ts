@@ -17,7 +17,7 @@ export type TOfferId = {
   offerId: string;
 }
 
-export type TRedirectRouteProps = {
+export type TRedirectRoute = {
   route: AppRoute;
   parameter?: string;
 }
