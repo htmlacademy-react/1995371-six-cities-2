@@ -42,6 +42,11 @@ export default function PlaceCard({
     onMouseLeave();
   };
 
+  const handleLinkClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    evt.preventDefault();
+    dispatch(fetchOfferScreenInfo({offerId: offer.id}));
+  };
+
   return (
     <article
       className={`place-card ${classNamePrefix}__card`}
@@ -50,10 +55,7 @@ export default function PlaceCard({
       ref={cardRef}
     >
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
-        <Link to={`${AppRoute.OfferBase}/${offer.id}`} onClick={(evt) => {
-          evt.preventDefault();
-          dispatch(fetchOfferScreenInfo({offerId: offer.id}));
-        }}>
+        <Link to={`${AppRoute.OfferBase}/${offer.id}`} onClick={handleLinkClick}>
           <img
             className="place-card__image"
             src={offer.previewImage}
