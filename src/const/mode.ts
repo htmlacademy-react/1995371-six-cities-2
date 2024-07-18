@@ -1,3 +1,13 @@
+const ClassnameActionModeOption = {
+  Add: 'Add',
+  Remove: 'Remove'
+} as const;
+
+const SortActionModeOption = {
+  Open: 'Open',
+  Close: 'Close'
+} as const;
+
 const PlaceCardModeOption = {
   Default: 'default',
   Favorite: 'favorite'
@@ -25,6 +35,8 @@ const PriceViewModeOption = {
 } as const;
 
 export {
+  ClassnameActionModeOption,
+  SortActionModeOption,
   PlaceCardModeOption,
   HeaderModeOption,
   RatingViewModeOption,
