@@ -13,24 +13,29 @@ import GoodsInsideModule from './goods-inside-module/goods-inside-module';
 import HostModule from './host-module/host-module';
 import ReviewsSection from '../reviews-section/reviews-section';
 import Map from '../ map/map';
+import { getOffer } from '../../utils/offers-utils';
 
 type PlaceOfferProps = {
+  offers: TOffers;
   currentOffer: TOfferFull;
   nearbyOffers: TOffers;
-  hoveredCardOffer: TOffer | undefined;
   reviews: TReviews;
 }
 
 export default function PlaceOffer({
+  offers,
   currentOffer,
   nearbyOffers,
-  hoveredCardOffer,
   reviews
 }: PlaceOfferProps): React.JSX.Element {
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
   const goodsModule = currentOffer.goods.length > 0
     ? (<GoodsInsideModule goods={currentOffer.goods}/>)
     : null;
+
+  const currentOfferShort = getOffer(offers, currentOffer.id) as TOffer;
+  const points = [...nearbyOffers, currentOfferShort];
+  const selectedPoints: TOffers = [currentOfferShort];
 
   return (
     <section className="offer">
@@ -57,7 +62,7 @@ export default function PlaceOffer({
         </div>
       </div>
       <section className="offer__map map">
-        <Map city={currentOffer.city} points={nearbyOffers} selectedPoint={hoveredCardOffer}/>
+        <Map city={currentOffer.city} points={points} selectedPoints={selectedPoints}/>
       </section>
     </section>
   );
