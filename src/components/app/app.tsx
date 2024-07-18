@@ -13,6 +13,7 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
+import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
   offers: Offers;
@@ -28,42 +29,44 @@ export default function App({
   cityPack
 }: AppProps): React.JSX.Element {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={
-            <MainScreen offers={offers} cityPack={cityPack}/>
-          }
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginScreen offers={offers} />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesScreen offers={offers} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={
-            <OfferScreen
-              offers={offers}
-              fullOffersPack={fullOffersPack}
-              reviewsPack={reviewsPack}
-            />
-          }
-        />
-        <Route
-          path="*"
-          element={<Error404Screen />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={
+              <MainScreen cityPack={cityPack}/>
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginScreen offers={offers} />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <FavoritesScreen offers={offers} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={
+              <OfferScreen
+                offers={offers}
+                fullOffersPack={fullOffersPack}
+                reviewsPack={reviewsPack}
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={<Error404Screen />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

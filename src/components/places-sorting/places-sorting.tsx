@@ -1,20 +1,25 @@
-import { useRef, useState } from 'react';
-import { SortActionMode, SortName } from '../../types/sort';
-import { resetOffersList, updateOffersList } from '../../store/action';
+import { useEffect, useRef } from 'react';
+import { SortActionMode, } from '../../types/sort';
+import { updateSortType, updateCityOffersList } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isKnownSortName } from '../../utils/type-quard';
-import { SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
+import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
 import { ClassnameActionModeOption, SortActionModeOption } from '../../const/mode';
 import { handleClassName } from '../../utils/utils';
 
 export default function PlacesSorting(): React.JSX.Element {
-  const defaultSort: SortName = SortPack.Popular.Alias;
-  const [activeSort, setActiveSort] = useState<SortName>(defaultSort);
   const sortOptionsListRef = useRef(null);
 
   const dispatch = useAppDispatch();
-  const cityOffers = useAppSelector((state) => state.offers);
-  const handleSortOptionsList = (action: SortActionMode = SortActionModeOption.Close) => {
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const currentSortType = useAppSelector((state) => state.sortType);
+
+  useEffect(() => {
+    dispatch(updateSortType(defaultSort));
+    dispatch(updateCityOffersList());
+  }, [currentCity, dispatch]);
+
+  function handleSortOptionsList(action: SortActionMode = SortActionModeOption.Close) {
     switch (action) {
       case SortActionModeOption.Open:
         handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME, ClassnameActionModeOption.Add);
@@ -24,7 +29,7 @@ export default function PlacesSorting(): React.JSX.Element {
         handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME);
         break;
     }
-  };
+  }
 
   function handleSortTypeClick() {
     handleSortOptionsList(SortActionModeOption.Open);
@@ -33,21 +38,12 @@ export default function PlacesSorting(): React.JSX.Element {
   function handleSortItemClick(evt: React.MouseEvent<HTMLLIElement, MouseEvent>) {
     const newSort = evt.currentTarget.dataset.sortName;
 
-    if(!newSort || newSort === activeSort || !isKnownSortName(newSort)) {
+    if(!newSort || newSort === currentSortType || !isKnownSortName(newSort)) {
       return;
     }
 
-    switch (newSort) {
-      case SortPack.Popular.Alias:
-        dispatch(resetOffersList());
-        break;
-
-      default:
-        dispatch(updateOffersList({newOffers: SortPack[newSort].SortFunction(cityOffers)}));
-        break;
-    }
-
-    setActiveSort(newSort);
+    dispatch(updateSortType(newSort));
+    dispatch(updateCityOffersList());
     handleSortOptionsList();
   }
 
@@ -56,14 +52,14 @@ export default function PlacesSorting(): React.JSX.Element {
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0} onClick={handleSortTypeClick}>
-        {SortPack[activeSort].Title}
+        {SortPack[currentSortType].Title}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
       <ul className="places__options places__options--custom" ref={sortOptionsListRef}>
         {Object.values(SortPack).map((sortItem) => {
-          const sortOptionClassName = `places__option ${sortItem.Alias === activeSort ? 'places__option--active' : ''}`;
+          const sortOptionClassName = `places__option ${sortItem.Alias === currentSortType ? 'places__option--active' : ''}`;
           return (
             <li
               key={sortItem.Alias}

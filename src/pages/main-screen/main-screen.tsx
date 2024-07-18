@@ -10,20 +10,19 @@ import PlacesSorting from '../../components/places-sorting/places-sorting';
 import PlacesList from '../../components/places-list/places-list';
 import Map from '../../components/ map/map';
 import LocationsList from '../../components/locations-list/locations-list';
-import { updateCurrentCity, updateOffersList } from '../../store/action';
-import { getCityFilteredOffers } from '../../utils/filter-utils';
-import { Offers } from '../../types/offers';
+import { updateCurrentCity, updateCityOffersList } from '../../store/action';
+import { Helmet } from 'react-helmet-async';
 
 type MainScreenProps = {
   cityPack: CityPackType;
-  offers: Offers;
 }
 
-export default function MainScreen({cityPack, offers}: MainScreenProps): React.JSX.Element {
+export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState('');
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.currentCity);
-  const cityOffers = useAppSelector((state) => state.offers);
+  const cityOffers = useAppSelector((state) => state.cityOffers);
+  const isLoading = useAppSelector((state) => state.isLoading);
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === activeOfferId) {
@@ -46,12 +45,15 @@ export default function MainScreen({cityPack, offers}: MainScreenProps): React.J
       return;
     }
 
-    dispatch(updateCurrentCity({newCity}));
-    dispatch(updateOffersList({newOffers: getCityFilteredOffers(offers, newCity.name)}));
+    dispatch(updateCurrentCity(newCity));
+    dispatch(updateCityOffersList());
   };
 
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Six cities</title>
+      </Helmet>
       <Header offers={cityOffers}/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -67,7 +69,12 @@ export default function MainScreen({cityPack, offers}: MainScreenProps): React.J
               <b className="places__found">{cityOffers.length} places to stay in {currentCity.name}</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlacesList offers={cityOffers} onCardMouseEnter={handleCardMouseEnter} onCardMouseLeave={handleCardMouseLeave} />
+                <PlacesList
+                  offers={cityOffers}
+                  isLoading={isLoading}
+                  onCardMouseEnter={handleCardMouseEnter}
+                  onCardMouseLeave={handleCardMouseLeave}
+                />
               </div>
             </section>
             <div className="cities__right-section">
