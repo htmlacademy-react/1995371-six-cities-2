@@ -1,6 +1,6 @@
 import { TFilter } from '../types/common';
 import { TOffers, TOffer } from '../types/offers';
-import { isString } from './type-quard';
+import { isString } from './type-guard';
 import { FilterType } from '../const/const';
 
 const FilterFunction = {
