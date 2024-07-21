@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { reviewsPack } from './mocks/reviews';
 import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
@@ -23,7 +22,6 @@ root.render(
     <Provider store={store}>
       <ToastContainer />
       <App
-        reviewsPack={reviewsPack}
         cityPack={CityPack}
       />
     </Provider>
