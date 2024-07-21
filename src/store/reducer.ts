@@ -7,11 +7,9 @@ import {
   updateSortType,
   setIsloading,
   setauthorizationstatus,
-  loadCurrentOffer,
-  loadCurrentOfferReviews,
-  loadNearbyOffers,
   setIsFormDisabled,
-  addReviewToList
+  addReviewToList,
+  loadOfferInfo
 } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
@@ -86,19 +84,15 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setauthorizationstatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(loadCurrentOffer, (state, action) => {
-      state.currentOffer = action.payload;
-    })
-    .addCase(loadCurrentOfferReviews, (state, action) => {
-      state.currentOfferReviews = action.payload;
-    })
-    .addCase(loadNearbyOffers, (state, action) => {
-      state.nearbyOffers = action.payload;
-    })
     .addCase(setIsFormDisabled, (state, action) => {
       state.isFormDisabled = action.payload;
     })
     .addCase(addReviewToList, (state, action) => {
       state.currentOfferReviews.push(action.payload);
+    })
+    .addCase(loadOfferInfo, (store, action) => {
+      store.currentOffer = action.payload.currentOffer;
+      store.currentOfferReviews = action.payload.reviews;
+      store.nearbyOffers = action.payload.nearbyOffers;
     });
 });

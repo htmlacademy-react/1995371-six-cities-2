@@ -1,31 +1,31 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
 import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
 import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
-import { TOffers } from '../../types/offers';
+import { fetchOfferScreenInfo } from '../../store/api-action';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
-  const [showedNearbyOffers, setShowedNearbyOffers] = useState<TOffers>([]);
   const currentOfferId = params.id;
+  const dispatch = useAppDispatch();
   const offers = useAppSelector((store) => store.offers);
   const currentOffer = useAppSelector((store) => store.currentOffer);
   const reviews = useAppSelector((store) => store.currentOfferReviews);
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
-
-  useEffect(() => {
-    setShowedNearbyOffers(getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT));
-  }, [nearbyOffers]);
+  const showedNearbyOffers = getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT);
 
   if (!currentOfferId || !currentOffer) {
-    return <Navigate to={AppRoute.Page404} />;
+    if (currentOfferId) {
+      dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
+    } else {
+      return <Navigate to={AppRoute.Page404} />;
+    }
   }
 
   return (

@@ -6,17 +6,14 @@ enum Action {
   SetIsloading = 'setIsloading',
   SetAuthorizationStatus = 'setAuthorizationStatus',
   RedirectToRoute = 'redirectToRoute',
-  LoadCurrentOffer = 'loadCurrentOffer',
-  LoadCurrentOfferReviews ='loadCurrentOfferReviews',
-  LoadNearbyOffers = 'loadNearbyOffers',
   SetIsFormDisabled = 'setIsFormDisabled',
-  AddReviewToList = 'addReviewToList'
+  AddReviewToList = 'addReviewToList',
+  LoadOfferInfo = 'loadOfferInfo'
 }
 
 enum APIAction {
   DataFetchOffers = 'data/fetchOffers',
-  DataFetchCurrentOffer = 'data/fetchCurrentOffer',
-  DataFetchCurrentOfferReviews = 'data/fetchCurrentOfferReviews',
+  DataPostNewOfferReview = 'data/postNewOfferReview',
   DataFetchNearbyOffers = 'data/fetchNearbyOffers',
   DataFetchOfferScreenInfo = 'data/fetchOfferScreenInfo',
   UserCheckAuth = 'user/checkAuth',
