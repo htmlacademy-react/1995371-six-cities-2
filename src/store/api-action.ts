@@ -3,12 +3,12 @@ import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
 import { APIRoute } from '../const/api';
 import { TOffers, TOfferFull } from '../types/offers';
-import { loadCurrentOffer, loadCurrentOfferReviews, loadNearbyOffers, loadOffersList, redirectToRoute, setauthorizationstatus, setError, setIsloading, updateCityOffersList } from './action';
+import { addReviewToList, loadCurrentOffer, loadCurrentOfferReviews, loadNearbyOffers, loadOffersList, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
 import { AppRoute, AuthorizationStatus } from '../const/const';
-import { TAuthData, TOfferId, TUserInfo } from '../types/api';
+import { TAuthData, TNewReviewInfo, TOfferId, TUserInfo } from '../types/api';
 import { saveToken } from '../services/token';
-import { TReviews } from '../types/reviews';
+import { TReview, TReviews } from '../types/reviews';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: TAppDispatch;
@@ -22,8 +22,6 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<TOffers>(APIRoute.Offers);
       dispatch(loadOffersList(data));
       dispatch(updateCityOffersList());
-    } catch(err) {
-      dispatch(setError('error'));
     } finally {
       dispatch(setIsloading(false));
     }
@@ -83,6 +81,29 @@ export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
       dispatch(redirectToRoute({route: AppRoute.OfferBase, parameter: offerId}));
     } catch {
       dispatch(redirectToRoute({route: AppRoute.Page404}));
+    }
+  }
+);
+
+export const postNewOfferReviewAction = createAsyncThunk<void, TNewReviewInfo, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.DataFetchCurrentOfferReviews,
+  async ({offerId, reviewData, onSuccess}, {dispatch, extra: api}) => {
+    const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
+    dispatch(setIsFormDisabled(true));
+    try {
+      const {data} = await api.post<TReview>(reviewsRoute, reviewData);
+      dispatch(addReviewToList(data));
+
+      if (onSuccess) {
+        onSuccess();
+      }
+
+    } finally {
+      dispatch(setIsFormDisabled(false));
     }
   }
 );

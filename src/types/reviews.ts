@@ -1,6 +1,6 @@
 export type TReviewState = {
   rating: number;
-  reviewText: string;
+  comment: string;
 }
 
 export type TUser = {

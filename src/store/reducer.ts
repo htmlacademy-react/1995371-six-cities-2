@@ -6,11 +6,12 @@ import {
   updateCityOffersList,
   updateSortType,
   setIsloading,
-  setError,
   setauthorizationstatus,
   loadCurrentOffer,
   loadCurrentOfferReviews,
-  loadNearbyOffers
+  loadNearbyOffers,
+  setIsFormDisabled,
+  addReviewToList
 } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
@@ -18,7 +19,7 @@ import { TOfferFull, TOffers } from '../types/offers';
 import { TSortName } from '../types/sort';
 import { AuthorizationStatus } from '../const/const';
 import { defaultSort, SortPack } from '../const/sort';
-import { isKnownSortName } from '../utils/type-quard';
+import { isKnownSortName } from '../utils/type-guard';
 import { TAuthorizationStatus } from '../types/common';
 import { TReviews } from '../types/reviews';
 
@@ -33,6 +34,7 @@ type TInitialState = {
   isLoading: boolean;
   error: string | null;
   authorizationStatus: TAuthorizationStatus;
+  isFormDisabled: boolean;
 }
 
 const initialState: TInitialState = {
@@ -45,7 +47,8 @@ const initialState: TInitialState = {
   sortType: defaultSort,
   isLoading: false,
   error: null,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isFormDisabled: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -80,9 +83,6 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setIsloading, (state, action) => {
       state.isLoading = action.payload;
     })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
-    })
     .addCase(setauthorizationstatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
@@ -94,5 +94,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
+    })
+    .addCase(setIsFormDisabled, (state, action) => {
+      state.isFormDisabled = action.payload;
+    })
+    .addCase(addReviewToList, (state, action) => {
+      state.currentOfferReviews.push(action.payload);
     });
 });

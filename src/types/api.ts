@@ -1,4 +1,5 @@
 import { AppRoute } from '../const/const';
+import { TReviewState } from './reviews';
 
 export type TAuthData = {
   email: string;
@@ -15,6 +16,11 @@ export type TUserInfo = {
 
 export type TOfferId = {
   offerId: string;
+}
+
+export type TNewReviewInfo = TOfferId & {
+  reviewData: TReviewState;
+  onSuccess?: () => void;
 }
 
 export type TRedirectRoute = {

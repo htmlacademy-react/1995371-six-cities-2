@@ -1,8 +1,13 @@
 import { TReviewState } from '../types/reviews';
 
-const reviewInitStateValue: TReviewState = {
-  rating: 0,
-  reviewText: '',
+const ReviewLength = {
+  MinLength: 50,
+  MaxLength: 300
 } as const;
 
-export { reviewInitStateValue };
+const ReviewInitStateValue: TReviewState = {
+  rating: 0,
+  comment: '',
+} as const;
+
+export { ReviewLength, ReviewInitStateValue };
