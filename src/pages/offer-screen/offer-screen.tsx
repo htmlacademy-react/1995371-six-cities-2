@@ -9,6 +9,7 @@ import { AppRoute, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
 import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
 import { fetchOfferScreenInfo } from '../../store/api-action';
+import { useEffect } from 'react';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
@@ -20,12 +21,14 @@ export default function OfferScreen(): React.JSX.Element {
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
   const showedNearbyOffers = getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT);
 
-  if (!currentOfferId || !currentOffer) {
+  useEffect(() => {
     if (currentOfferId) {
       dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
-    } else {
-      return <Navigate to={AppRoute.Page404} />;
     }
+  }, [currentOfferId, dispatch]);
+
+  if (!currentOfferId) {
+    return <Navigate to={AppRoute.Page404} />;
   }
 
   return (
