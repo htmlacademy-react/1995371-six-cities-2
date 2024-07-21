@@ -1,21 +1,22 @@
 import {
+  AuthorizationStatus,
   FilterType,
 } from '../const/const';
 
 import {
-  PlaceCardModeOption,
-  HeaderModeOption,
-  RatingViewModeOption,
-  BookmarkButtonModeOption,
-  PriceViewModeOption,
-  ClassnameActionModeOption
+  PlaceCardMode,
+  HeaderMode,
+  RatingViewMode,
+  BookmarkButtonMode,
+  PriceViewMode,
+  ClassnameActionMode
 } from '../const/mode';
 
-export type Filter = typeof FilterType.City | typeof FilterType.Favorite;
-export type PlaceCardMode = typeof PlaceCardModeOption.Default | typeof PlaceCardModeOption.Favorite;
-export type HeaderMode = typeof HeaderModeOption.LoginScreen | typeof HeaderModeOption.Default;
-export type RatingViewMode = typeof RatingViewModeOption.Card | typeof RatingViewModeOption.Offer | typeof RatingViewModeOption.Reviews;
-export type BookmarkButtonMode = typeof BookmarkButtonModeOption.Card | typeof BookmarkButtonModeOption.Offer;
-export type PriceViewMode = typeof PriceViewModeOption.Card | typeof PriceViewModeOption.Offer;
-
-export type ClassnameActionMode = keyof typeof ClassnameActionModeOption;
+export type TFilter = FilterType;
+export type TPlaceCardMode = PlaceCardMode;
+export type THeaderMode = HeaderMode;
+export type TRatingViewMode = RatingViewMode;
+export type TBookmarkButtonMode = BookmarkButtonMode;
+export type TPriceViewMode = PriceViewMode;
+export type TClassnameActionMode = ClassnameActionMode;
+export type TAuthorizationStatus = AuthorizationStatus;

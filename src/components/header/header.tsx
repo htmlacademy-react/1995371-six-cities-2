@@ -1,24 +1,24 @@
-import { HeaderMode } from '../../types/common';
+import { THeaderMode } from '../../types/common';
 import { Offers } from '../../types/offers';
 
 import { AuthorizationStatus } from '../../const/const';
-import { HeaderModeOption } from '../../const/mode';
+import { HeaderMode } from '../../const/mode';
 import Logo from './logo/logo';
 import ProfileLink from './links/profile-link';
 import SignOutLink from './links/sign-out-link';
+import { useAppSelector } from '../../hooks';
 
 type HeaderProps = {
-  authorizationStatus?: string;
-  headerMode?: HeaderMode;
+  headerMode?: THeaderMode;
   offers: Offers;
 }
 
 export default function Header({
-  authorizationStatus = AuthorizationStatus.Auth,
-  headerMode = HeaderModeOption.Default,
+  headerMode = HeaderMode.Default,
   offers
 }: HeaderProps): React.JSX.Element {
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
   const signOutElement = isAuthorized
     ? (
       <li className="header__nav-item">
@@ -27,7 +27,7 @@ export default function Header({
     )
     : null;
 
-  const headerNav = headerMode === HeaderModeOption.LoginScreen
+  const headerNav = headerMode === HeaderMode.LoginScreen
     ? null
     : (
       <nav className="header__nav">

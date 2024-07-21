@@ -1,18 +1,18 @@
-import { BookmarkButtonMode } from '../../../types/common';
-import { OfferBase } from '../../../types/offers';
+import { TBookmarkButtonMode } from '../../../types/common';
+import { TOfferBase } from '../../../types/offers';
 
-import { BookmarkButtonModeOption } from '../../../const/mode';
+import { BookmarkButtonMode } from '../../../const/mode';
 
 type BookmarkButtonProps = {
-  offer: OfferBase;
-  bookmarkButtonMode?: BookmarkButtonMode;
+  offer: TOfferBase;
+  bookmarkButtonMode?: TBookmarkButtonMode;
 }
 
 export default function BookmarkButton({
   offer,
-  bookmarkButtonMode = BookmarkButtonModeOption.Card
+  bookmarkButtonMode = BookmarkButtonMode.Card
 }: BookmarkButtonProps): React.JSX.Element {
-  const isOfferMode = bookmarkButtonMode === BookmarkButtonModeOption.Offer;
+  const isOfferMode = bookmarkButtonMode === BookmarkButtonMode.Offer;
 
   return (
     <button

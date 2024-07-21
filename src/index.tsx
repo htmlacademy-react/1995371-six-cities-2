@@ -9,9 +9,10 @@ import { reviewsPack } from './mocks/reviews';
 import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
-import { fetchOffersAction } from './store/api-action';
+import { checkAuthAction, fetchOffersAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
 
+store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(

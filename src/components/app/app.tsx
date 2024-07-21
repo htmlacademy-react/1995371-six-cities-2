@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import { FullOffersPack, Offers } from '../../types/offers';
-import { ReviewsPack } from '../../types/reviews';
-import { CityPackType } from '../../types/city';
+import { TFullOffersPack, Offers } from '../../types/offers';
+import { TReviewsPack } from '../../types/reviews';
+import { TCityPackType } from '../../types/city';
 
-import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { AppRoute } from '../../const/const';
 
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import PrivateRoute from '../private-route/private-route';
@@ -14,12 +14,14 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
 import { HelmetProvider } from 'react-helmet-async';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   offers: Offers;
-  fullOffersPack: FullOffersPack;
-  reviewsPack: ReviewsPack;
-  cityPack: CityPackType;
+  fullOffersPack: TFullOffersPack;
+  reviewsPack: TReviewsPack;
+  cityPack: TCityPackType;
 }
 
 export default function App({
@@ -28,9 +30,10 @@ export default function App({
   reviewsPack,
   cityPack
 }: AppProps): React.JSX.Element {
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route
@@ -46,7 +49,7 @@ export default function App({
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute>
                 <FavoritesScreen offers={offers} />
               </PrivateRoute>
             }
@@ -66,7 +69,7 @@ export default function App({
             element={<Error404Screen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

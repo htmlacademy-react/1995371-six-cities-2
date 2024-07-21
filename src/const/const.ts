@@ -4,18 +4,6 @@ const Setting = {
   OffersAmount: 5,
 } as const;
 
-const AccommodationType = {
-  Apartment: 'Apartment',
-  Room: 'Private room',
-  House: 'House',
-  Hotel: 'Hotel'
-} as const;
-
-const FilterType = {
-  Favorite: 'isFavorite',
-  City: 'city'
-} as const;
-
 const RatingStarTitle = {
   Perfect: 'perfect',
   Good: 'good',
@@ -31,6 +19,18 @@ const RatingStarValue = {
   [RatingStarTitle.Badly]: 2,
   [RatingStarTitle.Terribly]: 1,
 } as const;
+
+enum AccommodationType {
+  Apartment = 'Apartment',
+  Room = 'Private room',
+  House = 'House',
+  Hotel = 'Hotel'
+}
+
+enum FilterType {
+  Favorite = 'isFavorite',
+  City = 'city'
+}
 
 enum AppRoute {
   Main = '/',
@@ -49,10 +49,10 @@ enum AuthorizationStatus {
 export {
   AVATAR_TEMP_URL,
   Setting,
-  AccommodationType,
-  FilterType,
   RatingStarTitle,
   RatingStarValue,
+  AccommodationType,
+  FilterType,
   AppRoute,
   AuthorizationStatus
 };

@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import { City, CityPackType } from '../../types/city';
+import { TCity, TCityPackType } from '../../types/city';
 import { isKnownCityName } from '../../utils/type-quard';
 
 type LocationsListProps = {
-  cityPack: CityPackType;
-  currentCity: City;
-  onCityChange: (value: City) => void;
+  cityPack: TCityPackType;
+  currentCity: TCity;
+  onCityChange: (value: TCity) => void;
 }
 
 export default function LocationsList({cityPack, currentCity, onCityChange}: LocationsListProps): React.JSX.Element {
-  const cities: City[] = Array.from(Object.values(cityPack));
+  const cities: TCity[] = Array.from(Object.values(cityPack));
 
 
   const handleCityButtonClick = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {

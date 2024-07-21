@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Offers } from '../../types/offers';
-import { PlaceCardMode } from '../../types/common';
+import { TPlaceCardMode } from '../../types/common';
 
-import { PlaceCardModeOption } from '../../const/mode';
+import { PlaceCardMode } from '../../const/mode';
 import { getFavoriteOffers } from '../../utils/filter-utils';
 import PlaceCard from './place-card/place-card';
 import Spinner from '../shared/spinner/spinner';
@@ -11,7 +11,7 @@ import Spinner from '../shared/spinner/spinner';
 type PlacesListProps = {
   offers: Offers;
   isLoading?: boolean;
-  cardMode?: PlaceCardMode;
+  cardMode?: TPlaceCardMode;
   onCardMouseEnter?: (newId: string) => void;
   onCardMouseLeave?: (newId?: string) => void;
 }
@@ -19,11 +19,11 @@ type PlacesListProps = {
 export default function PlacesList({
   offers,
   isLoading,
-  cardMode = PlaceCardModeOption.Default,
+  cardMode = PlaceCardMode.Default,
   onCardMouseEnter,
   onCardMouseLeave
 }: PlacesListProps): React.JSX.Element {
-  const isFavorite: boolean = cardMode === PlaceCardModeOption.Favorite;
+  const isFavorite: boolean = cardMode === PlaceCardMode.Favorite;
 
   const handleMouseEnterEvent = (newId: string): void => {
     if (onCardMouseEnter) {

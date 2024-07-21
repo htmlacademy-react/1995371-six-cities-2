@@ -1,8 +1,8 @@
-import { Reviews } from '../../../types/reviews';
+import { TReviews } from '../../../types/reviews';
 import ReviewItem from '../review/review';
 
 type ReviewsListProps = {
-  reviews: Reviews;
+  reviews: TReviews;
 }
 
 export default function ReviewsList({reviews}: ReviewsListProps): React.JSX.Element {

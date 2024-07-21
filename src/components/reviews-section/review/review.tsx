@@ -1,11 +1,11 @@
-import { Review } from '../../../types/reviews';
+import { TReview } from '../../../types/reviews';
 
-import { RatingViewModeOption } from '../../../const/mode';
+import { RatingViewMode } from '../../../const/mode';
 import { huminizeDateString } from '../../../utils/date-utils';
 import Rating from '../../shared/rating/rating';
 
 type ReviewProps = {
-  review: Review;
+  review: TReview;
 }
 
 export default function ReviewItem({review}: ReviewProps): React.JSX.Element {
@@ -24,7 +24,7 @@ export default function ReviewItem({review}: ReviewProps): React.JSX.Element {
         <span className="reviews__user-name">{review.user.name}</span>
       </div>
       <div className="reviews__info">
-        <Rating offerRating={review.rating} ratingViewMode={RatingViewModeOption.Reviews}/>
+        <Rating offerRating={review.rating} ratingViewMode={RatingViewMode.Reviews}/>
         <p className="reviews__text">{review.comment}</p>
         <time className="reviews__time" dateTime={review.date}>{huminizeDateString(review.date)}</time>
       </div>

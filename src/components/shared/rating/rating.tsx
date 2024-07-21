@@ -1,16 +1,16 @@
-import { RatingViewMode } from '../../../types/common';
+import { TRatingViewMode } from '../../../types/common';
 
-import { RatingViewModeOption } from '../../../const/mode';
+import { RatingViewMode } from '../../../const/mode';
 import { roundToInteger } from '../../../utils/utils';
 
 type RatingProps = {
   offerRating: number;
-  ratingViewMode?: RatingViewMode;
+  ratingViewMode?: TRatingViewMode;
 }
 
 export default function Rating({
   offerRating,
-  ratingViewMode = RatingViewModeOption.Card
+  ratingViewMode = RatingViewMode.Card
 }: RatingProps): React.JSX.Element {
   const ratingWidthValue = `${2 * roundToInteger(offerRating)}0%`;
 

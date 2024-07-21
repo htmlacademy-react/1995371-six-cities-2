@@ -1,7 +1,7 @@
-import { Accommodation } from '../../../types/offers';
+import { TAccommodation } from '../../../types/offers';
 
 type FeaturesListProps = {
-  accommodationType: Accommodation;
+  accommodationType: TAccommodation;
   bedroomsAmount: number;
   maxAdultsAmount: number;
 }

@@ -1,11 +1,11 @@
-import { Reviews } from '../../types/reviews';
+import { TReviews } from '../../types/reviews';
 
 import ReviewForm from './reviews-form/reviews-form';
 import ReviewsList from './reviews-list/reviews-list';
 
 type ReviewsSectionProps = {
   offerId: string;
-  reviews: Reviews;
+  reviews: TReviews;
 }
 
 export default function ReviewsSection({

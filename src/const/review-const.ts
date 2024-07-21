@@ -1,6 +1,6 @@
-import { reviewState } from '../types/reviews';
+import { TReviewState } from '../types/reviews';
 
-const reviewInitStateValue: reviewState = {
+const reviewInitStateValue: TReviewState = {
   rating: 0,
   reviewText: '',
 } as const;
