@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
 import { APIRoute } from '../const/api';
 import { TOffers, TOfferFull } from '../types/offers';
-import { addReviewToList, loadCurrentOffer, loadCurrentOfferReviews, loadNearbyOffers, loadOffersList, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
+import { addReviewToList, loadOfferInfo, loadOffersList, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
 import { AppRoute, AuthorizationStatus } from '../const/const';
 import { TAuthData, TNewReviewInfo, TOfferId, TUserInfo } from '../types/api';
@@ -28,60 +28,31 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   }
 );
 
-export const fetchCurrentOfferAction = createAsyncThunk<void, TOfferId, {
-  dispatch: TAppDispatch;
-  state: TState;
-  extra: AxiosInstance;
-}>(
-  APIAction.DataFetchCurrentOffer,
-  async ({offerId}, {dispatch, extra: api}) => {
-    const offerRoute = `${APIRoute.Offers}/${offerId}`;
-    const {data} = await api.get<TOfferFull>(offerRoute);
-    dispatch(loadCurrentOffer(data));
-  }
-);
-
-export const fetchCurrentOfferReviewsAction = createAsyncThunk<void, TOfferId, {
-  dispatch: TAppDispatch;
-  state: TState;
-  extra: AxiosInstance;
-}>(
-  APIAction.DataFetchCurrentOfferReviews,
-  async ({offerId}, {dispatch, extra: api}) => {
-    const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
-    const {data} = await api.get<TReviews>(reviewsRoute);
-    dispatch(loadCurrentOfferReviews(data));
-  }
-);
-
-export const fetchNearbyOffersAction = createAsyncThunk<void, TOfferId, {
-  dispatch: TAppDispatch;
-  state: TState;
-  extra: AxiosInstance;
-}>(
-  APIAction.DataFetchNearbyOffers,
-  async ({offerId}, {dispatch, extra: api}) => {
-    const nearbyOffersRoute = `${APIRoute.Offers}/${offerId}${APIRoute.NearbyOffers}`;
-    const {data} = await api.get<TOffers>(nearbyOffersRoute);
-    dispatch(loadNearbyOffers(data));
-  }
-);
-
 export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.DataFetchOfferScreenInfo,
-  async ({offerId}, {dispatch}) => {
-    try {
-      await dispatch((fetchCurrentOfferAction({offerId})));
-      await dispatch((fetchCurrentOfferReviewsAction({offerId})));
-      await dispatch((fetchNearbyOffersAction({offerId})));
-      dispatch(redirectToRoute({route: AppRoute.OfferBase, parameter: offerId}));
-    } catch {
-      dispatch(redirectToRoute({route: AppRoute.Page404}));
-    }
+  async ({offerId}, {dispatch, extra: api}) => {
+    const offerRoute = `${APIRoute.Offers}/${offerId}`;
+    const {data} = await api.get<TOfferFull>(offerRoute);
+
+    const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
+    const reviewsResponse = await api.get<TReviews>(reviewsRoute);
+    const reviews = reviewsResponse.data;
+
+    const nearbyOffersRoute = `${APIRoute.Offers}/${offerId}${APIRoute.NearbyOffers}`;
+    const nearbyOffersResponse = await api.get<TOffers>(nearbyOffersRoute);
+    const nearbyOffers = nearbyOffersResponse.data;
+
+    const test = {
+      currentOffer: data,
+      reviews: reviews,
+      nearbyOffers: nearbyOffers
+    };
+
+    dispatch(loadOfferInfo(test));
   }
 );
 
@@ -90,7 +61,7 @@ export const postNewOfferReviewAction = createAsyncThunk<void, TNewReviewInfo, {
   state: TState;
   extra: AxiosInstance;
 }>(
-  APIAction.DataFetchCurrentOfferReviews,
+  APIAction.DataPostNewOfferReview,
   async ({offerId, reviewData, onSuccess}, {dispatch, extra: api}) => {
     const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
     dispatch(setIsFormDisabled(true));

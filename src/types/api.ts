@@ -1,5 +1,6 @@
 import { AppRoute } from '../const/const';
-import { TReviewState } from './reviews';
+import { TOfferFull, TOffers } from './offers';
+import { TReviews, TReviewState } from './reviews';
 
 export type TAuthData = {
   email: string;
@@ -26,4 +27,10 @@ export type TNewReviewInfo = TOfferId & {
 export type TRedirectRoute = {
   route: AppRoute;
   parameter?: string;
+}
+
+export type TOfferInfo = {
+  currentOffer: TOfferFull;
+  reviews: TReviews;
+  nearbyOffers: TOffers;
 }
