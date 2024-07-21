@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { TCity, TCityPackType } from '../../types/city';
-import { isKnownCityName } from '../../utils/type-quard';
+import { isKnownCityName } from '../../utils/type-guard';
 
 type LocationsListProps = {
   cityPack: TCityPackType;
