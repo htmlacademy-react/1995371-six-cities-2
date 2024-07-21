@@ -4,12 +4,13 @@ enum Action {
   LoadOffersList= 'loadOffersList',
   UpdateCityOffersList= 'updateCityOffersList',
   SetIsloading = 'setIsloading',
-  SetError= 'setError',
   SetAuthorizationStatus = 'setAuthorizationStatus',
   RedirectToRoute = 'redirectToRoute',
   LoadCurrentOffer = 'loadCurrentOffer',
   LoadCurrentOfferReviews ='loadCurrentOfferReviews',
-  LoadNearbyOffers = 'loadNearbyOffers'
+  LoadNearbyOffers = 'loadNearbyOffers',
+  SetIsFormDisabled = 'setIsFormDisabled',
+  AddReviewToList = 'addReviewToList'
 }
 
 enum APIAction {
