@@ -15,10 +15,9 @@ type MainScreenProps = {
 export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.currentCity);
-  const cityOffers = useAppSelector((state) => state.cityOffers);
+  const isCityOffers = useAppSelector((state) => state.isCityOffers);
   const isLoading = useAppSelector((state) => state.isLoading);
-
-  const isNoOffers = !isLoading && !cityOffers.length;
+  const isNoOffers = !isLoading && !isCityOffers;
 
   const handleCityChange = (newCity: TCity) => {
     if (newCity.name === currentCity.name) {
@@ -28,6 +27,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
     dispatch(updateCurrentCity(newCity));
     dispatch(updateCityOffersList());
   };
+
 
   return (
     <div className="page page--gray page--main">

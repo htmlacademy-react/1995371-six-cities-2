@@ -17,11 +17,11 @@ export default function CitiesSection({currentCity}: MainCitiesSectionProps): Re
 
   const cityOffers = useAppSelector((state) => state.cityOffers);
   const isLoading = useAppSelector((state) => state.isLoading);
-
   const hoveredCardOffer = getOffer(cityOffers, activeOfferId);
   const selectedPoints: TOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
+  const isCityOffers = useAppSelector((state) => state.isCityOffers);
 
-  const isNoOffers = !isLoading && !cityOffers.length;
+  const isNoOffers = !isLoading && !isCityOffers;
 
   const handleCardMouseEnter = (newId?: string) => {
     if (newId === activeOfferId) {
@@ -38,8 +38,6 @@ export default function CitiesSection({currentCity}: MainCitiesSectionProps): Re
 
     setActiveOfferId(newId ? newId : '');
   };
-
-  // const PlacesSection =
 
   return (
     <div className="cities">

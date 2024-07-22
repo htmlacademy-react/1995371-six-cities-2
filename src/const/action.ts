@@ -8,7 +8,7 @@ enum Action {
   RedirectToRoute = 'redirectToRoute',
   SetIsFormDisabled = 'setIsFormDisabled',
   AddReviewToList = 'addReviewToList',
-  LoadOfferInfo = 'loadOfferInfo'
+  LoadOfferInfo = 'loadOfferInfo',
 }
 
 enum APIAction {

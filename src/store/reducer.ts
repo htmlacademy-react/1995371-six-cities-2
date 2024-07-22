@@ -9,7 +9,7 @@ import {
   setauthorizationstatus,
   setIsFormDisabled,
   addReviewToList,
-  loadOfferInfo
+  loadOfferInfo,
 } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
@@ -30,6 +30,7 @@ type TInitialState = {
   currentOfferReviews: TReviews;
   sortType: TSortName;
   isLoading: boolean;
+  isCityOffers: boolean;
   error: string | null;
   authorizationStatus: TAuthorizationStatus;
   isFormDisabled: boolean;
@@ -44,6 +45,7 @@ const initialState: TInitialState = {
   currentOfferReviews: [],
   sortType: defaultSort,
   isLoading: false,
+  isCityOffers: false,
   error: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   isFormDisabled: false,
@@ -74,6 +76,7 @@ export const reducer = createReducer(initialState, (builder) => {
           state.cityOffers = SortPack[state.sortType].SortFunction(state.cityOffers);
           break;
       }
+      state.isCityOffers = !!state.cityOffers.length;
     })
     .addCase(loadOffersList, (state, action) => {
       state.offers = action.payload;

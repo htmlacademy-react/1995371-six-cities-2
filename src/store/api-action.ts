@@ -46,13 +46,13 @@ export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
     const nearbyOffersResponse = await api.get<TOffers>(nearbyOffersRoute);
     const nearbyOffers = nearbyOffersResponse.data;
 
-    const test = {
+    const screenInfo = {
       currentOffer: data,
       reviews: reviews,
       nearbyOffers: nearbyOffers
     };
 
-    dispatch(loadOfferInfo(test));
+    dispatch(loadOfferInfo(screenInfo));
   }
 );
 
