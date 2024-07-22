@@ -18,3 +18,5 @@ export const setauthorizationstatus = createAction<TAuthorizationStatus>(Action.
 export const redirectToRoute = createAction<TRedirectRoute>(Action.RedirectToRoute);
 
 export const loadOfferInfo = createAction<TOfferInfo>(Action.LoadOfferInfo);
+export const loadUserName = createAction<string>(Action.LoadUserName);
+export const loadUserEmail = createAction<string>(Action.LoadUserEmail);

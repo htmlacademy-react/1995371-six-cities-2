@@ -12,11 +12,12 @@ export default function ProfileLink({
   isAuthorized,
 }: ProfileLinkProps): React.JSX.Element {
   const offers = useAppSelector((store) => store.offers);
+  const userEmail = useAppSelector((store) => store.userEmail);
   const favoriteOffers = getFavoriteOffers(offers);
   const ProfileLinkInner = isAuthorized
     ? (
       <>
-        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+        <span className="header__user-name user__name">{userEmail}</span>
         <span className="header__favorite-count">{favoriteOffers.length}</span>
       </>
     )

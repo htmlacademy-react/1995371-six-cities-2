@@ -10,6 +10,8 @@ import {
   setIsFormDisabled,
   addReviewToList,
   loadOfferInfo,
+  loadUserName,
+  loadUserEmail,
 } from './action';
 import { getCityFilteredOffers } from '../utils/filter-utils';
 import { TCity } from '../types/city';
@@ -34,6 +36,8 @@ type TInitialState = {
   error: string | null;
   authorizationStatus: TAuthorizationStatus;
   isFormDisabled: boolean;
+  userName: string;
+  userEmail: string;
 }
 
 const initialState: TInitialState = {
@@ -49,6 +53,8 @@ const initialState: TInitialState = {
   error: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   isFormDisabled: false,
+  userName: '',
+  userEmail: '',
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -97,5 +103,11 @@ export const reducer = createReducer(initialState, (builder) => {
       store.currentOffer = action.payload.currentOffer;
       store.currentOfferReviews = action.payload.reviews;
       store.nearbyOffers = action.payload.nearbyOffers;
+    })
+    .addCase(loadUserName, (state, action) => {
+      state.userName = action.payload;
+    })
+    .addCase(loadUserEmail, (state, action) => {
+      state.userEmail = action.payload;
     });
 });
