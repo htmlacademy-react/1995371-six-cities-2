@@ -9,6 +9,8 @@ enum Action {
   SetIsFormDisabled = 'setIsFormDisabled',
   AddReviewToList = 'addReviewToList',
   LoadOfferInfo = 'loadOfferInfo',
+  LoadUserName = 'loadUserName',
+  LoadUserEmail = 'loadUserEmail'
 }
 
 enum APIAction {

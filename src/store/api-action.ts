@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
 import { APIRoute } from '../const/api';
 import { TOffers, TOfferFull } from '../types/offers';
-import { addReviewToList, loadOfferInfo, loadOffersList, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
+import { addReviewToList, loadOfferInfo, loadOffersList, loadUserEmail, loadUserName, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
 import { APIAction } from '../const/action';
 import { AppRoute, AuthorizationStatus } from '../const/const';
 import { TAuthData, TNewReviewInfo, TOfferId, TUserInfo } from '../types/api';
@@ -86,11 +86,18 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   APIAction.UserCheckAuth,
   async (_arg, {dispatch, extra: api}) => {
+    let userName = '';
+    let userEmail = '';
     try {
-      await api.get(APIRoute.Login);
+      const {data} = await api.get<TUserInfo>(APIRoute.Login);
       dispatch(setauthorizationstatus(AuthorizationStatus.Auth));
+      userName = data.name;
+      userEmail = data.email;
     } catch {
       dispatch(setauthorizationstatus(AuthorizationStatus.NoAuth));
+    } finally {
+      dispatch(loadUserName(userName));
+      dispatch(loadUserEmail(userEmail));
     }
   }
 );
@@ -102,8 +109,8 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
 }>(
   APIAction.UserLogin,
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
-    saveToken(token);
+    const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(checkAuthAction());
     dispatch(redirectToRoute({route: AppRoute.Main}));
   }
