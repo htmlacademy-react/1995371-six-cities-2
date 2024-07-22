@@ -13,6 +13,7 @@ import LocationsList from '../../components/locations-list/locations-list';
 import { updateCurrentCity, updateCityOffersList } from '../../store/action';
 import { Helmet } from 'react-helmet-async';
 import { TOffers } from '../../types/offers';
+import { PlacesListWrapperClassName } from '../../const/const';
 
 type MainScreenProps = {
   cityPack: TCityPackType;
@@ -58,7 +59,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
       <Helmet>
         <title>Six cities</title>
       </Helmet>
-      <Header offers={cityOffers}/>
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -72,14 +73,13 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{cityOffers.length} places to stay in {currentCity.name}</b>
               <PlacesSorting />
-              <div className="cities__places-list places__list tabs__content">
-                <PlacesList
-                  offers={cityOffers}
-                  isLoading={isLoading}
-                  onCardMouseEnter={handleCardMouseEnter}
-                  onCardMouseLeave={handleCardMouseLeave}
-                />
-              </div>
+              <PlacesList
+                offers={cityOffers}
+                className={PlacesListWrapperClassName.Main}
+                isLoading={isLoading}
+                onCardMouseEnter={handleCardMouseEnter}
+                onCardMouseLeave={handleCardMouseLeave}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
