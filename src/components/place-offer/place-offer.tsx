@@ -12,7 +12,6 @@ import HostModule from './host-module/host-module';
 import ReviewsSection from '../reviews-section/reviews-section';
 import Map from '../ map/map';
 import { getOffer } from '../../utils/offers-utils';
-import { useAppSelector } from '../../hooks';
 
 type PlaceOfferProps = {
   offers: TOffers;
@@ -25,7 +24,6 @@ export default function PlaceOffer({
   currentOffer,
   nearbyOffers,
 }: PlaceOfferProps): React.JSX.Element {
-  const reviews = useAppSelector((store) => store.currentOfferReviews);
 
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
   const goodsModule = currentOffer.goods.length > 0
@@ -57,7 +55,7 @@ export default function PlaceOffer({
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
           {goodsModule}
           <HostModule offer={currentOffer}/>
-          <ReviewsSection reviews={reviews}/>
+          <ReviewsSection />
         </div>
       </div>
       <section className="offer__map map">
