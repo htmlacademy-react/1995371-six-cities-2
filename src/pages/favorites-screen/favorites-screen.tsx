@@ -1,13 +1,12 @@
 import { TOffers } from '../../types/offers';
 
-import { PlaceCardMode } from '../../const/mode';
 import { getCityFilteredOffers, getFavoriteOffers } from '../../utils/filter-utils';
 
 import Header from '../../components/header/header';
 import FooterLogo from '../../components/footer-logo/footer-logo';
-import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
+import FavoriteLocationsList from '../../components/favorite-places-list/favorite-locations-list';
 
 export default function FavoritesScreen(): React.JSX.Element {
   const offers = useAppSelector((store) => store.offers);
@@ -20,39 +19,17 @@ export default function FavoritesScreen(): React.JSX.Element {
     getCityFilteredOffers(favoriteOffers, city)
   ));
 
-  const locationItemsLists = Array.from(cities).map((city) => {
-    const filteredOffers = cityOffers.get(city) as TOffers;
-
-    return (
-      <li className="favorites__locations-items" key={city}>
-        <div className="favorites__locations locations locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>{city}</span>
-            </a>
-          </div>
-        </div>
-        <div className="favorites__places">
-          <PlacesList offers={filteredOffers} cardMode={PlaceCardMode.Favorite}/>
-        </div>
-      </li>
-    );
-
-  });
-
   return (
     <div className="page">
       <Helmet>
         <title>Six cities. Favorite offers</title>
       </Helmet>
-      <Header offers={offers}/>
+      <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {locationItemsLists}
-            </ul>
+            <FavoriteLocationsList cities={cities} cityOffers={cityOffers} />
           </section>
         </div>
       </main>

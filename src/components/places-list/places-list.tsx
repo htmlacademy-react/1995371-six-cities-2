@@ -10,6 +10,7 @@ import Spinner from '../shared/spinner/spinner';
 
 type PlacesListProps = {
   offers: TOffers;
+  className: string;
   isLoading?: boolean;
   cardMode?: TPlaceCardMode;
   onCardMouseEnter?: (newId: string) => void;
@@ -18,6 +19,7 @@ type PlacesListProps = {
 
 export default function PlacesList({
   offers,
+  className,
   isLoading,
   cardMode = PlaceCardMode.Default,
   onCardMouseEnter,
@@ -40,7 +42,8 @@ export default function PlacesList({
   const filteredOffers = isFavorite ? getFavoriteOffers(offers) : offers;
 
   return (
-    <>{isLoading && <Spinner description='Ищем лучшие варианты'></Spinner>}
+    <div className={className}>
+      {isLoading && <Spinner description='Ищем лучшие варианты'></Spinner>}
       {filteredOffers.map((offer): React.JSX.Element => (
         <PlaceCard
           offer={offer}
@@ -50,6 +53,6 @@ export default function PlacesList({
           key={offer.id}
         />
       ))}
-    </>
+    </div>
   );
 }
