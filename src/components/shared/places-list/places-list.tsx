@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { TOffers } from '../../types/offers';
-import { TPlaceCardMode } from '../../types/common';
+import { TOffers } from '../../../types/offers';
+import { TPlaceCardMode } from '../../../types/common';
 
-import { PlaceCardMode } from '../../const/mode';
-import { getFavoriteOffers } from '../../utils/filter-utils';
+import { PlaceCardMode } from '../../../const/mode';
+import { getFavoriteOffers } from '../../../utils/filter-utils';
 import PlaceCard from './place-card/place-card';
-import Spinner from '../shared/spinner/spinner';
+import Spinner from '../spinner/spinner';
 
 type PlacesListProps = {
   offers: TOffers;

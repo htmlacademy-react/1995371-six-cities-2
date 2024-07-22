@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
-import PlacesList from '../../components/places-list/places-list';
+import PlacesList from '../../components/shared/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, PlacesListWrapperClassName, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
