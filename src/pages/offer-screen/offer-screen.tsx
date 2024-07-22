@@ -19,7 +19,6 @@ export default function OfferScreen(): React.JSX.Element {
   const currentOffer = useAppSelector((store) => store.currentOffer);
   const reviews = useAppSelector((store) => store.currentOfferReviews);
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
-  const showedNearbyOffers = getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT);
 
   useEffect(() => {
     if (currentOfferId) {
@@ -30,6 +29,9 @@ export default function OfferScreen(): React.JSX.Element {
   if (!currentOfferId) {
     return <Navigate to={AppRoute.Page404} />;
   }
+
+  const showedNearbyOffers = getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT);
+  const isNearbyOffers = !!nearbyOffers.length;
 
   return (
     <div className="page">
@@ -48,15 +50,18 @@ export default function OfferScreen(): React.JSX.Element {
             />
           )
           : <Spinner description='Загружаем информацию о предложении'/>}
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlacesList
-              offers={showedNearbyOffers}
-              className={PlacesListWrapperClassName.Offer}
-            />
-          </section>
-        </div>
+        {isNearbyOffers
+          ? (
+            <div className="container">
+              <section className="near-places places">
+                <h2 className="near-places__title">Other places in the neighbourhood</h2>
+                <PlacesList
+                  offers={showedNearbyOffers}
+                  className={PlacesListWrapperClassName.Offer}
+                />
+              </section>
+            </div>)
+          : null}
       </main>
     </div>
   );
