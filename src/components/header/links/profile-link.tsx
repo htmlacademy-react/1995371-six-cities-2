@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
 
-import { TOffers } from '../../../types/offers';
 import { AppRoute } from '../../../const/const';
 import { getFavoriteOffers } from '../../../utils/filter-utils';
+import { useAppSelector } from '../../../hooks';
 
 type ProfileLinkProps = {
   isAuthorized: boolean;
-  offers: TOffers;
 }
 
 export default function ProfileLink({
   isAuthorized,
-  offers
 }: ProfileLinkProps): React.JSX.Element {
+  const offers = useAppSelector((store) => store.offers);
   const favoriteOffers = getFavoriteOffers(offers);
   const ProfileLinkInner = isAuthorized
     ? (
