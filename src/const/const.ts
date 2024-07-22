@@ -21,6 +21,12 @@ const RatingStarValue = {
   [RatingStarTitle.Terribly]: 1,
 } as const;
 
+enum PlacesListWrapperClassName {
+  Main = 'cities__places-list places__list tabs__content',
+  Offer = 'near-places__list places__list',
+  Favorite = 'favorites__places'
+}
+
 enum AccommodationType {
   Apartment = 'Apartment',
   Room = 'Private room',
@@ -54,6 +60,7 @@ export {
   Setting,
   RatingStarTitle,
   RatingStarValue,
+  PlacesListWrapperClassName,
   AccommodationType,
   FilterType,
   AppRoute,
