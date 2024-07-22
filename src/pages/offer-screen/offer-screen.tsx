@@ -17,7 +17,6 @@ export default function OfferScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const offers = useAppSelector((store) => store.offers);
   const currentOffer = useAppSelector((store) => store.currentOffer);
-  const reviews = useAppSelector((store) => store.currentOfferReviews);
   const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export default function OfferScreen(): React.JSX.Element {
               offers={offers}
               currentOffer={currentOffer}
               nearbyOffers={showedNearbyOffers}
-              reviews={reviews}
             />
           )
           : <Spinner description='Загружаем информацию о предложении'/>}
