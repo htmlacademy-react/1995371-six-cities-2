@@ -9,7 +9,6 @@ import { AppRoute, AuthorizationStatus } from '../../const/const';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((store) => store.offers);
   const currentAuthorizationStatus = useAppSelector((store) => store.authorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +32,7 @@ export default function LoginScreen(): React.JSX.Element {
           <Helmet>
             <title>Six cities. Login</title>
           </Helmet>
-          <Header headerMode={HeaderMode.LoginScreen} offers={offers}/>
+          <Header headerMode={HeaderMode.LoginScreen}/>
           <main className="page__main page__main--login">
             <div className="page__login-container container">
               <section className="login">

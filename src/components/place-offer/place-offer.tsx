@@ -1,6 +1,4 @@
 import { TOffer, TOfferFull, TOffers } from '../../types/offers';
-import { TReviews } from '../../types/reviews';
-
 import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
@@ -14,20 +12,21 @@ import HostModule from './host-module/host-module';
 import ReviewsSection from '../reviews-section/reviews-section';
 import Map from '../ map/map';
 import { getOffer } from '../../utils/offers-utils';
+import { useAppSelector } from '../../hooks';
 
 type PlaceOfferProps = {
   offers: TOffers;
   currentOffer: TOfferFull;
   nearbyOffers: TOffers;
-  reviews: TReviews;
 }
 
 export default function PlaceOffer({
   offers,
   currentOffer,
   nearbyOffers,
-  reviews
 }: PlaceOfferProps): React.JSX.Element {
+  const reviews = useAppSelector((store) => store.currentOfferReviews);
+
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
   const goodsModule = currentOffer.goods.length > 0
     ? (<GoodsInsideModule goods={currentOffer.goods}/>)
