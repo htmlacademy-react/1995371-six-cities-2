@@ -1,7 +1,7 @@
 import { PlacesListWrapperClassName } from '../../../const/const';
 import { PlaceCardMode } from '../../../const/mode';
 import { TOffers } from '../../../types/offers';
-import PlacesList from '../../places-list/places-list';
+import PlacesList from '../../shared/places-list/places-list';
 type FavoriteLocationItemProps = {
   city: string;
   filteredOffers: TOffers;
