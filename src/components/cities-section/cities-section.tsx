@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { TCity } from '../../types/city';
 import { getOffer } from '../../utils/offers-utils';
 import Map from '../ map/map';
-import PlacesSection from './no-places/places-section/places-section';
+import PlacesSection from './places-section/places-section';
 import NoPlacesSection from './no-places/no-places-section';
 
 type MainCitiesSectionProps = {
