@@ -1,8 +1,9 @@
-import { PlacesListWrapperClassName } from '../../../../const/const';
-import { TCity } from '../../../../types/city';
-import { TOffers } from '../../../../types/offers';
-import PlacesSorting from '../../../places-sorting/places-sorting';
-import PlacesList from '../../../shared/places-list/places-list';
+import { memo } from 'react';
+import { PlacesListWrapperClassName } from '../../../const/const';
+import { TCity } from '../../../types/city';
+import { TOffers } from '../../../types/offers';
+import PlacesSorting from '../../places-sorting/places-sorting';
+import PlacesList from '../../shared/places-list/places-list';
 
 type PlacesSectionProps = {
   cityOffers: TOffers;
@@ -12,14 +13,13 @@ type PlacesSectionProps = {
   handleCardMouseLeave: (newId?: string) => void;
 }
 
-export default function PlacesSection({
+function PlacesSectionComponent({
   cityOffers,
   currentCity,
   isLoading,
   handleCardMouseEnter,
   handleCardMouseLeave
-}: PlacesSectionProps): React.JSX.Element {
-
+}: PlacesSectionProps) {
 
   return(
     <section className="cities__places places">
@@ -36,3 +36,7 @@ export default function PlacesSection({
     </section>
   );
 }
+
+const PlacesSection = memo(PlacesSectionComponent);
+
+export default PlacesSection;
