@@ -2,19 +2,15 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { TOffers } from '../../types/offers';
 import { useAppSelector } from '../../hooks';
-import { TCity } from '../../types/city';
 import { getOffer } from '../../utils/offers-utils';
 import Map from '../ map/map';
 import PlacesSection from './places-section/places-section';
 import NoPlacesSection from './no-places/no-places-section';
 
-type MainCitiesSectionProps = {
-  currentCity: TCity;
-}
-
-export default function CitiesSection({currentCity}: MainCitiesSectionProps): React.JSX.Element {
+export default function CitiesSection(): React.JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState('');
 
+  const currentCity = useAppSelector((state) => state.currentCity);
   const cityOffers = useAppSelector((state) => state.cityOffers);
   const isLoading = useAppSelector((state) => state.isLoading);
   const hoveredCardOffer = getOffer(cityOffers, activeOfferId);

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import classNames from 'classnames';
-import { TCity, TCityPackType } from '../../types/city';
-import { updateCurrentCity, updateCityOffersList } from '../../store/action';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { TCityPackType } from '../../types/city';
+import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/locations-list';
 import CitiesSection from '../../components/cities-section/cities-section';
@@ -13,20 +12,10 @@ type MainScreenProps = {
 }
 
 export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
-  const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.currentCity);
+
   const isCityOffers = useAppSelector((state) => state.isCityOffers);
   const isLoading = useAppSelector((state) => state.isLoading);
   const isNoOffers = !isLoading && !isCityOffers;
-
-  const handleCityChange = (newCity: TCity) => {
-    if (newCity.name === currentCity.name) {
-      return;
-    }
-
-    dispatch(updateCurrentCity(newCity));
-    dispatch(updateCityOffersList());
-  };
 
 
   return (
@@ -44,10 +33,10 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList cityPack={cityPack} currentCity={currentCity} onCityChange={handleCityChange}/>
+            <LocationsList cityPack={cityPack} />
           </section>
         </div>
-        <CitiesSection currentCity={currentCity} />
+        <CitiesSection />
       </main>
     </div>
   );
