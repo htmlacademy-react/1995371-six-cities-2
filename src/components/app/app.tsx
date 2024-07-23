@@ -1,9 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
-import { TFullOffersPack, Offers } from '../../types/offers';
-import { TReviewsPack } from '../../types/reviews';
 import { TCityPackType } from '../../types/city';
-
 import { AppRoute } from '../../const/const';
 
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
@@ -13,21 +11,14 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import Error404Screen from '../../pages/error-404-screen/error-404-screen';
-import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 type AppProps = {
-  offers: Offers;
-  fullOffersPack: TFullOffersPack;
-  reviewsPack: TReviewsPack;
   cityPack: TCityPackType;
 }
 
 export default function App({
-  offers,
-  fullOffersPack,
-  reviewsPack,
   cityPack
 }: AppProps): React.JSX.Element {
 
@@ -44,29 +35,29 @@ export default function App({
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginScreen offers={offers} />}
+            element={<LoginScreen />}
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute>
-                <FavoritesScreen offers={offers} />
+                <FavoritesScreen />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.Offer}
             element={
-              <OfferScreen
-                offers={offers}
-                fullOffersPack={fullOffersPack}
-                reviewsPack={reviewsPack}
-              />
+              <OfferScreen />
             }
           />
           <Route
-            path="*"
+            path={AppRoute.Page404}
             element={<Error404Screen />}
+          />
+          <Route
+            path="*"
+            element={<Navigate to={AppRoute.Page404} />}
           />
         </Routes>
       </HistoryRouter>

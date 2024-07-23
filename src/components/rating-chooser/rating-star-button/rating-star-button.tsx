@@ -5,13 +5,16 @@ type RatingStarButtonProps = {
   value: number;
   isChecked: boolean;
   onRatingChange: (newValue: number) => void;
+  isDisabled?: boolean;
 }
 
 export default function RatingStarButton({
   title,
   value,
   isChecked,
-  onRatingChange}: RatingStarButtonProps): React.JSX.Element {
+  onRatingChange,
+  isDisabled
+}: RatingStarButtonProps): React.JSX.Element {
   const idValue = `${value}-star${value === 1 ? '' : 's'}`;
 
   const handleRatingChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +31,7 @@ export default function RatingStarButton({
         checked={isChecked}
         onChange={handleRatingChange}
         type="radio"
+        disabled={isDisabled}
       />
       <label
         htmlFor={idValue}

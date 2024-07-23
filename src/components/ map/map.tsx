@@ -3,14 +3,14 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import { TCity } from '../../types/city';
-import { TPoint, TPoints } from '../../types/map';
+import { TPoints } from '../../types/map';
 import useMap from '../../hooks/use-map';
 
 
 type MapProps = {
   city: TCity;
   points: TPoints;
-  selectedPoint?: TPoint | undefined;
+  selectedPoints?: TPoints;
 }
 
 const defaultCustomIcon = new Icon({
@@ -28,7 +28,7 @@ const currentCustomIcon = new Icon({
 export default function Map({
   city,
   points,
-  selectedPoint
+  selectedPoints
 }: MapProps): React.JSX.Element {
 
   const mapRef = useRef(null);
@@ -49,9 +49,10 @@ export default function Map({
       });
 
       marker
-        .setIcon(selectedPoint && selectedPoint.id === point.id
-          ? currentCustomIcon
-          : defaultCustomIcon)
+        .setIcon(
+          selectedPoints && selectedPoints.some((selectedPoint) => selectedPoint.id === point.id)
+            ? currentCustomIcon
+            : defaultCustomIcon)
         .addTo(markerLayer);
     });
 
@@ -59,7 +60,7 @@ export default function Map({
       map.removeLayer(markerLayer);
     };
 
-  }, [map, city, points, selectedPoint]);
+  }, [map, city, points, selectedPoints]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

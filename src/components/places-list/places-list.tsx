@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Offers } from '../../types/offers';
+import { TOffers } from '../../types/offers';
 import { TPlaceCardMode } from '../../types/common';
 
 import { PlaceCardMode } from '../../const/mode';
@@ -9,7 +9,7 @@ import PlaceCard from './place-card/place-card';
 import Spinner from '../shared/spinner/spinner';
 
 type PlacesListProps = {
-  offers: Offers;
+  offers: TOffers;
   isLoading?: boolean;
   cardMode?: TPlaceCardMode;
   onCardMouseEnter?: (newId: string) => void;

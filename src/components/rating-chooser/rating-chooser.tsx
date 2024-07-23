@@ -4,11 +4,13 @@ import RatingStarButton from './rating-star-button/rating-star-button';
 type RatingChooserProps = {
   currentRatingValue: number;
   onRatingChange: (newValue: number) => void;
+  isDisabled?: boolean;
 }
 
 export default function RatingChooser({
   currentRatingValue,
-  onRatingChange
+  onRatingChange,
+  isDisabled
 }: RatingChooserProps): React.JSX.Element {
   const ratingOptionButtons = Object.values(RatingStarTitle).map((starTitle) => {
     const currentStarValue = RatingStarValue[starTitle];
@@ -21,6 +23,7 @@ export default function RatingChooser({
         isChecked={isChecked}
         onRatingChange={onRatingChange}
         key={currentStarValue}
+        isDisabled={isDisabled}
       />
     );
   });

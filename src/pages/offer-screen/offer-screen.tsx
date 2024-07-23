@@ -1,56 +1,35 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 
-import { TFullOffersPack, Offers } from '../../types/offers';
-import { TReviewsPack } from '../../types/reviews';
-import { getFullOffer, getOffer } from '../../utils/offers-utils';
-
-import Error404Screen from '../error-404-screen/error-404-screen';
 import Header from '../../components/header/header';
 import PlaceOffer from '../../components/place-offer/place-offer';
 import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoute, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
+import Spinner from '../../components/shared/spinner/spinner';
+import { getRandomArrayItems } from '../../utils/utils';
+import { fetchOfferScreenInfo } from '../../store/api-action';
+import { useEffect } from 'react';
 
-type OfferScreenProps = {
-  offers: Offers;
-  fullOffersPack: TFullOffersPack;
-  reviewsPack: TReviewsPack;
-}
-
-export default function OfferScreen({
-  offers,
-  fullOffersPack,
-  reviewsPack
-}: OfferScreenProps): React.JSX.Element {
+export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
-  const [hoveredCardOfferID, setHoveredCardOfferID] = useState<string>('');
-
   const currentOfferId = params.id;
-  const currentOffer = getFullOffer(fullOffersPack, currentOfferId);
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((store) => store.offers);
+  const currentOffer = useAppSelector((store) => store.currentOffer);
+  const reviews = useAppSelector((store) => store.currentOfferReviews);
+  const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
+  const showedNearbyOffers = getRandomArrayItems(nearbyOffers, SHOWED_NEARBY_OFFERS_AMOUNT);
 
-  if (!currentOfferId || !currentOffer) {
-    return <Error404Screen />;
+  useEffect(() => {
+    if (currentOfferId) {
+      dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
+    }
+  }, [currentOfferId, dispatch]);
+
+  if (!currentOfferId) {
+    return <Navigate to={AppRoute.Page404} />;
   }
-
-  const nearbyOffers = offers.filter((offer) => offer.id !== currentOfferId);
-  const hoveredCardOffer = getOffer(offers, hoveredCardOfferID);
-  const reviews = reviewsPack[currentOfferId];
-
-  const handleCardMouseEnter = (newId: string) => {
-    if (newId === hoveredCardOfferID) {
-      return;
-    }
-
-    setHoveredCardOfferID(newId);
-  };
-
-  const handleCardMouseLeave = (newId?: string) => {
-    if (newId === hoveredCardOfferID) {
-      return;
-    }
-
-    setHoveredCardOfferID(newId ? newId : '');
-  };
 
   return (
     <div className="page">
@@ -59,20 +38,22 @@ export default function OfferScreen({
       </Helmet>
       <Header offers={offers}/>
       <main className="page__main page__main--offer">
-        <PlaceOffer
-          currentOffer={currentOffer}
-          nearbyOffers={nearbyOffers}
-          hoveredCardOffer={hoveredCardOffer}
-          reviews={reviews}
-        />
+        {currentOffer
+          ? (
+            <PlaceOffer
+              offers={offers}
+              currentOffer={currentOffer}
+              nearbyOffers={showedNearbyOffers}
+              reviews={reviews}
+            />
+          )
+          : <Spinner description='Загружаем информацию о предложении'/>}
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <PlacesList
-                offers={nearbyOffers}
-                onCardMouseEnter={handleCardMouseEnter}
-                onCardMouseLeave={handleCardMouseLeave}
+                offers={showedNearbyOffers}
               />
             </div>
           </section>

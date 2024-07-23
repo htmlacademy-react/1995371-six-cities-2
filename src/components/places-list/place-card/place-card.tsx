@@ -25,7 +25,6 @@ export default function PlaceCard({
   onMouseLeave
 }: PlaceCardProps): React.JSX.Element {
   const cardRef = useRef<HTMLElement | null>(null);
-
   const isFavoriteMode = cardMode === PlaceCardMode.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
@@ -47,7 +46,7 @@ export default function PlaceCard({
       ref={cardRef}
     >
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
-        <Link to={`${AppRoute.OfferBase}${offer.id}`}>
+        <Link to={`${AppRoute.OfferBase}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}

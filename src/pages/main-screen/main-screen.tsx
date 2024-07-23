@@ -12,6 +12,7 @@ import Map from '../../components/ map/map';
 import LocationsList from '../../components/locations-list/locations-list';
 import { updateCurrentCity, updateCityOffersList } from '../../store/action';
 import { Helmet } from 'react-helmet-async';
+import { TOffers } from '../../types/offers';
 
 type MainScreenProps = {
   cityPack: TCityPackType;
@@ -23,6 +24,9 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
   const currentCity = useAppSelector((state) => state.currentCity);
   const cityOffers = useAppSelector((state) => state.cityOffers);
   const isLoading = useAppSelector((state) => state.isLoading);
+
+  const hoveredCardOffer = getOffer(cityOffers, activeOfferId);
+  const selectedPoints: TOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
 
   const handleCardMouseEnter = (newId: string) => {
     if (newId === activeOfferId) {
@@ -79,7 +83,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currentCity} points={cityOffers} selectedPoint={getOffer(cityOffers, activeOfferId)}/>
+                <Map city={currentCity} points={cityOffers} selectedPoints={selectedPoints}/>
               </section>
             </div>
           </div>
