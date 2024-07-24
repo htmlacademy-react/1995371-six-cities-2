@@ -10,14 +10,15 @@ import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
 import { fetchOfferScreenInfo } from '../../store/api-action';
 import { useEffect } from 'react';
+import { getCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
   const currentOfferId = params.id;
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((store) => store.offers);
-  const currentOffer = useAppSelector((store) => store.currentOffer);
-  const nearbyOffers = useAppSelector((store) => store.nearbyOffers);
+  const offers = useAppSelector(getOffers);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
 
   useEffect(() => {
     if (currentOfferId) {

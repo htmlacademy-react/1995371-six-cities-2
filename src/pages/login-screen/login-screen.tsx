@@ -6,10 +6,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const currentAuthorizationStatus = useAppSelector((store) => store.authorizationStatus);
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const/const';
 import { getFavoriteOffers } from '../../../utils/filter-utils';
 import { useAppSelector } from '../../../hooks';
+import { getOffers } from '../../../store/data-process/data-process.selectors';
+import { getUserEmail } from '../../../store/user-process/user-process.selectors';
 
 type ProfileLinkProps = {
   isAuthorized: boolean;
@@ -11,8 +13,8 @@ type ProfileLinkProps = {
 export default function ProfileLink({
   isAuthorized,
 }: ProfileLinkProps): React.JSX.Element {
-  const offers = useAppSelector((store) => store.offers);
-  const userEmail = useAppSelector((store) => store.userEmail);
+  const offers = useAppSelector(getOffers);
+  const userEmail = useAppSelector(getUserEmail);
   const favoriteOffers = getFavoriteOffers(offers);
   const ProfileLinkInner = isAuthorized
     ? (

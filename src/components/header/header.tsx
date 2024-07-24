@@ -6,6 +6,7 @@ import Logo from './logo/logo';
 import ProfileLink from './links/profile-link';
 import SignOutLink from './links/sign-out-link';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 type HeaderProps = {
   headerMode?: THeaderMode;
@@ -14,7 +15,7 @@ type HeaderProps = {
 export default function Header({
   headerMode = HeaderMode.Default,
 }: HeaderProps): React.JSX.Element {
-  const currentAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
   const signOutElement = isAuthorized
     ? (

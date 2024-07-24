@@ -6,9 +6,10 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import FavoritesSection from '../../components/favorites-section/favorites-section';
 import FavoritesSectionEmpty from '../../components/favorites-section/favorites-section-empty';
+import { getOffers } from '../../store/data-process/data-process.selectors';
 
 export default function FavoritesScreen(): React.JSX.Element {
-  const offers = useAppSelector((store) => store.offers);
+  const offers = useAppSelector(getOffers);
   const favoriteOffers = getFavoriteOffers(offers);
 
 

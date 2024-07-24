@@ -6,16 +6,22 @@ import { getOffer } from '../../utils/offers-utils';
 import Map from '../ map/map';
 import PlacesSection from './places-section/places-section';
 import NoPlacesSection from './no-places/no-places-section';
+import {
+  getCityOffers,
+  getCurrentCity,
+  getIsCityOffers,
+  getIsLoading
+} from '../../store/data-process/data-process.selectors';
 
 export default function CitiesSection(): React.JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState('');
 
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const cityOffers = useAppSelector((state) => state.cityOffers);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const currentCity = useAppSelector(getCurrentCity);
+  const cityOffers = useAppSelector(getCityOffers);
+  const isLoading = useAppSelector(getIsLoading);
   const hoveredCardOffer = getOffer(cityOffers, activeOfferId);
   const selectedPoints: TOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
-  const isCityOffers = useAppSelector((state) => state.isCityOffers);
+  const isCityOffers = useAppSelector(getIsCityOffers);
 
   const isNoOffers = !isLoading && !isCityOffers;
 

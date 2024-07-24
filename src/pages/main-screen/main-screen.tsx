@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import LocationsList from '../../components/locations-list/locations-list';
 import CitiesSection from '../../components/cities-section/cities-section';
+import { getIsCityOffers, getIsLoading } from '../../store/data-process/data-process.selectors';
 
 type MainScreenProps = {
   cityPack: TCityPackType;
@@ -13,10 +14,9 @@ type MainScreenProps = {
 
 export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
 
-  const isCityOffers = useAppSelector((state) => state.isCityOffers);
-  const isLoading = useAppSelector((state) => state.isLoading);
+  const isCityOffers = useAppSelector(getIsCityOffers);
+  const isLoading = useAppSelector(getIsLoading);
   const isNoOffers = !isLoading && !isCityOffers;
-
 
   return (
     <div className="page page--gray page--main">
