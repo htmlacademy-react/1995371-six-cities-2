@@ -11,11 +11,13 @@ import { getRandomArrayItems } from '../../utils/utils';
 import { fetchOfferScreenInfo } from '../../store/api-action';
 import { useEffect } from 'react';
 import { getCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
+import { clearOfferScreenInfo } from '../../store/data-process/data-process.slice';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
   const currentOfferId = params.id;
   const dispatch = useAppDispatch();
+
   const offers = useAppSelector(getOffers);
   const currentOffer = useAppSelector(getCurrentOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
@@ -24,6 +26,11 @@ export default function OfferScreen(): React.JSX.Element {
     if (currentOfferId) {
       dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
     }
+
+    return () => {
+      dispatch(clearOfferScreenInfo());
+    };
+
   }, [currentOfferId, dispatch]);
 
   if (!currentOfferId) {

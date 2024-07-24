@@ -50,6 +50,11 @@ export const dataProcess = createSlice({
           break;
       }
       state.isCityOffers = !!state.cityOffers.length;
+    },
+    clearOfferScreenInfo: (state) => {
+      state.currentOffer = null;
+      state.currentOfferReviews = [];
+      state.nearbyOffers = [];
     }
   },
   extraReducers(builder) {
@@ -60,6 +65,16 @@ export const dataProcess = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isLoading = false;
+        switch (state.sortType) {
+          case SortPack.Popular.Alias:
+            state.cityOffers = getCityFilteredOffers(state.offers, state.currentCity.name);
+            break;
+
+          default:
+            state.cityOffers = SortPack[state.sortType].SortFunction(state.cityOffers);
+            break;
+        }
+        state.isCityOffers = !!state.cityOffers.length;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isLoading = false;
@@ -82,4 +97,4 @@ export const dataProcess = createSlice({
   }
 });
 
-export const {updateCurrentCity, updateSortType, updateCityOffersList} = dataProcess.actions;
+export const {updateCurrentCity, updateSortType, updateCityOffersList, clearOfferScreenInfo} = dataProcess.actions;
