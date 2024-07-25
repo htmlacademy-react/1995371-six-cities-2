@@ -10,6 +10,7 @@ const getCurrentOfferReviews = (state: TState) => state[StoreNameSpace.Data].cur
 const getCurrentSortType = (state: TState) => state[StoreNameSpace.Data].sortType;
 const getIsLoading = (state: TState) => state[StoreNameSpace.Data].isLoading;
 const getIsCityOffers = (state: TState) => state[StoreNameSpace.Data].isCityOffers;
+const getIsNoCurrentOffer = (state: TState) => state[StoreNameSpace.Data].isNoCurrentOffer;
 const getIsFormDisabled = (state: TState) => state[StoreNameSpace.Data].isFormDisabled;
 
 export {
@@ -22,5 +23,6 @@ export {
   getCurrentSortType,
   getIsLoading,
   getIsCityOffers,
+  getIsNoCurrentOffer,
   getIsFormDisabled
 };

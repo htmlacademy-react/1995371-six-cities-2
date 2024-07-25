@@ -18,6 +18,7 @@ export type TInitialState = {
   sortType: TSortName;
   isLoading: boolean;
   isCityOffers: boolean;
+  isNoCurrentOffer: boolean;
   authorizationStatus: TAuthorizationStatus;
   isFormDisabled: boolean;
   userEmail: string;

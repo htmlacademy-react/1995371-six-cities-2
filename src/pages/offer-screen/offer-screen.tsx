@@ -10,8 +10,9 @@ import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
 import { fetchOfferScreenInfo } from '../../store/api-action';
 import { useEffect } from 'react';
-import { getCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
+import { getCurrentOffer, getIsNoCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
 import { clearOfferScreenInfo } from '../../store/data-process/data-process.slice';
+import { redirectToRoute } from '../../store/action';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
@@ -21,6 +22,7 @@ export default function OfferScreen(): React.JSX.Element {
   const offers = useAppSelector(getOffers);
   const currentOffer = useAppSelector(getCurrentOffer);
   const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isNoCurrentOffer = useAppSelector(getIsNoCurrentOffer);
 
   useEffect(() => {
     if (currentOfferId) {
@@ -32,6 +34,12 @@ export default function OfferScreen(): React.JSX.Element {
     };
 
   }, [currentOfferId, dispatch]);
+
+  useEffect(() => {
+    if (isNoCurrentOffer) {
+      dispatch(redirectToRoute({route: AppRoute.Page404}));
+    }
+  }, [isNoCurrentOffer, dispatch]);
 
   if (!currentOfferId) {
     return <Navigate to={AppRoute.Page404} />;

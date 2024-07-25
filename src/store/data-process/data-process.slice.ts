@@ -19,6 +19,7 @@ const initialState: TDataProcessInitialState = {
   sortType: defaultSort,
   isLoading: false,
   isCityOffers: false,
+  isNoCurrentOffer: false,
   isFormDisabled: false,
 };
 
@@ -55,6 +56,7 @@ export const dataProcess = createSlice({
       state.currentOffer = null;
       state.currentOfferReviews = [];
       state.nearbyOffers = [];
+      state.isNoCurrentOffer = false;
     }
   },
   extraReducers(builder) {
@@ -83,6 +85,9 @@ export const dataProcess = createSlice({
         state.currentOffer = action.payload.currentOffer;
         state.currentOfferReviews = action.payload.reviews;
         state.nearbyOffers = action.payload.nearbyOffers;
+      })
+      .addCase(fetchOfferScreenInfo.rejected, (state) => {
+        state.isNoCurrentOffer = true;
       })
       .addCase(postNewOfferReviewAction.pending, (state) => {
         state.isFormDisabled = true;
