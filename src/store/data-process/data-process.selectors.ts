@@ -3,6 +3,7 @@ import { TState } from '../../types/state';
 
 const getCurrentCity = (state: TState) => state[StoreNameSpace.Data].currentCity;
 const getOffers = (state: TState) => state[StoreNameSpace.Data].offers;
+const getFavoriteOffers = (state: TState) => state[StoreNameSpace.Data].favoriteOffers;
 const getCityOffers = (state: TState) => state[StoreNameSpace.Data].cityOffers;
 const getNearbyOffers = (state: TState) => state[StoreNameSpace.Data].nearbyOffers;
 const getCurrentOffer = (state: TState) => state[StoreNameSpace.Data].currentOffer;
@@ -16,6 +17,7 @@ const getIsFormDisabled = (state: TState) => state[StoreNameSpace.Data].isFormDi
 export {
   getCurrentCity,
   getOffers,
+  getFavoriteOffers,
   getCityOffers,
   getNearbyOffers,
   getCurrentOffer,

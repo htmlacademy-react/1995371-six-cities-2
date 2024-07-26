@@ -3,7 +3,7 @@ import { DEFAULT_CITY } from '../../const/citypack';
 import { defaultSort, SortPack } from '../../const/sort';
 import { TDataProcessInitialState } from '../../types/state';
 import { StoreNameSpace } from '../../const/store';
-import { fetchOffersAction, fetchOfferScreenInfo, postNewOfferReviewAction } from '../api-action';
+import { fetchFavoriteOffers, fetchOffersAction, fetchOfferScreenInfo, postNewOfferReviewAction } from '../api-action';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import { TCity } from '../../types/city';
 import { TSortName } from '../../types/sort';
@@ -12,6 +12,7 @@ import { isKnownSortName } from '../../utils/type-guard';
 const initialState: TDataProcessInitialState = {
   currentCity: DEFAULT_CITY,
   offers: [],
+  favoriteOffers: [],
   cityOffers: [],
   nearbyOffers: [],
   currentOffer: null,
@@ -80,6 +81,9 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
       })
       .addCase(fetchOfferScreenInfo.fulfilled, (state, action) => {
         state.currentOffer = action.payload.currentOffer;

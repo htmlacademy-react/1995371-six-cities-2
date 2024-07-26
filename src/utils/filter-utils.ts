@@ -35,12 +35,7 @@ const getCityFilteredOffers = (
   city: string
 ) => getFilteredOffers<string>(offers, FilterType.City, city);
 
-const getFavoriteOffers = (
-  offers: TOffers
-) => getFilteredOffers(offers, FilterType.Favorite);
-
 export {
   getFilteredOffers,
-  getCityFilteredOffers,
-  getFavoriteOffers
+  getCityFilteredOffers
 };
