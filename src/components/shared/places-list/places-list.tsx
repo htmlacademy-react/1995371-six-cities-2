@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { TOffers } from '../../../types/offers';
 import { TPlaceCardMode } from '../../../types/common';
-
 import { PlaceCardMode } from '../../../const/mode';
-import { getFavoriteOffers } from '../../../utils/filter-utils';
+import { useAppSelector } from '../../../hooks';
+import { getFavoriteOffers } from '../../../store/data-process/data-process.selectors';
 import PlaceCard from './place-card/place-card';
 import Spinner from '../spinner/spinner';
 
@@ -26,6 +25,8 @@ export default function PlacesList({
   onCardMouseLeave
 }: PlacesListProps): React.JSX.Element {
   const isFavorite: boolean = cardMode === PlaceCardMode.Favorite;
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const filteredOffers = isFavorite ? favoriteOffers : offers;
 
   const handleMouseEnterEvent = (newId: string): void => {
     if (onCardMouseEnter) {
@@ -38,8 +39,6 @@ export default function PlacesList({
       onCardMouseLeave(newId);
     }
   };
-
-  const filteredOffers = isFavorite ? getFavoriteOffers(offers) : offers;
 
   return (
     <div className={className}>

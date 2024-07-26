@@ -22,6 +22,18 @@ export const fetchOffersAction = createAsyncThunk<TOffers, undefined, {
   }
 );
 
+export const fetchFavoriteOffers = createAsyncThunk<TOffers, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.DataFetchFevoriteOffers,
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TOffers>(APIRoute.FavoriteOffers);
+    return data;
+  }
+);
+
 export const fetchOfferScreenInfo = createAsyncThunk<TOfferInfo, TOfferId, {
   dispatch: TAppDispatch;
   state: TState;

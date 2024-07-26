@@ -12,9 +12,7 @@ type HeaderProps = {
   headerMode?: THeaderMode;
 }
 
-export default function Header({
-  headerMode = HeaderMode.Default,
-}: HeaderProps): React.JSX.Element {
+export default function Header({headerMode = HeaderMode.Default}: HeaderProps): React.JSX.Element {
   const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
   const signOutElement = isAuthorized

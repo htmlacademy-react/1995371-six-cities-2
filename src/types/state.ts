@@ -11,6 +11,7 @@ export type TAppDispatch = typeof store.dispatch;
 export type TInitialState = {
   currentCity: TCity;
   offers: TOffers;
+  favoriteOffers: TOffers;
   cityOffers: TOffers;
   nearbyOffers: TOffers;
   currentOffer: TOfferFull | null;
