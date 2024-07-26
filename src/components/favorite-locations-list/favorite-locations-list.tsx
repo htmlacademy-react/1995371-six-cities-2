@@ -1,9 +1,9 @@
-import { TOffers } from '../../types/offers';
+import { TShortOffers } from '../../types/offers';
 import FavoriteLocationItem from './favorite-location-item/favorite-location-item';
 
 type FavoriteLocationsListProps = {
   cities: Set<string>;
-  cityOffers: Map<string, TOffers>;
+  cityOffers: Map<string, TShortOffers>;
 }
 
 export default function FavoriteLocationsList({cities, cityOffers}: FavoriteLocationsListProps): React.JSX.Element {

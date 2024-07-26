@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import { PlacesListWrapperClassName } from '../../../const/const';
 import { TCity } from '../../../types/city';
-import { TOffers } from '../../../types/offers';
+import { TShortOffers } from '../../../types/offers';
 import PlacesSorting from '../../places-sorting/places-sorting';
 import PlacesList from '../../shared/places-list/places-list';
 
 type PlacesSectionProps = {
-  cityOffers: TOffers;
+  cityOffers: TShortOffers;
   currentCity: TCity;
   isLoading: boolean;
   handleCardMouseEnter: (newId?: string) => void;

@@ -1,4 +1,4 @@
-import { TOffer, TOfferFull, TOffers } from '../../types/offers';
+import { TShortOffer, TOffer, TShortOffers } from '../../types/offers';
 import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
@@ -14,9 +14,9 @@ import Map from '../ map/map';
 import { getOffer } from '../../utils/offers-utils';
 
 type PlaceOfferProps = {
-  offers: TOffers;
-  currentOffer: TOfferFull;
-  nearbyOffers: TOffers;
+  offers: TShortOffers;
+  currentOffer: TOffer;
+  nearbyOffers: TShortOffers;
 }
 
 export default function PlaceOffer({
@@ -30,9 +30,9 @@ export default function PlaceOffer({
     ? (<GoodsInsideModule goods={currentOffer.goods}/>)
     : null;
 
-  const currentOfferShort = getOffer(offers, currentOffer.id) as TOffer;
+  const currentOfferShort = getOffer(offers, currentOffer.id) as TShortOffer;
   const points = [...nearbyOffers, currentOfferShort];
-  const selectedPoints: TOffers = [currentOfferShort];
+  const selectedPoints: TShortOffers = [currentOfferShort];
 
   return (
     <section className="offer">

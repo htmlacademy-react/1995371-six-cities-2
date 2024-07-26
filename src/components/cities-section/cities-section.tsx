@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { TOffers } from '../../types/offers';
+import { TShortOffers } from '../../types/offers';
 import { useAppSelector } from '../../hooks';
 import { getOffer } from '../../utils/offers-utils';
 import Map from '../ map/map';
@@ -20,7 +20,7 @@ export default function CitiesSection(): React.JSX.Element {
   const cityOffers = useAppSelector(getCityOffers);
   const isLoading = useAppSelector(getIsLoading);
   const hoveredCardOffer = getOffer(cityOffers, activeOfferId);
-  const selectedPoints: TOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
+  const selectedPoints: TShortOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
   const isCityOffers = useAppSelector(getIsCityOffers);
 
   const isNoOffers = !isLoading && !isCityOffers;

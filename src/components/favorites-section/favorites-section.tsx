@@ -1,14 +1,14 @@
-import { TOffers } from '../../types/offers';
+import { TShortOffers } from '../../types/offers';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import FavoriteLocationsList from '../favorite-locations-list/favorite-locations-list';
 
 type FavoritesSectionProps = {
-  favoriteOffers: TOffers;
+  favoriteOffers: TShortOffers;
 }
 
 export default function FavoritesSection({favoriteOffers}: FavoritesSectionProps): React.JSX.Element {
   const cities = new Set(favoriteOffers.map((offer) => offer.city.name));
-  const cityOffers = new Map<string, TOffers>();
+  const cityOffers = new Map<string, TShortOffers>();
 
   cities.forEach((city) => cityOffers.set(
     city,

@@ -1,7 +1,7 @@
-import { TOfferFull } from '../../../types/offers';
+import { TOffer } from '../../../types/offers';
 
 type HostModuleProps = {
-  offer: TOfferFull;
+  offer: TOffer;
 }
 
 export default function HostModule({offer}: HostModuleProps): React.JSX.Element {

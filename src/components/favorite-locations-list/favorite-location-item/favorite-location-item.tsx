@@ -1,10 +1,10 @@
 import { PlacesListWrapperClassName } from '../../../const/const';
 import { PlaceCardMode } from '../../../const/mode';
-import { TOffers } from '../../../types/offers';
+import { TShortOffers } from '../../../types/offers';
 import PlacesList from '../../shared/places-list/places-list';
 type FavoriteLocationItemProps = {
   city: string;
-  filteredOffers: TOffers;
+  filteredOffers: TShortOffers;
 }
 
 export default function FavoriteLocationItem({city, filteredOffers}: FavoriteLocationItemProps): React.JSX.Element {

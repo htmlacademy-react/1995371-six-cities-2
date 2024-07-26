@@ -3,7 +3,7 @@ import { DEFAULT_CITY } from '../../const/citypack';
 import { defaultSort, SortPack } from '../../const/sort';
 import { TDataProcessInitialState } from '../../types/state';
 import { StoreNameSpace } from '../../const/store';
-import { fetchFavoriteOffers, fetchOffersAction, fetchOfferScreenInfo, postNewOfferReviewAction } from '../api-action';
+import { fetchFavoriteOffers, fetchOffersAction, fetchOfferScreenInfo, postNewOfferReviewAction, setOfferFavoriteStatus } from '../api-action';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import { TCity } from '../../types/city';
 import { TSortName } from '../../types/sort';
@@ -84,6 +84,27 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
+      })
+      .addCase(setOfferFavoriteStatus.fulfilled, (state, action) => {
+        const currentOffer = action.payload;
+        const currentId = currentOffer.id;
+        const {isFavorite} = currentOffer;
+
+        state.offers = state.offers.map((offer) => (
+          offer.id === currentId
+            ? {...offer, isFavorite: isFavorite}
+            : offer
+        ));
+
+        state.cityOffers = state.cityOffers.map((offer) => (
+          offer.id === currentId
+            ? {...offer, isFavorite: isFavorite}
+            : offer
+        ));
+
+        state.favoriteOffers = isFavorite
+          ? [...state.favoriteOffers, currentOffer]
+          : state.favoriteOffers.filter((offer) => offer.id !== currentId);
       })
       .addCase(fetchOfferScreenInfo.fulfilled, (state, action) => {
         state.currentOffer = action.payload.currentOffer;
