@@ -1,11 +1,11 @@
-import { TOffers } from '../types/offers';
+import { TShortOffers } from '../types/offers';
 
 const SORT_OPTIONS_OPEN_CLASSNAME = 'places__options--opened';
 
-const sortToHigherPrice = (offers: TOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => currentOffer.price - nextOffer.price);
-const sortToLowerPrice = (offers: TOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.price - currentOffer.price);
-const sortToLowerRating = (offers: TOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.rating - currentOffer.rating);
-const sortPopular = (offers: TOffers | []) => offers;
+const sortToHigherPrice = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => currentOffer.price - nextOffer.price);
+const sortToLowerPrice = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.price - currentOffer.price);
+const sortToLowerRating = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.rating - currentOffer.rating);
+const sortPopular = (offers: TShortOffers | []) => offers;
 
 const SortPack = {
   Popular: {

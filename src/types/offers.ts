@@ -25,11 +25,11 @@ export type TOfferBase = {
   rating: number;
 }
 
-export type TOffer = TOfferBase & {
+export type TShortOffer = TOfferBase & {
   previewImage: string;
 }
 
-export type TOfferFull = TOfferBase & {
+export type TOffer = TOfferBase & {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -38,5 +38,8 @@ export type TOfferFull = TOfferBase & {
   maxAdults: number;
 }
 
-export type TOffers = TOffer[];
-export type TFullOffersPack = {[key: TId]: TOfferFull};
+export type TFullOffer = TShortOffer & TOffer;
+
+export type TShortOffers = TShortOffer[];
+export type TFullOffers = TFullOffer[];
+export type TOffersPack = {[key: TId]: TOffer};

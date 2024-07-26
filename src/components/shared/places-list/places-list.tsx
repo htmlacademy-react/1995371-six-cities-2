@@ -1,5 +1,5 @@
 import React from 'react';
-import { TOffers } from '../../../types/offers';
+import { TShortOffers } from '../../../types/offers';
 import { TPlaceCardMode } from '../../../types/common';
 import { PlaceCardMode } from '../../../const/mode';
 import { useAppSelector } from '../../../hooks';
@@ -8,7 +8,7 @@ import PlaceCard from './place-card/place-card';
 import Spinner from '../spinner/spinner';
 
 type PlacesListProps = {
-  offers: TOffers;
+  offers: TShortOffers;
   className: string;
   isLoading?: boolean;
   cardMode?: TPlaceCardMode;

@@ -4,7 +4,8 @@ enum Action {
 
 enum APIAction {
   DataFetchOffers = 'data/fetchOffers',
-  DataFetchFevoriteOffers = 'dataFetchFevoriteOffers',
+  DataFetchFavoriteOffers = 'data/FetchFevoriteOffers',
+  DataSetOfferFavoriteStatus = 'data/setOfferFavoriteStatus',
   DataPostNewOfferReview = 'data/postNewOfferReview',
   DataFetchNearbyOffers = 'data/fetchNearbyOffers',
   DataFetchOfferScreenInfo = 'data/fetchOfferScreenInfo',
@@ -13,8 +14,8 @@ enum APIAction {
 }
 
 enum StoreNameSpace {
-  Data='DATA',
-  User = 'USER'
+  Data='data',
+  User = 'user'
 }
 
 export {
