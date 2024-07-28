@@ -5,14 +5,15 @@ import RatingChooser from '../../rating-chooser/rating-chooser';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { postNewOfferReviewAction } from '../../../store/api-action';
 import { isCommentsLengthValid } from '../../../utils/offers-utils';
+import { getCurrentOffer, getIsFormDisabled } from '../../../store/data-process/data-process.selectors';
 
 export default function ReviewForm(): React.JSX.Element {
 
   const [reviewData, setReviewData] = useState({...ReviewInitStateValue});
 
   const dispatch = useAppDispatch();
-  const currentOfferId = useAppSelector((store) => store.currentOffer?.id) as string;
-  const isFormDisabled = useAppSelector((store) => store.isFormDisabled);
+  const currentOfferId = useAppSelector(getCurrentOffer)?.id as string;
+  const isFormDisabled = useAppSelector(getIsFormDisabled);
   const isDataValid = !!reviewData.rating && isCommentsLengthValid(reviewData.comment);
 
   const handleRatingChange = (newRatingValue: number) => {

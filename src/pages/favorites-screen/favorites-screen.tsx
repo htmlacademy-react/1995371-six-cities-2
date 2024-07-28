@@ -1,59 +1,41 @@
-import { TOffers } from '../../types/offers';
-
-import { PlaceCardMode } from '../../const/mode';
-import { getCityFilteredOffers, getFavoriteOffers } from '../../utils/filter-utils';
-
+import classNames from 'classnames';
+import { getFavoriteOffers } from '../../utils/filter-utils';
 import Header from '../../components/header/header';
 import FooterLogo from '../../components/footer-logo/footer-logo';
-import PlacesList from '../../components/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
+import FavoritesSection from '../../components/favorites-section/favorites-section';
+import FavoritesSectionEmpty from '../../components/favorites-section/favorites-section-empty';
+import { getOffers } from '../../store/data-process/data-process.selectors';
 
 export default function FavoritesScreen(): React.JSX.Element {
-  const offers = useAppSelector((store) => store.offers);
+  const offers = useAppSelector(getOffers);
   const favoriteOffers = getFavoriteOffers(offers);
-  const cities = new Set(favoriteOffers.map((offer) => offer.city.name));
-  const cityOffers = new Map<string, TOffers>();
 
-  cities.forEach((city) => cityOffers.set(
-    city,
-    getCityFilteredOffers(favoriteOffers, city)
-  ));
 
-  const locationItemsLists = Array.from(cities).map((city) => {
-    const filteredOffers = cityOffers.get(city) as TOffers;
-
-    return (
-      <li className="favorites__locations-items" key={city}>
-        <div className="favorites__locations locations locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>{city}</span>
-            </a>
-          </div>
-        </div>
-        <div className="favorites__places">
-          <PlacesList offers={filteredOffers} cardMode={PlaceCardMode.Favorite}/>
-        </div>
-      </li>
-    );
-
-  });
+  const isFavoritesOffers = !!favoriteOffers.length;
 
   return (
-    <div className="page">
+    <div
+      className={classNames(
+        'page',
+        {'page--favorites-empty': !isFavoritesOffers}
+      )}
+    >
       <Helmet>
         <title>Six cities. Favorite offers</title>
       </Helmet>
-      <Header offers={offers}/>
-      <main className="page__main page__main--favorites">
+      <Header />
+      <main
+        className={classNames(
+          'page__main page__main--favorites',
+          {'page__main--favorites-empty': !isFavoritesOffers}
+        )}
+      >
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {locationItemsLists}
-            </ul>
-          </section>
+          {isFavoritesOffers
+            ? <FavoritesSection favoriteOffers={favoriteOffers} />
+            : <FavoritesSectionEmpty />}
         </div>
       </main>
       <footer className="footer container">

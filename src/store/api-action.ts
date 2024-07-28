@@ -1,40 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
-import { APIRoute } from '../const/api';
+import { TAuthData, TNewReviewInfo, TOfferId, TOfferInfo, TUserInfo } from '../types/api';
 import { TOffers, TOfferFull } from '../types/offers';
-import { addReviewToList, loadOfferInfo, loadOffersList, redirectToRoute, setauthorizationstatus, setIsFormDisabled, setIsloading, updateCityOffersList } from './action';
-import { APIAction } from '../const/action';
-import { AppRoute, AuthorizationStatus } from '../const/const';
-import { TAuthData, TNewReviewInfo, TOfferId, TUserInfo } from '../types/api';
-import { saveToken } from '../services/token';
 import { TReview, TReviews } from '../types/reviews';
+import { saveToken } from '../services/token';
+import { AppRoute } from '../const/const';
+import { APIRoute } from '../const/api';
+import { APIAction } from '../const/store';
+import { redirectToRoute } from './action';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<TOffers, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.DataFetchOffers,
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setIsloading(true));
-    try {
-      const {data} = await api.get<TOffers>(APIRoute.Offers);
-      dispatch(loadOffersList(data));
-      dispatch(updateCityOffersList());
-    } finally {
-      dispatch(setIsloading(false));
-    }
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TOffers>(APIRoute.Offers);
+    return data;
   }
 );
 
-export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
+export const fetchOfferScreenInfo = createAsyncThunk<TOfferInfo, TOfferId, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.DataFetchOfferScreenInfo,
-  async ({offerId}, {dispatch, extra: api}) => {
+  async ({offerId}, {extra: api}) => {
     const offerRoute = `${APIRoute.Offers}/${offerId}`;
     const {data} = await api.get<TOfferFull>(offerRoute);
 
@@ -46,52 +40,43 @@ export const fetchOfferScreenInfo = createAsyncThunk<void, TOfferId, {
     const nearbyOffersResponse = await api.get<TOffers>(nearbyOffersRoute);
     const nearbyOffers = nearbyOffersResponse.data;
 
-    const test = {
+    const screenInfo: TOfferInfo = {
       currentOffer: data,
       reviews: reviews,
       nearbyOffers: nearbyOffers
     };
 
-    dispatch(loadOfferInfo(test));
+    return screenInfo;
   }
 );
 
-export const postNewOfferReviewAction = createAsyncThunk<void, TNewReviewInfo, {
+export const postNewOfferReviewAction = createAsyncThunk<TReview, TNewReviewInfo, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.DataPostNewOfferReview,
-  async ({offerId, reviewData, onSuccess}, {dispatch, extra: api}) => {
+  async ({offerId, reviewData, onSuccess}, {extra: api}) => {
     const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
-    dispatch(setIsFormDisabled(true));
-    try {
-      const {data} = await api.post<TReview>(reviewsRoute, reviewData);
-      dispatch(addReviewToList(data));
+    const {data} = await api.post<TReview>(reviewsRoute, reviewData);
 
-      if (onSuccess) {
-        onSuccess();
-      }
-
-    } finally {
-      dispatch(setIsFormDisabled(false));
+    if (data && onSuccess) {
+      onSuccess();
     }
+
+    return data;
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<TUserInfo, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.UserCheckAuth,
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(setauthorizationstatus(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(setauthorizationstatus(AuthorizationStatus.NoAuth));
-    }
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TUserInfo>(APIRoute.Login);
+    return data;
   }
 );
 
@@ -102,8 +87,8 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
 }>(
   APIAction.UserLogin,
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
-    saveToken(token);
+    const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(checkAuthAction());
     dispatch(redirectToRoute({route: AppRoute.Main}));
   }

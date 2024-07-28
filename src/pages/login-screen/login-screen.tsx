@@ -6,11 +6,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((store) => store.offers);
-  const currentAuthorizationStatus = useAppSelector((store) => store.authorizationStatus);
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -33,7 +33,7 @@ export default function LoginScreen(): React.JSX.Element {
           <Helmet>
             <title>Six cities. Login</title>
           </Helmet>
-          <Header headerMode={HeaderMode.LoginScreen} offers={offers}/>
+          <Header headerMode={HeaderMode.LoginScreen}/>
           <main className="page__main page__main--login">
             <div className="page__login-container container">
               <section className="login">

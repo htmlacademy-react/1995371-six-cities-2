@@ -1,93 +1,42 @@
-import React, { useState } from 'react';
-
-import { TCity, TCityPackType } from '../../types/city';
-
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getOffer } from '../../utils/offers-utils';
-
-import Header from '../../components/header/header';
-import PlacesSorting from '../../components/places-sorting/places-sorting';
-import PlacesList from '../../components/places-list/places-list';
-import Map from '../../components/ map/map';
-import LocationsList from '../../components/locations-list/locations-list';
-import { updateCurrentCity, updateCityOffersList } from '../../store/action';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { TOffers } from '../../types/offers';
+import classNames from 'classnames';
+import { TCityPackType } from '../../types/city';
+import { useAppSelector } from '../../hooks';
+import Header from '../../components/header/header';
+import LocationsList from '../../components/locations-list/locations-list';
+import CitiesSection from '../../components/cities-section/cities-section';
+import { getIsCityOffers, getIsLoading } from '../../store/data-process/data-process.selectors';
 
 type MainScreenProps = {
   cityPack: TCityPackType;
 }
 
 export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState('');
-  const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const cityOffers = useAppSelector((state) => state.cityOffers);
-  const isLoading = useAppSelector((state) => state.isLoading);
 
-  const hoveredCardOffer = getOffer(cityOffers, activeOfferId);
-  const selectedPoints: TOffers = hoveredCardOffer ? [hoveredCardOffer] : [];
-
-  const handleCardMouseEnter = (newId: string) => {
-    if (newId === activeOfferId) {
-      return;
-    }
-
-    setActiveOfferId(newId);
-  };
-
-  const handleCardMouseLeave = (newId?: string) => {
-    if (newId === activeOfferId) {
-      return;
-    }
-
-    setActiveOfferId(newId ? newId : '');
-  };
-
-  const handleCityChange = (newCity: TCity) => {
-    if (newCity.name === currentCity.name) {
-      return;
-    }
-
-    dispatch(updateCurrentCity(newCity));
-    dispatch(updateCityOffersList());
-  };
+  const isCityOffers = useAppSelector(getIsCityOffers);
+  const isLoading = useAppSelector(getIsLoading);
+  const isNoOffers = !isLoading && !isCityOffers;
 
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>Six cities</title>
       </Helmet>
-      <Header offers={cityOffers}/>
-      <main className="page__main page__main--index">
+      <Header />
+      <main
+        className={classNames(
+          'page__main page__main--index',
+          {'page__main--index-empty': isNoOffers}
+        )}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsList cityPack={cityPack} currentCity={currentCity} onCityChange={handleCityChange}/>
+            <LocationsList cityPack={cityPack} />
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in {currentCity.name}</b>
-              <PlacesSorting />
-              <div className="cities__places-list places__list tabs__content">
-                <PlacesList
-                  offers={cityOffers}
-                  isLoading={isLoading}
-                  onCardMouseEnter={handleCardMouseEnter}
-                  onCardMouseLeave={handleCardMouseLeave}
-                />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map city={currentCity} points={cityOffers} selectedPoints={selectedPoints}/>
-              </section>
-            </div>
-          </div>
-        </div>
+        <CitiesSection />
       </main>
     </div>
   );

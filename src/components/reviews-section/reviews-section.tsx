@@ -1,19 +1,15 @@
 import { AuthorizationStatus } from '../../const/const';
 import { useAppSelector } from '../../hooks';
-import { TReviews } from '../../types/reviews';
+import { getCurrentOfferReviews } from '../../store/data-process/data-process.selectors';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 import ReviewForm from './reviews-form/reviews-form';
 import ReviewsList from './reviews-list/reviews-list';
 
-type ReviewsSectionProps = {
-  reviews: TReviews;
-}
+export default function ReviewsSection(): React.JSX.Element {
 
-export default function ReviewsSection({
-  reviews
-}: ReviewsSectionProps): React.JSX.Element {
-
-  const currentAuthorizationStatus = useAppSelector((store) => store.authorizationStatus);
+  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getCurrentOfferReviews);
 
   return (
     <section className="offer__reviews reviews">

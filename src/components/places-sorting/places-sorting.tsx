@@ -1,18 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { TSortActionMode, } from '../../types/sort';
-import { updateSortType, updateCityOffersList } from '../../store/action';
+import { updateSortType, updateCityOffersList } from '../../store/data-process/data-process.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isKnownSortName } from '../../utils/type-guard';
 import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
 import { ClassnameActionMode, SortActionMode } from '../../const/mode';
 import { handleClassName } from '../../utils/utils';
+import { getCurrentCity, getCurrentSortType } from '../../store/data-process/data-process.selectors';
 
 export default function PlacesSorting(): React.JSX.Element {
   const sortOptionsListRef = useRef(null);
 
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const currentSortType = useAppSelector((state) => state.sortType);
+  const currentCity = useAppSelector(getCurrentCity);
+  const currentSortType = useAppSelector(getCurrentSortType);
 
   useEffect(() => {
     dispatch(updateSortType(defaultSort));

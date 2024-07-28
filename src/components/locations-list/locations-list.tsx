@@ -1,16 +1,18 @@
 import classNames from 'classnames';
 import { TCity, TCityPackType } from '../../types/city';
 import { isKnownCityName } from '../../utils/type-guard';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { updateCurrentCity, updateCityOffersList } from '../../store/data-process/data-process.slice';
+import { getCurrentCity } from '../../store/data-process/data-process.selectors';
 
 type LocationsListProps = {
   cityPack: TCityPackType;
-  currentCity: TCity;
-  onCityChange: (value: TCity) => void;
 }
 
-export default function LocationsList({cityPack, currentCity, onCityChange}: LocationsListProps): React.JSX.Element {
+export default function LocationsList({cityPack}: LocationsListProps): React.JSX.Element {
   const cities: TCity[] = Array.from(Object.values(cityPack));
-
+  const dispatch = useAppDispatch();
+  const currentCity = useAppSelector(getCurrentCity);
 
   const handleCityButtonClick = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
     evt.preventDefault();
@@ -21,7 +23,13 @@ export default function LocationsList({cityPack, currentCity, onCityChange}: Loc
     }
 
     const city = cityPack[cityName];
-    onCityChange(city);
+
+    if (city.name === currentCity.name) {
+      return;
+    }
+
+    dispatch(updateCurrentCity(city));
+    dispatch(updateCityOffersList());
   };
 
   return (

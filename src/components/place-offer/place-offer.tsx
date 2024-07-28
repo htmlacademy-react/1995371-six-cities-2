@@ -1,6 +1,4 @@
 import { TOffer, TOfferFull, TOffers } from '../../types/offers';
-import { TReviews } from '../../types/reviews';
-
 import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
@@ -19,15 +17,14 @@ type PlaceOfferProps = {
   offers: TOffers;
   currentOffer: TOfferFull;
   nearbyOffers: TOffers;
-  reviews: TReviews;
 }
 
 export default function PlaceOffer({
   offers,
   currentOffer,
   nearbyOffers,
-  reviews
 }: PlaceOfferProps): React.JSX.Element {
+
   const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
   const goodsModule = currentOffer.goods.length > 0
     ? (<GoodsInsideModule goods={currentOffer.goods}/>)
@@ -58,7 +55,7 @@ export default function PlaceOffer({
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
           {goodsModule}
           <HostModule offer={currentOffer}/>
-          <ReviewsSection reviews={reviews}/>
+          <ReviewsSection />
         </div>
       </div>
       <section className="offer__map map">
