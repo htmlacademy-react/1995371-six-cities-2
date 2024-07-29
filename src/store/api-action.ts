@@ -9,7 +9,6 @@ import { AppRoute } from '../const/const';
 import { APIRoute, FavoriteStatusPathNumber } from '../const/api';
 import { APIAction } from '../const/store';
 import { redirectToRoute } from './action';
-import { updateCityOffersList } from './data-process/data-process.slice';
 
 export const fetchOffersAction = createAsyncThunk<TShortOffers, undefined, {
   dispatch: TAppDispatch;
