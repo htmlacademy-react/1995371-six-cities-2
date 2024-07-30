@@ -9,8 +9,7 @@ import { handleClassName } from '../../utils/utils';
 import { getCurrentCity, getCurrentSortType } from '../../store/data-process/data-process.selectors';
 
 export default function PlacesSorting(): React.JSX.Element {
-  const sortOptionsListRef = useRef(null);
-
+  const sortOptionsListRef = useRef<HTMLUListElement>(null);
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector(getCurrentCity);
   const currentSortType = useAppSelector(getCurrentSortType);
@@ -21,14 +20,14 @@ export default function PlacesSorting(): React.JSX.Element {
   }, [currentCity, dispatch]);
 
   function handleSortOptionsList(action: TSortActionMode = SortActionMode.Close) {
-    switch (action) {
-      case SortActionMode.Open:
-        handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME, ClassnameActionMode.Add);
-        break;
-
-      case SortActionMode.Close:
-        handleClassName(sortOptionsListRef.current, SORT_OPTIONS_OPEN_CLASSNAME);
-        break;
+    if (sortOptionsListRef.current) {
+      handleClassName(
+        sortOptionsListRef.current,
+        SORT_OPTIONS_OPEN_CLASSNAME,
+        action === SortActionMode.Open
+          ? ClassnameActionMode.Add
+          : ClassnameActionMode.Remove
+      );
     }
   }
 
