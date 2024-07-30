@@ -1,41 +1,14 @@
 import { THeaderMode } from '../../types/common';
-
-import { AuthorizationStatus } from '../../const/const';
 import { HeaderMode } from '../../const/mode';
 import Logo from './logo/logo';
-import ProfileLink from './links/profile-link';
-import SignOutLink from './links/sign-out-link';
-import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import HeaderNav from './header-nav/header-nav';
+import { memo } from 'react';
 
 type HeaderProps = {
   headerMode?: THeaderMode;
 }
 
-export default function Header({headerMode = HeaderMode.Default}: HeaderProps): React.JSX.Element {
-  const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
-  const signOutElement = isAuthorized
-    ? (
-      <li className="header__nav-item">
-        <SignOutLink />
-      </li>
-    )
-    : null;
-
-  const headerNav = headerMode === HeaderMode.LoginScreen
-    ? null
-    : (
-      <nav className="header__nav">
-        <ul className="header__nav-list">
-          <li className="header__nav-item user">
-            <ProfileLink isAuthorized={isAuthorized}/>
-          </li>
-          {signOutElement}
-        </ul>
-      </nav>
-    );
-
+function Header({headerMode = HeaderMode.Default}: HeaderProps): React.JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -43,9 +16,13 @@ export default function Header({headerMode = HeaderMode.Default}: HeaderProps): 
           <div className="header__left">
             <Logo />
           </div>
-          {headerNav}
+          {!(headerMode === HeaderMode.LoginScreen) && <HeaderNav />}
         </div>
       </div>
     </header>
   );
 }
+
+const HeaderMemo = memo(Header);
+
+export default HeaderMemo;

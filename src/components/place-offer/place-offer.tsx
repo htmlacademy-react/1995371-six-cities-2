@@ -49,7 +49,7 @@ export default function PlaceOffer({
           />
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
           {currentOffer.goods.length > 0 && <GoodsInsideModule goods={currentOffer.goods}/>}
-          <HostModule offer={currentOffer}/>
+          <HostModule hostInfo={currentOffer.host} description={currentOffer.description}/>
           <ReviewsSection />
         </div>
       </div>

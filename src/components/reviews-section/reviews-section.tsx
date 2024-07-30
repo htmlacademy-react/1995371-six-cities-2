@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { AuthorizationStatus } from '../../const/const';
 import { useAppSelector } from '../../hooks';
 import { getCurrentOfferReviews } from '../../store/data-process/data-process.selectors';
@@ -6,7 +7,7 @@ import { getAuthorizationStatus } from '../../store/user-process/user-process.se
 import ReviewForm from './reviews-form/reviews-form';
 import ReviewsList from './reviews-list/reviews-list';
 
-export default function ReviewsSection(): React.JSX.Element {
+function ReviewsSection(): React.JSX.Element {
 
   const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getCurrentOfferReviews);
@@ -19,3 +20,7 @@ export default function ReviewsSection(): React.JSX.Element {
     </section>
   );
 }
+
+const ReviewsSectionMemo = memo(ReviewsSection);
+
+export default ReviewsSectionMemo;
