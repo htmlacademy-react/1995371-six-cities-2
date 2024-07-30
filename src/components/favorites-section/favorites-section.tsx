@@ -3,7 +3,6 @@ import FavoriteLocationsList from '../favorite-locations-list/favorite-locations
 import { getFavoriteCities, getFavoriteCityOffers } from '../../store/data-process/data-process.selectors';
 
 export default function FavoritesSection(): React.JSX.Element {
-  // const cities = new Set(favoriteOffers.map((offer) => offer.city.name));
   const cities = useSelector(getFavoriteCities);
   const cityOffers = useSelector(getFavoriteCityOffers);
 

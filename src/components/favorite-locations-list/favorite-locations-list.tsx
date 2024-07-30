@@ -19,7 +19,7 @@ export default function FavoriteLocationsList({cities, cityOffers}: FavoriteLoca
       );
 
     })
-    .filter((element) => element);
+    .filter((element) => !!element);
 
   return (
     <ul className="favorites__list">
