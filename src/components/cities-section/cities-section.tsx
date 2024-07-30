@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import { TShortOffers } from '../../types/offers';
 import { useAppSelector } from '../../hooks';
@@ -25,21 +25,21 @@ export default function CitiesSection(): React.JSX.Element {
 
   const isNoOffers = !isLoading && !isCityOffers;
 
-  const handleCardMouseEnter = (newId?: string) => {
+  const handleCardMouseEnter = useCallback((newId?: string) => {
     if (newId === activeOfferId) {
       return;
     }
 
     setActiveOfferId(newId ? newId : '');
-  };
+  }, [activeOfferId]);
 
-  const handleCardMouseLeave = (newId?: string) => {
+  const handleCardMouseLeave = useCallback((newId?: string) => {
     if (newId === activeOfferId) {
       return;
     }
 
     setActiveOfferId(newId ? newId : '');
-  };
+  }, [activeOfferId]);
 
   return (
     <div className="cities">
@@ -61,13 +61,11 @@ export default function CitiesSection(): React.JSX.Element {
             />
           )}
         <div className="cities__right-section">
-          {isNoOffers
-            ? null
-            : (
-              <section className="cities__map map">
-                <Map city={currentCity} points={cityOffers} selectedPoints={selectedPoints}/>
-              </section>
-            )}
+          {!isNoOffers && (
+            <section className="cities__map map">
+              <Map city={currentCity} points={cityOffers} selectedPoints={selectedPoints}/>
+            </section>
+          )}
         </div>
       </div>
     </div>

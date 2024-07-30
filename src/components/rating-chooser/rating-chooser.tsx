@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { RatingStarTitle, RatingStarValue } from '../../const/const';
 import RatingStarButton from './rating-star-button/rating-star-button';
 
@@ -7,7 +8,7 @@ type RatingChooserProps = {
   isDisabled?: boolean;
 }
 
-export default function RatingChooser({
+function RatingChooser({
   currentRatingValue,
   onRatingChange,
   isDisabled
@@ -34,3 +35,7 @@ export default function RatingChooser({
     </div>
   );
 }
+
+const RatingChooserMemo = memo(RatingChooser);
+
+export default RatingChooserMemo;

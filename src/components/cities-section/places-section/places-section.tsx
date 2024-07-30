@@ -13,7 +13,7 @@ type PlacesSectionProps = {
   handleCardMouseLeave: (newId?: string) => void;
 }
 
-function PlacesSectionComponent({
+function PlacesSection({
   cityOffers,
   currentCity,
   isLoading,
@@ -37,6 +37,6 @@ function PlacesSectionComponent({
   );
 }
 
-const PlacesSection = memo(PlacesSectionComponent);
+const PlacesSectionMemo = memo(PlacesSection);
 
-export default PlacesSection;
+export default PlacesSectionMemo;

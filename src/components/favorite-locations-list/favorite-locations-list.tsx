@@ -7,17 +7,19 @@ type FavoriteLocationsListProps = {
 }
 
 export default function FavoriteLocationsList({cities, cityOffers}: FavoriteLocationsListProps): React.JSX.Element {
-  const locationItemsLists = Array.from(cities).map((city) => {
-    const filteredOffers = cityOffers.get(city);
-    if (!filteredOffers) {
-      return;
-    }
+  const locationItemsLists = Array.from(cities)
+    .map((city) => {
+      const filteredOffers = cityOffers.get(city);
+      if (!filteredOffers) {
+        return;
+      }
 
-    return (
-      <FavoriteLocationItem key={city} city={city} filteredOffers={filteredOffers}/>
-    );
+      return (
+        <FavoriteLocationItem key={city} city={city} filteredOffers={filteredOffers}/>
+      );
 
-  }).filter((element) => element);
+    })
+    .filter((element) => element);
 
   return (
     <ul className="favorites__list">

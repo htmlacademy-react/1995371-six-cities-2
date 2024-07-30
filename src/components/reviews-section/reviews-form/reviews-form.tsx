@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { ReviewInitStateValue, ReviewLength } from '../../../const/review-const';
 import RatingChooser from '../../rating-chooser/rating-chooser';
@@ -16,9 +16,9 @@ export default function ReviewForm(): React.JSX.Element {
   const isFormDisabled = useAppSelector(getIsFormDisabled);
   const isDataValid = !!reviewData.rating && isCommentsLengthValid(reviewData.comment);
 
-  const handleRatingChange = (newRatingValue: number) => {
+  const handleRatingChange = useCallback((newRatingValue: number) => {
     setReviewData({...reviewData, rating: newRatingValue});
-  };
+  }, [reviewData]);
 
   const handleReviewTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReviewData({...reviewData, comment: evt.target.value});

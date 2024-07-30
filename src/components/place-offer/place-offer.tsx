@@ -25,11 +25,6 @@ export default function PlaceOffer({
   nearbyOffers,
 }: PlaceOfferProps): React.JSX.Element {
 
-  const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
-  const goodsModule = currentOffer.goods.length > 0
-    ? (<GoodsInsideModule goods={currentOffer.goods}/>)
-    : null;
-
   const currentOfferShort = getOffer(offers, currentOffer.id) as TShortOffer;
   const points = [...nearbyOffers, currentOfferShort];
   const selectedPoints: TShortOffers = [currentOfferShort];
@@ -41,7 +36,7 @@ export default function PlaceOffer({
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          {offerMark}
+          {currentOffer.isPremium && <OfferMark />}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{currentOffer.title}</h1>
             <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonMode.Offer}/>
@@ -53,7 +48,7 @@ export default function PlaceOffer({
             maxAdultsAmount={currentOffer.maxAdults}
           />
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
-          {goodsModule}
+          {currentOffer.goods.length > 0 && <GoodsInsideModule goods={currentOffer.goods}/>}
           <HostModule offer={currentOffer}/>
           <ReviewsSection />
         </div>
