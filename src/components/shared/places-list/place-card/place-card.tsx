@@ -45,6 +45,11 @@ export default function PlaceCard({
       onMouseLeave={handleMouseLeaveEvent}
       ref={cardRef}
     >
+      {offer.isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
         <Link to={`${AppRoute.OfferBase}/${offer.id}`}>
           <img
