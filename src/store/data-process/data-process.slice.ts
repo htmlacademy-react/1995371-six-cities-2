@@ -96,6 +96,8 @@ export const dataProcess = createSlice({
         const currentId = currentOffer.id;
         const {isFavorite} = currentOffer;
 
+        state.currentOffer = currentOffer;
+
         state.offers = state.offers.map((offer) => (
           offer.id === currentId
             ? {...offer, isFavorite: isFavorite}
