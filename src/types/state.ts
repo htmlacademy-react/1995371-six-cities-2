@@ -18,7 +18,6 @@ export type TInitialState = {
   currentOfferReviews: TReviews;
   sortType: TSortName;
   isLoading: boolean;
-  isCityOffers: boolean;
   isNoCurrentOffer: boolean;
   authorizationStatus: TAuthorizationStatus;
   isFormDisabled: boolean;

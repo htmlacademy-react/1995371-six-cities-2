@@ -30,7 +30,7 @@ export default function FavoritesScreen(): React.JSX.Element {
       >
         <div className="page__favorites-container container">
           {isFavoriteOffers
-            ? <FavoritesSection favoriteOffers={favoriteOffers} />
+            ? <FavoritesSection />
             : <FavoritesSectionEmpty />}
         </div>
       </main>

@@ -19,7 +19,6 @@ const initialState: TDataProcessInitialState = {
   currentOfferReviews: [],
   sortType: defaultSort,
   isLoading: false,
-  isCityOffers: false,
   isNoCurrentOffer: false,
   isFormDisabled: false,
 };
@@ -31,15 +30,24 @@ export const dataProcess = createSlice({
     updateCurrentCity: (state, action: PayloadAction<TCity>) => {
       state.currentCity = action.payload;
     },
-    updateSortType: (state, action: PayloadAction<TSortName>) => {
-      const currentSortType = state.sortType;
-      const newSortType = action.payload;
+    updateSortType: {
+      reducer: (state, action: PayloadAction<TSortName>) => {
+        const currentSortType = state.sortType;
+        const newSortType = action.payload;
 
-      if(!newSortType || newSortType === currentSortType || !isKnownSortName(newSortType)) {
-        return;
+        if(newSortType === currentSortType) {
+          return;
+        }
+
+        state.sortType = newSortType;
+      },
+      prepare: (sortType: TSortName) => {
+        if (!isKnownSortName(sortType)) {
+          throw new Error('Unknown sort type');
+        }
+
+        return {payload: sortType};
       }
-
-      state.sortType = newSortType;
     },
     updateCityOffersList: (state) => {
       switch (state.sortType) {
@@ -51,7 +59,6 @@ export const dataProcess = createSlice({
           state.cityOffers = SortPack[state.sortType].SortFunction(state.cityOffers);
           break;
       }
-      state.isCityOffers = !!state.cityOffers.length;
     },
     clearOfferScreenInfo: (state) => {
       state.currentOffer = null;
@@ -77,7 +84,6 @@ export const dataProcess = createSlice({
             state.cityOffers = SortPack[state.sortType].SortFunction(state.cityOffers);
             break;
         }
-        state.isCityOffers = !!state.cityOffers.length;
       })
       .addCase(fetchOffersAction.rejected, (state) => {
         state.isLoading = false;
