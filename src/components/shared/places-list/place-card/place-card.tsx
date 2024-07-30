@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { TPlaceCardMode } from '../../../../types/common';
-import { TOffer } from '../../../../types/offers';
+import { TShortOffer } from '../../../../types/offers';
 
 import { AppRoute } from '../../../../const/const';
 import { PlaceCardMode } from '../../../../const/mode';
@@ -12,7 +12,7 @@ import OfferPrice from '../../offer-price/offer-price';
 import { useRef } from 'react';
 
 type PlaceCardProps = {
-  offer: TOffer;
+  offer: TShortOffer;
   cardMode: TPlaceCardMode;
   onMouseEnter: (id: string) => void;
   onMouseLeave: (id?: string) => void;
@@ -45,6 +45,11 @@ export default function PlaceCard({
       onMouseLeave={handleMouseLeaveEvent}
       ref={cardRef}
     >
+      {offer.isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
         <Link to={`${AppRoute.OfferBase}/${offer.id}`}>
           <img

@@ -1,25 +1,21 @@
 import classNames from 'classnames';
-import { getFavoriteOffers } from '../../utils/filter-utils';
 import Header from '../../components/header/header';
 import FooterLogo from '../../components/footer-logo/footer-logo';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import FavoritesSection from '../../components/favorites-section/favorites-section';
 import FavoritesSectionEmpty from '../../components/favorites-section/favorites-section-empty';
-import { getOffers } from '../../store/data-process/data-process.selectors';
+import { getFavoriteOffers } from '../../store/data-process/data-process.selectors';
 
 export default function FavoritesScreen(): React.JSX.Element {
-  const offers = useAppSelector(getOffers);
-  const favoriteOffers = getFavoriteOffers(offers);
-
-
-  const isFavoritesOffers = !!favoriteOffers.length;
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const isFavoriteOffers = !!favoriteOffers.length;
 
   return (
     <div
       className={classNames(
         'page',
-        {'page--favorites-empty': !isFavoritesOffers}
+        {'page--favorites-empty': !isFavoriteOffers}
       )}
     >
       <Helmet>
@@ -29,12 +25,12 @@ export default function FavoritesScreen(): React.JSX.Element {
       <main
         className={classNames(
           'page__main page__main--favorites',
-          {'page__main--favorites-empty': !isFavoritesOffers}
+          {'page__main--favorites-empty': !isFavoriteOffers}
         )}
       >
         <div className="page__favorites-container container">
-          {isFavoritesOffers
-            ? <FavoritesSection favoriteOffers={favoriteOffers} />
+          {isFavoriteOffers
+            ? <FavoritesSection />
             : <FavoritesSectionEmpty />}
         </div>
       </main>

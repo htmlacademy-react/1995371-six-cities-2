@@ -1,19 +1,19 @@
 import { TFilter } from '../types/common';
-import { TOffers, TOffer } from '../types/offers';
+import { TShortOffers, TShortOffer } from '../types/offers';
 import { isString } from './type-guard';
 import { FilterType } from '../const/const';
 
 const FilterFunction = {
-  [FilterType.Favorite]: () => (offer: TOffer) => offer.isFavorite,
-  [FilterType.City]: (city: string) => (offer: TOffer) => offer.city.name === city
+  [FilterType.Favorite]: () => (offer: TShortOffer) => offer.isFavorite,
+  [FilterType.City]: (city: string) => (offer: TShortOffer) => offer.city.name === city
 } as const;
 
 const getFilteredOffers = <T>(
-  offers: TOffers,
+  offers: TShortOffers,
   filterType: TFilter,
   filterTag?: T
 ) => {
-  let filterFunction = (offer: TOffer): boolean => offer !== undefined;
+  let filterFunction = (offer: TShortOffer): boolean => offer !== undefined;
 
   switch (filterType) {
     case FilterType.City:
@@ -31,16 +31,15 @@ const getFilteredOffers = <T>(
 };
 
 const getCityFilteredOffers = (
-  offers: TOffers,
+  offers: TShortOffers,
   city: string
-) => getFilteredOffers<string>(offers, FilterType.City, city);
-
-const getFavoriteOffers = (
-  offers: TOffers
-) => getFilteredOffers(offers, FilterType.Favorite);
+) => {
+  const test = getFilteredOffers<string>(offers, FilterType.City, city);
+  // console.log(test);
+  return test;
+};
 
 export {
   getFilteredOffers,
-  getCityFilteredOffers,
-  getFavoriteOffers
+  getCityFilteredOffers
 };

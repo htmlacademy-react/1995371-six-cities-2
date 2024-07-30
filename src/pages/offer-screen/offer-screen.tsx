@@ -64,18 +64,17 @@ export default function OfferScreen(): React.JSX.Element {
             />
           )
           : <Spinner description='Загружаем информацию о предложении'/>}
-        {isNearbyOffers
-          ? (
-            <div className="container">
-              <section className="near-places places">
-                <h2 className="near-places__title">Other places in the neighbourhood</h2>
-                <PlacesList
-                  offers={showedNearbyOffers}
-                  className={PlacesListWrapperClassName.Offer}
-                />
-              </section>
-            </div>)
-          : null}
+        {isNearbyOffers && (
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <PlacesList
+                offers={showedNearbyOffers}
+                className={PlacesListWrapperClassName.Offer}
+              />
+            </section>
+          </div>
+        )}
       </main>
     </div>
   );

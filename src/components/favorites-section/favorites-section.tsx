@@ -1,19 +1,10 @@
-import { TOffers } from '../../types/offers';
-import { getCityFilteredOffers } from '../../utils/filter-utils';
+import { useSelector } from 'react-redux';
 import FavoriteLocationsList from '../favorite-locations-list/favorite-locations-list';
+import { getFavoriteCities, getFavoriteCityOffers } from '../../store/data-process/data-process.selectors';
 
-type FavoritesSectionProps = {
-  favoriteOffers: TOffers;
-}
-
-export default function FavoritesSection({favoriteOffers}: FavoritesSectionProps): React.JSX.Element {
-  const cities = new Set(favoriteOffers.map((offer) => offer.city.name));
-  const cityOffers = new Map<string, TOffers>();
-
-  cities.forEach((city) => cityOffers.set(
-    city,
-    getCityFilteredOffers(favoriteOffers, city)
-  ));
+export default function FavoritesSection(): React.JSX.Element {
+  const cities = useSelector(getFavoriteCities);
+  const cityOffers = useSelector(getFavoriteCityOffers);
 
   return (
     <section className="favorites">

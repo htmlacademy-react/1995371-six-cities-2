@@ -1,23 +1,48 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { TAppDispatch, TState } from '../types/state';
-import { TAuthData, TNewReviewInfo, TOfferId, TOfferInfo, TUserInfo } from '../types/api';
-import { TOffers, TOfferFull } from '../types/offers';
+import { TAuthData, TFavoriteInfo, TNewReviewInfo, TOfferId, TOfferInfo, TUserInfo } from '../types/api';
+import { TShortOffers, TOffer, TFullOffers, TFullOffer } from '../types/offers';
 import { TReview, TReviews } from '../types/reviews';
 import { saveToken } from '../services/token';
 import { AppRoute } from '../const/const';
-import { APIRoute } from '../const/api';
+import { APIRoute, FavoriteStatusPathNumber } from '../const/api';
 import { APIAction } from '../const/store';
 import { redirectToRoute } from './action';
 
-export const fetchOffersAction = createAsyncThunk<TOffers, undefined, {
+export const fetchOffersAction = createAsyncThunk<TShortOffers, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
 }>(
   APIAction.DataFetchOffers,
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<TOffers>(APIRoute.Offers);
+    const {data} = await api.get<TShortOffers>(APIRoute.Offers);
+    return data;
+  }
+);
+
+export const fetchFavoriteOffers = createAsyncThunk<TFullOffers, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.DataFetchFavoriteOffers,
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TFullOffers>(APIRoute.FavoriteOffers);
+    return data;
+  }
+);
+
+export const setOfferFavoriteStatus = createAsyncThunk<TFullOffer, TFavoriteInfo, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.DataSetOfferFavoriteStatus,
+  async ({offerId, isFavorite}, {extra: api}) => {
+    const favoriteStatusRoute = `${APIRoute.FavoriteOffers}/${offerId}/${isFavorite ? FavoriteStatusPathNumber.Add : FavoriteStatusPathNumber.Remove}`;
+    const {data} = await api.post<TFullOffer>(favoriteStatusRoute);
     return data;
   }
 );
@@ -30,14 +55,14 @@ export const fetchOfferScreenInfo = createAsyncThunk<TOfferInfo, TOfferId, {
   APIAction.DataFetchOfferScreenInfo,
   async ({offerId}, {extra: api}) => {
     const offerRoute = `${APIRoute.Offers}/${offerId}`;
-    const {data} = await api.get<TOfferFull>(offerRoute);
+    const {data} = await api.get<TOffer>(offerRoute);
 
     const reviewsRoute = `${APIRoute.Comments}/${offerId}`;
     const reviewsResponse = await api.get<TReviews>(reviewsRoute);
     const reviews = reviewsResponse.data;
 
     const nearbyOffersRoute = `${APIRoute.Offers}/${offerId}${APIRoute.NearbyOffers}`;
-    const nearbyOffersResponse = await api.get<TOffers>(nearbyOffersRoute);
+    const nearbyOffersResponse = await api.get<TShortOffers>(nearbyOffersRoute);
     const nearbyOffers = nearbyOffersResponse.data;
 
     const screenInfo: TOfferInfo = {

@@ -1,5 +1,5 @@
 import { AppRoute } from '../const/const';
-import { TOfferFull, TOffers } from './offers';
+import { TOffer, TShortOffers } from './offers';
 import { TReviews, TReviewState } from './reviews';
 
 export type TAuthData = {
@@ -19,18 +19,22 @@ export type TOfferId = {
   offerId: string;
 }
 
+export type TOfferInfo = {
+  currentOffer: TOffer;
+  reviews: TReviews;
+  nearbyOffers: TShortOffers;
+}
+
 export type TNewReviewInfo = TOfferId & {
   reviewData: TReviewState;
   onSuccess?: () => void;
 }
 
+export type TFavoriteInfo = TOfferId & {
+  isFavorite: boolean;
+}
+
 export type TRedirectRoute = {
   route: AppRoute;
   parameter?: string;
-}
-
-export type TOfferInfo = {
-  currentOffer: TOfferFull;
-  reviews: TReviews;
-  nearbyOffers: TOffers;
 }

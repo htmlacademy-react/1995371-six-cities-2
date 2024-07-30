@@ -1,4 +1,4 @@
-import { TOffer } from './offers';
+import { TShortOffer } from './offers';
 
-export type TPoint = Pick<TOffer, 'id' | 'title' | 'location'>;
+export type TPoint = Pick<TShortOffer, 'id' | 'title' | 'location'>;
 export type TPoints = TPoint[];

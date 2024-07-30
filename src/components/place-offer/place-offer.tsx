@@ -1,4 +1,4 @@
-import { TOffer, TOfferFull, TOffers } from '../../types/offers';
+import { TShortOffer, TOffer, TShortOffers } from '../../types/offers';
 import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
@@ -14,9 +14,9 @@ import Map from '../ map/map';
 import { getOffer } from '../../utils/offers-utils';
 
 type PlaceOfferProps = {
-  offers: TOffers;
-  currentOffer: TOfferFull;
-  nearbyOffers: TOffers;
+  offers: TShortOffers;
+  currentOffer: TOffer;
+  nearbyOffers: TShortOffers;
 }
 
 export default function PlaceOffer({
@@ -25,14 +25,9 @@ export default function PlaceOffer({
   nearbyOffers,
 }: PlaceOfferProps): React.JSX.Element {
 
-  const offerMark = currentOffer.isPremium ? <OfferMark /> : null;
-  const goodsModule = currentOffer.goods.length > 0
-    ? (<GoodsInsideModule goods={currentOffer.goods}/>)
-    : null;
-
-  const currentOfferShort = getOffer(offers, currentOffer.id) as TOffer;
+  const currentOfferShort = getOffer(offers, currentOffer.id) as TShortOffer;
   const points = [...nearbyOffers, currentOfferShort];
-  const selectedPoints: TOffers = [currentOfferShort];
+  const selectedPoints: TShortOffers = [currentOfferShort];
 
   return (
     <section className="offer">
@@ -41,7 +36,7 @@ export default function PlaceOffer({
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          {offerMark}
+          {currentOffer.isPremium && <OfferMark />}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{currentOffer.title}</h1>
             <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonMode.Offer}/>
@@ -53,8 +48,8 @@ export default function PlaceOffer({
             maxAdultsAmount={currentOffer.maxAdults}
           />
           <OfferPrice offerPrice={currentOffer.price} priceViewMode={PriceViewMode.Offer}/>
-          {goodsModule}
-          <HostModule offer={currentOffer}/>
+          {currentOffer.goods.length > 0 && <GoodsInsideModule goods={currentOffer.goods}/>}
+          <HostModule hostInfo={currentOffer.host} description={currentOffer.description}/>
           <ReviewsSection />
         </div>
       </div>

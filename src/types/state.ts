@@ -1,7 +1,7 @@
 import { store } from '../store';
 import { TCity } from './city';
 import { TAuthorizationStatus } from './common';
-import { TOffers, TOfferFull } from './offers';
+import { TShortOffers, TOffer, TFullOffers } from './offers';
 import { TReviews } from './reviews';
 import { TSortName } from './sort';
 
@@ -10,14 +10,14 @@ export type TAppDispatch = typeof store.dispatch;
 
 export type TInitialState = {
   currentCity: TCity;
-  offers: TOffers;
-  cityOffers: TOffers;
-  nearbyOffers: TOffers;
-  currentOffer: TOfferFull | null;
+  offers: TShortOffers;
+  favoriteOffers: TFullOffers;
+  cityOffers: TShortOffers;
+  nearbyOffers: TShortOffers;
+  currentOffer: TOffer | null;
   currentOfferReviews: TReviews;
   sortType: TSortName;
   isLoading: boolean;
-  isCityOffers: boolean;
   isNoCurrentOffer: boolean;
   authorizationStatus: TAuthorizationStatus;
   isFormDisabled: boolean;

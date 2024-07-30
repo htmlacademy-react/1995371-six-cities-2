@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { TAccommodation } from '../../../types/offers';
 
 type FeaturesListProps = {
@@ -6,7 +7,7 @@ type FeaturesListProps = {
   maxAdultsAmount: number;
 }
 
-export default function FeaturesList({
+function FeaturesList({
   accommodationType,
   bedroomsAmount,
   maxAdultsAmount
@@ -19,3 +20,7 @@ export default function FeaturesList({
     </ul>
   );
 }
+
+const FeaturesListMemo = memo(FeaturesList);
+
+export default FeaturesListMemo;
