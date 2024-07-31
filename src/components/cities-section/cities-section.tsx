@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { getOffer } from '../../utils/offers-utils';
 import Map from '../ map/map';
 import PlacesSection from './places-section/places-section';
-import NoPlacesSection from './no-places/no-places-section';
+import PlacesSectionEmpty from './places-section/places-section-empty';
 import {
   getCityOffers,
   getCurrentCity,
@@ -50,7 +50,7 @@ export default function CitiesSection(): React.JSX.Element {
         )}
       >
         {isNoOffers
-          ? (<NoPlacesSection cityTitle={currentCity.name}/>)
+          ? (<PlacesSectionEmpty cityTitle={currentCity.name}/>)
           : (
             <PlacesSection
               cityOffers={cityOffers}
