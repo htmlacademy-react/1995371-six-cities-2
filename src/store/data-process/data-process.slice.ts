@@ -7,7 +7,7 @@ import { fetchFavoriteOffers, fetchOffersAction, fetchOfferScreenInfo, postNewOf
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import { TCity } from '../../types/city';
 import { TSortName } from '../../types/sort';
-import { isKnownSortName } from '../../utils/type-guard';
+import { isKnownCityName, isKnownSortName } from '../../utils/type-guard';
 
 const initialState: TDataProcessInitialState = {
   currentCity: DEFAULT_CITY,
@@ -27,8 +27,17 @@ export const dataProcess = createSlice({
   name: StoreNameSpace.Data,
   initialState,
   reducers: {
-    updateCurrentCity: (state, action: PayloadAction<TCity>) => {
-      state.currentCity = action.payload;
+    updateCurrentCity: {
+      reducer: (state, action: PayloadAction<TCity>) => {
+        state.currentCity = action.payload;
+      },
+      prepare: (city: TCity) => {
+        if (!isKnownCityName(city.name)) {
+          throw new Error('Unknown city');
+        }
+
+        return {payload: city};
+      }
     },
     updateSortType: {
       reducer: (state, action: PayloadAction<TSortName>) => {
