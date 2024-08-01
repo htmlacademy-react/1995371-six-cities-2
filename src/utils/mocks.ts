@@ -29,7 +29,11 @@ const makeFakeOfferBase = (city?: TCity): TOfferBase => {
     });
 };
 
-export const makeFakeShortOffer = (city?: TCity): TShortOffer => {
+type makeFakeShortOfferProps = {
+  city?: TCity;
+}
+
+export const makeFakeShortOffer = ({city}: makeFakeShortOfferProps): TShortOffer => {
   const baseOffer = makeFakeOfferBase(city);
 
   return (
@@ -39,12 +43,18 @@ export const makeFakeShortOffer = (city?: TCity): TShortOffer => {
     });
 };
 
-export const makeFakeFullOfferFromShort = (shortOffer: TShortOffer): TFullOffer => {
+type makeFakeOfferProps = {
+  shortOffer?: TShortOffer;
+  city?: TCity;
+}
+
+export const makeFakeFullOffer = ({shortOffer, city}: makeFakeOfferProps): TFullOffer => {
+  const baseOffer = shortOffer ?? makeFakeShortOffer({city});
   const goods = Array.from({length: getRandomInteger(0, 8)}, () => commerce.productName());
   const images = Array.from({length: getRandomInteger(1, 4)}, () => image.city());
 
   return {
-    ...shortOffer,
+    ...baseOffer,
     description: lorem.sentences(),
     bedrooms: getRandomInteger(1, 5),
     goods: goods,
@@ -62,9 +72,9 @@ type TFullOfferToOffer = TOffer & {
   previewImage?: string;
 }
 
-export const makeFakeOfferFromShort = (shortOffer: TShortOffer): TOffer => {
+export const makeFakeOffer = ({shortOffer, city}: makeFakeOfferProps): TOffer => {
 
-  const transformOffer: TFullOfferToOffer = makeFakeFullOfferFromShort(shortOffer);
+  const transformOffer: TFullOfferToOffer = makeFakeFullOffer({shortOffer, city});
   delete transformOffer.previewImage;
   return transformOffer;
 };

@@ -1,7 +1,7 @@
 import { defaultSort } from '../../const/sort';
 import { StoreNameSpace } from '../../const/store';
 import { TShortOffers } from '../../types/offers';
-import { cities, getRandomCity, makeFakeFullOfferFromShort, makeFakeOfferFromShort, makeFakeReview, makeFakeShortOffer, staticFavoriteCities } from '../../utils/mocks';
+import { cities, getRandomCity, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer, staticFavoriteCities } from '../../utils/mocks';
 import { getRandomArrayItem, getRandomInteger } from '../../utils/utils';
 import { getCityOffers, getCurrentCity, getCurrentOffer, getCurrentSortType, getFavoriteCities, getFavoriteCityOffers, getFavoriteOffers, getIsFormDisabled, getIsLoading, getIsNoCurrentOffer, getNearbyOffers, getOffers } from './data-process.selectors';
 
@@ -9,17 +9,17 @@ describe('DataProcess selectors', () => {
   const mockCity = getRandomCity();
   const offers: TShortOffers = [];
   cities.forEach((city) => {
-    offers.push(makeFakeShortOffer(city));
-    offers.push(makeFakeShortOffer(city));
+    offers.push(makeFakeShortOffer({city}));
+    offers.push(makeFakeShortOffer({city}));
   });
   const favoriteOffers = offers
     .slice()
     .filter((offer) => offer.isFavorite)
-    .map((offer) => makeFakeFullOfferFromShort(offer));
+    .map((offer) => makeFakeFullOffer({shortOffer: offer}));
   const cityOffers = offers
     .slice()
     .filter((offer) => offer.city.name === mockCity.name);
-  const currentOffer = makeFakeOfferFromShort(getRandomArrayItem(offers));
+  const currentOffer = makeFakeOffer({shortOffer: getRandomArrayItem(offers)});
   const nearbyOffers = offers
     .slice()
     .filter((offer) => offer.city.name === currentOffer.city.name && offer.id !== currentOffer.id);
