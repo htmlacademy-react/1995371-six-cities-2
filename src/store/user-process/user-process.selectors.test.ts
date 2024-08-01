@@ -18,7 +18,7 @@ describe('UserProcess selectors', () => {
     expect(result).toBe(authorizationStatus);
   });
 
-  it('should return user email', () => {
+  it('should return user email from state', () => {
     const {userEmail} = state[StoreNameSpace.User];
     const result = getUserEmail(state);
     expect(result).toBe(userEmail);
