@@ -1,4 +1,4 @@
-import {datatype, lorem, image, commerce, name, date} from 'faker';
+import {datatype, lorem, image, commerce, name, date, internet} from 'faker';
 
 import { TCity } from '../types/city';
 import { TFullOffer, TOffer, TOfferBase, TShortOffer } from '../types/offers';
@@ -6,6 +6,19 @@ import { CityPack } from '../const/citypack';
 import { getRandomArrayItem, getRandomInteger } from './utils';
 import { AccommodationType } from '../const/const';
 import { SortPack } from './sort-utils';
+import { TReview } from '../types/reviews';
+
+export const makeFakeBaseUser = () => ({
+  name: `${name.firstName()} ${name.lastName()}`,
+  avatarUrl: image.avatar(),
+  isPro: Boolean(getRandomInteger(0, 1))
+});
+
+export const makeFakeUser = () => ({
+  ...makeFakeBaseUser(),
+  email: internet.email(),
+  token: datatype.uuid()
+});
 
 export const cities = Object.values(CityPack);
 
@@ -61,11 +74,7 @@ export const makeFakeFullOffer = ({shortOffer, city}: makeFakeOfferProps): TFull
     description: lorem.sentences(),
     bedrooms: getRandomInteger(1, 5),
     goods: goods,
-    host: {
-      name: `${name.firstName()} ${name.lastName()}`,
-      avatarUrl: image.avatar(),
-      isPro: Boolean(getRandomInteger(0, 1))
-    },
+    host: makeFakeBaseUser(),
     images: images,
     maxAdults: getRandomInteger(0, 8)
   };
@@ -82,14 +91,11 @@ export const makeFakeOffer = ({shortOffer, city}: makeFakeOfferProps): TOffer =>
   return transformOffer;
 };
 
-export const makeFakeReview = () => ({
+export const makeFakeReview = (): TReview => ({
   id: datatype.uuid(),
   date: date.past().toISOString(),
-  user: {
-    name: `${name.firstName()} ${name.lastName()}`,
-    avatarUrl: image.avatar(),
-    isPro: Boolean(getRandomInteger(0, 1))
-  },
+  user: makeFakeBaseUser(),
   comment: lorem.sentences(),
   rating: getRandomInteger(1, 5)
 });
+
