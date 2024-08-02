@@ -5,12 +5,15 @@ import { TFullOffer, TOffer, TOfferBase, TShortOffer } from '../types/offers';
 import { CityPack } from '../const/citypack';
 import { getRandomArrayItem, getRandomInteger } from './utils';
 import { AccommodationType } from '../const/const';
+import { SortPack } from './sort-utils';
 
 export const cities = Object.values(CityPack);
 
 export const staticFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
 
 export const getRandomCity = (): TCity => getRandomArrayItem<TCity>(cities);
+export const getRandomSortType = () => getRandomArrayItem(Object.values(SortPack));
+
 const makeFakeOfferBase = (city?: TCity): TOfferBase => {
   const mockCity = city ?? getRandomCity();
   const isFavorite = staticFavoriteCities.has(mockCity.name);

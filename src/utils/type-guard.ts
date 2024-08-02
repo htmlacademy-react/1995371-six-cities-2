@@ -1,5 +1,5 @@
 import { TSortName } from '../types/sort';
-import { SortPack } from '../const/sort';
+import { SortPack } from './sort-utils';
 import { TCityPackType } from '../types/city';
 import { CityPack } from '../const/citypack';
 

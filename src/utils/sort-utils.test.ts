@@ -1,8 +1,8 @@
 import { TCity } from '../types/city';
 import { TShortOffer, TShortOffers } from '../types/offers';
-import { makeFakeShortOffer } from '../utils/mocks';
-import { CityPack } from './citypack';
-import { SortPack } from './sort';
+import { makeFakeShortOffer } from './mocks';
+import { CityPack } from '../const/citypack';
+import { SortPack } from './sort-utils';
 
 describe('Sort test', () => {
   const defaultCity: TCity = CityPack.Amsterdam;

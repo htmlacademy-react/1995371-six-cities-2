@@ -1,6 +1,6 @@
 import { TCity } from '../types/city';
 import { TShortOffers } from '../types/offers';
-import { getCityFilteredOffers } from '../utils/filter-utils';
+import { getCityFilteredOffers } from './filter-utils';
 
 const SORT_OPTIONS_OPEN_CLASSNAME = 'places__options--opened';
 
