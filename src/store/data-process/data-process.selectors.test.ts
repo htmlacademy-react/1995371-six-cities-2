@@ -1,4 +1,4 @@
-import { defaultSort } from '../../const/sort';
+import { defaultSort } from '../../utils/sort-utils';
 import { StoreNameSpace } from '../../const/store';
 import { TShortOffers } from '../../types/offers';
 import { cities, getRandomCity, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer, staticFavoriteCities } from '../../utils/mocks';

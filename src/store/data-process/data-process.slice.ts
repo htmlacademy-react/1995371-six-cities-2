@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../../const/citypack';
-import { defaultSort, SortPack } from '../../const/sort';
+import { defaultSort, SortPack } from '../../utils/sort-utils';
 import { TDataProcessInitialState } from '../../types/state';
 import { StoreNameSpace } from '../../const/store';
 import { fetchFavoriteOffers, fetchOffersAction, fetchOfferScreenInfo, postNewOfferReviewAction, setOfferFavoriteStatus } from '../api-action';
@@ -59,13 +59,14 @@ export const dataProcess = createSlice({
       }
     },
     updateCityOffersList: (state) => {
+      const initialCityOffers = current(state).cityOffers ?? getCityFilteredOffers(state.offers, state.currentCity.name);
       switch (state.sortType) {
         case SortPack.Popular.Alias:
-          state.cityOffers = getCityFilteredOffers(state.offers, state.currentCity.name);
+          state.cityOffers = SortPack[state.sortType].SortFunction(state.offers, state.currentCity);
           break;
 
         default:
-          state.cityOffers = SortPack[state.sortType].SortFunction(state.cityOffers);
+          state.cityOffers = SortPack[state.sortType].SortFunction(initialCityOffers);
           break;
       }
     },
