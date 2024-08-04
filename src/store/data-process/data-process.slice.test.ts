@@ -2,7 +2,7 @@ import { DEFAULT_CITY } from '../../const/citypack';
 import { defaultSort, SortPack } from '../../utils/sort-utils';
 import { getRandomCity, getRandomSortType, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer } from '../../utils/mocks';
 import { clearOfferScreenInfo, dataProcess, updateCityOffersList, updateCurrentCity, updateSortType } from './data-process.slice';
-import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, setOfferFavoriteStatusAction } from '../api-action';
+import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from '../api-action';
 
 describe('DataProcess slice', () => {
   const stubCurrentOffer = makeFakeOffer({});
@@ -197,7 +197,7 @@ describe('DataProcess slice', () => {
       expect(result.favoriteOffers).toEqual(stubFavoriteOffers);
     });
 
-    it('should update "isFavorite" value for specific offer in offers, favoriteOffers, cityOffers, nearbyOffers and currentOffer in case of "setOfferFavoriteStatusAction.fulfilled"', () => {
+    it('should update "isFavorite" value for specific offer in offers, favoriteOffers, cityOffers, nearbyOffers and (conditionally) currentOffer in case of "setOfferFavoriteStatusAction.fulfilled"', () => {
       const stubShortOffer = makeFakeShortOffer({});
       const stubOffer = makeFakeOffer({shortOffer: stubShortOffer});
       const stubFullOffer = {
@@ -244,26 +244,71 @@ describe('DataProcess slice', () => {
       expect(result).toEqual(expectedState);
     });
 
-    it('should set "currentOffer" to Offer, "currentOfferReviews" to array of Reviews, "nearbyOffers" to array of ShortOffers and "isNoCurrentOffer" to "false" in case of "fetchOfferScreenInfoAction.fulfilled"', () => {
-      const expectedState = {
-        ...defaultState,
-        nearbyOffers: stubNearbyOffers,
-        currentOffer: stubCurrentOffer,
-        currentOfferReviews: stubCurrentOfferReviews,
-        isNoCurrentOffer: false,
-      };
-
-      const result = dataProcess.reducer(undefined, fetchOfferScreenInfoAction.fulfilled(
-        {
+    describe('fetchOfferScreenInfo tests', () => {
+      it('should set "currentOffer" to Offer, "currentOfferReviews" to array of Reviews, "nearbyOffers" to array of ShortOffers and "isNoCurrentOffer" to "false" in case of "fetchOfferScreenInfoAction.fulfilled"', () => {
+        const expectedState = {
+          ...defaultState,
+          nearbyOffers: stubNearbyOffers,
           currentOffer: stubCurrentOffer,
-          reviews: stubCurrentOfferReviews,
-          nearbyOffers: stubNearbyOffers
-        },
-        '',
-        {offerId: stubCurrentOffer.id})
-      );
+          currentOfferReviews: stubCurrentOfferReviews,
+          isNoCurrentOffer: false,
+        };
 
-      expect(result).toEqual(expectedState);
+        const result = dataProcess.reducer(undefined, fetchOfferScreenInfoAction.fulfilled(
+          {
+            currentOffer: stubCurrentOffer,
+            reviews: stubCurrentOfferReviews,
+            nearbyOffers: stubNearbyOffers
+          },
+          '',
+          {offerId: stubCurrentOffer.id})
+        );
+
+        expect(result).toEqual(expectedState);
+      });
+
+      it('should set "isNoCurrentOffer" to "true" in case of "fetchOfferScreenInfoAction.rejected"', () => {
+        const result = dataProcess.reducer(undefined, fetchOfferScreenInfoAction.rejected);
+        expect(result.isNoCurrentOffer).toBe(true);
+      });
+    });
+    describe('postNewOfferReview', () => {
+      it('should set "isFormDisabled" to "true" in case of "postNewOfferReviewAction.pending"', () => {
+        const result = dataProcess.reducer(undefined, postNewOfferReviewAction.pending);
+        expect(result.isFormDisabled).toBe(true);
+      });
+
+      it('should add newReview to currentOfferReviews and set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.fulfilled"', () => {
+        const newReview = makeFakeReview();
+
+        const initialState = {
+          ...defaultState,
+          isFormDisabled: true
+        };
+
+        const expectedState = {
+          ...defaultState,
+          currentOfferReviews: [newReview],
+          isFormDisabled: false
+        };
+
+        const result = dataProcess.reducer(initialState, postNewOfferReviewAction.fulfilled(
+          newReview,
+          '',
+          {
+            offerId: newReview.id,
+            reviewData: {
+              rating: newReview.rating,
+              comment: newReview.comment
+            }
+          }));
+        expect(result).toEqual(expectedState);
+      });
+
+      it('should set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.rejected"', () => {
+        const result = dataProcess.reducer(undefined, postNewOfferReviewAction.rejected);
+        expect(result.isFormDisabled).toBe(false);
+      });
     });
   });
 });
