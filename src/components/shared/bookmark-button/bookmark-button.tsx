@@ -1,7 +1,7 @@
 import { TBookmarkButtonMode } from '../../../types/common';
 import { TOfferBase } from '../../../types/offers';
 import { BookmarkButtonMode } from '../../../const/mode';
-import { setOfferFavoriteStatus } from '../../../store/api-action';
+import { setOfferFavoriteStatusAction } from '../../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
 import { AppRoute, AuthorizationStatus } from '../../../const/const';
@@ -28,7 +28,7 @@ export default function BookmarkButton({
       return;
     }
 
-    dispatch(setOfferFavoriteStatus({
+    dispatch(setOfferFavoriteStatusAction({
       offerId: offer.id,
       isFavorite: !offer.isFavorite
     }));

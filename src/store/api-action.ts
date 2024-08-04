@@ -22,7 +22,7 @@ export const fetchOffersAction = createAsyncThunk<TShortOffers, undefined, {
   }
 );
 
-export const fetchFavoriteOffers = createAsyncThunk<TFullOffers, undefined, {
+export const fetchFavoriteOffersAction = createAsyncThunk<TFullOffers, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
@@ -34,7 +34,7 @@ export const fetchFavoriteOffers = createAsyncThunk<TFullOffers, undefined, {
   }
 );
 
-export const setOfferFavoriteStatus = createAsyncThunk<TFullOffer, TFavoriteInfo, {
+export const setOfferFavoriteStatusAction = createAsyncThunk<TFullOffer, TFavoriteInfo, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
@@ -47,7 +47,7 @@ export const setOfferFavoriteStatus = createAsyncThunk<TFullOffer, TFavoriteInfo
   }
 );
 
-export const fetchOfferScreenInfo = createAsyncThunk<TOfferInfo, TOfferId, {
+export const fetchOfferScreenInfoAction = createAsyncThunk<TOfferInfo, TOfferId, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;

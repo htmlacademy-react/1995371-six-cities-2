@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, PlacesListWrapperClassName, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
 import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
-import { fetchOfferScreenInfo } from '../../store/api-action';
+import { fetchOfferScreenInfoAction } from '../../store/api-action';
 import { useEffect } from 'react';
 import { getCurrentOffer, getIsNoCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
 import { clearOfferScreenInfo } from '../../store/data-process/data-process.slice';
@@ -26,7 +26,7 @@ export default function OfferScreen(): React.JSX.Element {
 
   useEffect(() => {
     if (currentOfferId) {
-      dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
+      dispatch(fetchOfferScreenInfoAction({offerId: currentOfferId}));
     }
 
     return () => {

@@ -7,12 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
-import { checkAuthAction, fetchFavoriteOffers, fetchOffersAction } from './store/api-action';
+import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
-store.dispatch(fetchFavoriteOffers());
+store.dispatch(fetchFavoriteOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
