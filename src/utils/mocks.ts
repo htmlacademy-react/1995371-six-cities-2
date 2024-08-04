@@ -22,14 +22,14 @@ export const makeFakeUser = () => ({
 
 export const cities = Object.values(CityPack);
 
-export const staticFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
+export const stubFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
 
 export const getRandomCity = (): TCity => getRandomArrayItem<TCity>(cities);
 export const getRandomSortType = () => getRandomArrayItem(Object.values(SortPack));
 
 const makeFakeOfferBase = (city?: TCity): TOfferBase => {
   const mockCity = city ?? getRandomCity();
-  const isFavorite = staticFavoriteCities.has(mockCity.name);
+  const isFavorite = stubFavoriteCities.has(mockCity.name);
 
   return (
     {

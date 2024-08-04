@@ -1,7 +1,7 @@
 import { defaultSort } from '../../utils/sort-utils';
 import { StoreNameSpace } from '../../const/store';
 import { TShortOffers } from '../../types/offers';
-import { cities, getRandomCity, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer, staticFavoriteCities } from '../../utils/mocks';
+import { cities, getRandomCity, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer, stubFavoriteCities } from '../../utils/mocks';
 import { getRandomArrayItem, getRandomInteger } from '../../utils/utils';
 import { getCityOffers, getCurrentCity, getCurrentOffer, getCurrentSortType, getFavoriteCities, getFavoriteCityOffers, getFavoriteOffers, getIsFormDisabled, getIsLoading, getIsNoCurrentOffer, getNearbyOffers, getOffers } from './data-process.selectors';
 
@@ -57,13 +57,13 @@ describe('DataProcess selectors', () => {
   });
 
   it('should return favorite offers cities from state', () => {
-    const mockFavoriteCities = staticFavoriteCities;
+    const mockFavoriteCities = stubFavoriteCities;
     const result = getFavoriteCities(state);
     expect(result).toEqual(mockFavoriteCities);
   });
 
   it('should return favoriteCityOffers from state', () => {
-    const mockFavoriteCities = staticFavoriteCities;
+    const mockFavoriteCities = stubFavoriteCities;
     const mockCityFavoriteOffers = new Map<string, TShortOffers>();
     mockFavoriteCities.forEach((cityName) => {
       mockCityFavoriteOffers.set(
