@@ -4,7 +4,7 @@ import { TAppDispatch, TState } from '../types/state';
 import { TAuthData, TFavoriteInfo, TNewReviewInfo, TOfferId, TOfferInfo, TUserInfo } from '../types/api';
 import { TShortOffers, TOffer, TFullOffers, TFullOffer } from '../types/offers';
 import { TReview, TReviews } from '../types/reviews';
-import { saveToken } from '../services/token';
+import { removeToken, saveToken } from '../services/token';
 import { AppRoute } from '../const/const';
 import { APIRoute, FavoriteStatusPathNumber } from '../const/api';
 import { APIAction } from '../const/store';
@@ -116,5 +116,17 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
     saveToken(data.token);
     dispatch(checkAuthAction());
     dispatch(redirectToRoute({route: AppRoute.Main}));
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.UserLogout,
+  async (_arg, {extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    removeToken();
   }
 );

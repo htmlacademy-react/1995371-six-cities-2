@@ -3,7 +3,7 @@ import { DEFAULT_CITY } from '../../const/citypack';
 import { defaultSort, SortPack } from '../../utils/sort-utils';
 import { TDataProcessInitialState } from '../../types/state';
 import { StoreNameSpace } from '../../const/store';
-import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from '../api-action';
+import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, logoutAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from '../api-action';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 import { TCity } from '../../types/city';
 import { TSortName } from '../../types/sort';
@@ -153,6 +153,9 @@ export const dataProcess = createSlice({
       })
       .addCase(postNewOfferReviewAction.rejected, (state) => {
         state.isFormDisabled = false;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.favoriteOffers = [];
       });
   }
 });

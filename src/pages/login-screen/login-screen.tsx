@@ -1,12 +1,12 @@
-import { HeaderMode } from '../../const/mode';
-import Header from '../../components/header/header';
-import { Helmet } from 'react-helmet-async';
 import { useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
-import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { HeaderMode } from '../../const/mode';
+import Header from '../../components/header/header';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
