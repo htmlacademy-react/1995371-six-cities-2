@@ -7,6 +7,18 @@ import { getRandomArrayItem, getRandomInteger } from './utils';
 import { AccommodationType } from '../const/const';
 import { SortPack } from './sort-utils';
 import { TReview } from '../types/reviews';
+import { TState } from '../types/state';
+import { createAPI } from '../services/api';
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+
+export type AppThunkDispatch = ThunkDispatch<TState, ReturnType<typeof createAPI>, Action>
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({type}) => type);
+
+export const cities = Object.values(CityPack);
+export const stubFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
+export const getRandomCity = (): TCity => getRandomArrayItem<TCity>(cities);
+export const getRandomSortType = () => getRandomArrayItem(Object.values(SortPack));
 
 export const makeFakeBaseUser = () => ({
   name: `${name.firstName()} ${name.lastName()}`,
@@ -19,13 +31,6 @@ export const makeFakeUser = () => ({
   email: internet.email(),
   token: datatype.uuid()
 });
-
-export const cities = Object.values(CityPack);
-
-export const stubFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
-
-export const getRandomCity = (): TCity => getRandomArrayItem<TCity>(cities);
-export const getRandomSortType = () => getRandomArrayItem(Object.values(SortPack));
 
 const makeFakeOfferBase = (city?: TCity): TOfferBase => {
   const mockCity = city ?? getRandomCity();
@@ -98,4 +103,3 @@ export const makeFakeReview = (): TReview => ({
   comment: lorem.sentences(),
   rating: getRandomInteger(1, 5)
 });
-
