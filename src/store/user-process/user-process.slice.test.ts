@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../../const/const';
 import { makeFakeUser } from '../../utils/mocks';
-import { checkAuthAction } from '../api-action';
+import { checkAuthAction, logoutAction } from '../api-action';
 import { userProcess } from './user-process.slice';
 
 describe('userProcess slice', () => {
@@ -43,6 +43,16 @@ describe('userProcess slice', () => {
     };
 
     const result = userProcess.reducer(initialState, checkAuthAction.rejected);
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should set "authorizationStatus" to "AuthorizationStatus.NoAuth" and "userEmail" to "" in case of "logoutAction.fulfilled"', () => {
+    const expectedState = {
+      authorizationStatus: AuthorizationStatus.NoAuth,
+      userEmail: '',
+    };
+
+    const result = userProcess.reducer(initialState, logoutAction.fulfilled);
     expect(result).toEqual(expectedState);
   });
 });

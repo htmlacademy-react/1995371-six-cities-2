@@ -2,7 +2,7 @@ import { DEFAULT_CITY } from '../../const/citypack';
 import { defaultSort, SortPack } from '../../utils/sort-utils';
 import { getRandomCity, getRandomSortType, makeFakeFullOffer, makeFakeOffer, makeFakeReview, makeFakeShortOffer } from '../../utils/mocks';
 import { clearOfferScreenInfo, dataProcess, updateCityOffersList, updateCurrentCity, updateSortType } from './data-process.slice';
-import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from '../api-action';
+import { fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, logoutAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from '../api-action';
 
 describe('DataProcess slice', () => {
   const stubCurrentOffer = makeFakeOffer({});
@@ -272,6 +272,7 @@ describe('DataProcess slice', () => {
         expect(result.isNoCurrentOffer).toBe(true);
       });
     });
+
     describe('postNewOfferReview', () => {
       it('should set "isFormDisabled" to "true" in case of "postNewOfferReviewAction.pending"', () => {
         const result = dataProcess.reducer(undefined, postNewOfferReviewAction.pending);
@@ -309,6 +310,16 @@ describe('DataProcess slice', () => {
         const result = dataProcess.reducer(undefined, postNewOfferReviewAction.rejected);
         expect(result.isFormDisabled).toBe(false);
       });
+    });
+
+    it('should set "favoriteOffers" to empty array in case of "logoutAction.fulfilled"', () => {
+      const initialState = {
+        ...defaultState,
+        favoriteOffers: [makeFakeFullOffer({})]
+      };
+
+      const result = dataProcess.reducer(initialState, logoutAction.fulfilled);
+      expect(result.favoriteOffers).toEqual([]);
     });
   });
 });
