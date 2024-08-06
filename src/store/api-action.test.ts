@@ -271,16 +271,17 @@ describe('Async actions', () => {
   describe('postNewOfferReviewAction', () => {
     it('should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.fulfilled" in case of server\'s response 200', async () => {
       const stubReview = makeFakeReview();
-      const url = new RegExp(`${APIRoute.Comments}/*`);
-      mockAxiosAdapter.onPost(url).reply(200, stubReview);
-
-      await store.dispatch(postNewOfferReviewAction({
+      const stubReviewInfo = {
         offerId: 'testId',
         reviewData: {
           rating: stubReview.rating,
           comment: stubReview.comment
         }
-      }));
+      };
+      const url = new RegExp(`${APIRoute.Comments}/*`);
+      mockAxiosAdapter.onPost(url).reply(200, stubReview);
+
+      await store.dispatch(postNewOfferReviewAction(stubReviewInfo));
 
       const actions = store.getActions();
       const actionTypes = extractActionsTypes(actions);
@@ -292,6 +293,31 @@ describe('Async actions', () => {
       ]);
 
       expect(postNewOfferReviewFulfilledAction.payload).toEqual(stubReview);
+    });
+
+    it('should call "onSuccess" in case of server\'s response 200 and onSuccess', async () => {
+      const stubOnsuccessStorage = {
+        stubOnSuccess: () => {
+          setTimeout(() => 'success', 100);
+        }
+      };
+      const mockOnSuccess = vi.spyOn(stubOnsuccessStorage, 'stubOnSuccess');
+
+      const stubReview = makeFakeReview();
+      const stubReviewInfo = {
+        offerId: 'testId',
+        reviewData: {
+          rating: stubReview.rating,
+          comment: stubReview.comment
+        },
+        onSuccess: stubOnsuccessStorage.stubOnSuccess
+      };
+      const url = new RegExp(`${APIRoute.Comments}/*`);
+      mockAxiosAdapter.onPost(url).reply(200, stubReview);
+
+      await store.dispatch(postNewOfferReviewAction(stubReviewInfo));
+
+      expect(mockOnSuccess).toBeCalledTimes(1);
     });
 
     it('should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.rejected" in case of server\'s response 400', async () => {
