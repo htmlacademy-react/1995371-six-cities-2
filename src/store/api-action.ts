@@ -112,10 +112,15 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
 }>(
   APIAction.UserLogin,
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
-    saveToken(data.token);
-    dispatch(checkAuthAction());
-    dispatch(redirectToRoute({route: AppRoute.Main}));
+    try {
+      const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      await dispatch(checkAuthAction()).unwrap();
+      dispatch(redirectToRoute({route: AppRoute.Main}));
+    } catch {
+      throw new Error('Login or authentication failed');
+    }
+
   }
 );
 

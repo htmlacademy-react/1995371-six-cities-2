@@ -11,6 +11,8 @@ import { defaultSort } from '../utils/sort-utils';
 import { AuthorizationStatus } from '../const/const';
 import { APIRoute, FavoriteStatusPathNumber } from '../const/api';
 import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction, fetchOfferScreenInfoAction, loginAction, logoutAction, postNewOfferReviewAction, setOfferFavoriteStatusAction } from './api-action';
+import { redirectToRoute } from './action';
+import * as tokenStorage from '../services/token';
 
 describe('Async actions', () => {
   const axios = createAPI();
@@ -348,18 +350,80 @@ describe('Async actions', () => {
   });
 
   describe('loginAction', () => {
-    it('', async () => {
+    it('should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.fulfilled", "redirectToRoute" and "loginAction.fulfilled" in case of  server\'s responses 200', async () => {
       const stubUser = makeFakeUser();
       const stubAuthData = {
         email: stubUser.email,
         password: 'testPassword'
       };
       mockAxiosAdapter.onPost(APIRoute.Login).reply(200, stubUser);
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(200, stubUser);
+
+      await store.dispatch(loginAction(stubAuthData));
+      const actionTypes = extractActionsTypes(store.getActions());
+
+      expect(actionTypes).toEqual([
+        loginAction.pending.type,
+        checkAuthAction.pending.type,
+        checkAuthAction.fulfilled.type,
+        redirectToRoute.type,
+        loginAction.fulfilled.type
+      ]);
+    });
+
+    it('should call "saveToken" once in case of received token', async () => {
+      const stubUser = makeFakeUser();
+      const stubAuthData = {
+        email: stubUser.email,
+        password: 'testPassword'
+      };
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(200, stubUser);
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(400);
+      const mockSaveToken = vi.spyOn(tokenStorage, 'saveToken');
+
+      await store.dispatch(loginAction(stubAuthData));
+
+      expect(mockSaveToken).toBeCalledTimes(1);
+      expect(mockSaveToken).toBeCalledWith(stubUser.token);
+    });
+
+    it('should dispatch "loginAction.pending" and "loginAction.rejected" in case of  server\'s response 400', async () => {
+      const stubUser = makeFakeUser();
+      const stubAuthData = {
+        email: stubUser.email,
+        password: 'testPassword'
+      };
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(400);
+
+      await store.dispatch(loginAction(stubAuthData));
+      const actionTypes = extractActionsTypes(store.getActions());
+
+      expect(actionTypes).toEqual([
+        loginAction.pending.type,
+        loginAction.rejected.type
+      ]);
+    });
+
+    it('should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.rejected" and "loginAction.rejected" in case of  server\'s responses 200 and 400', async () => {
+      const stubUser = makeFakeUser();
+      const stubAuthData = {
+        email: stubUser.email,
+        password: 'testPassword'
+      };
+      mockAxiosAdapter.onPost(APIRoute.Login).reply(200, stubUser);
+      mockAxiosAdapter.onGet(APIRoute.Login).reply(400);
 
       await store.dispatch(loginAction(stubAuthData));
 
       const actions = store.getActions();
       const actionTypes = extractActionsTypes(actions);
+
+      expect(actionTypes).toEqual([
+        loginAction.pending.type,
+        checkAuthAction.pending.type,
+        checkAuthAction.rejected.type,
+        loginAction.rejected.type
+      ]);
     });
   });
 
@@ -373,6 +437,14 @@ describe('Async actions', () => {
         logoutAction.pending.type,
         logoutAction.fulfilled.type
       ]);
+    });
+
+    it('should call "removeToken" once in case of server\'s response 204', async () => {
+      mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
+      const mockRemoveToken = vi.spyOn(tokenStorage, 'removeToken');
+
+      await store.dispatch(logoutAction());
+      expect(mockRemoveToken).toBeCalledTimes(1);
     });
 
     it('should dispatch "logoutAction.pending" and "logoutAction.rejected" in case of server\'s response 404', async () => {
