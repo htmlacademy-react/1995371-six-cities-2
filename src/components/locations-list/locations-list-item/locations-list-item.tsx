@@ -19,6 +19,7 @@ function LocationsListItem({city, handleCityButtonClick, isCurrent}: LocationsLi
         href="#"
         data-city-name={city.name}
         onClickCapture={handleCityButtonClick}
+        data-testid='locationsListItem link'
       >
         <span>{city.name}</span>
       </a>

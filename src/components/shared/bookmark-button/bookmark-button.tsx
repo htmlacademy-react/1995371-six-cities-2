@@ -39,8 +39,9 @@ export default function BookmarkButton({
       className={`button ${bookmarkButtonMode}__bookmark-button ${offer.isFavorite ? `${bookmarkButtonMode}__bookmark-button--active` : ''}`}
       type="button"
       onClick={handleBookmarkButtonClick}
+      data-testid='bookmark button element'
     >
-      <svg className={`${bookmarkButtonMode}__bookmark-icon`} width={isOfferMode ? '31' : '18'} height={isOfferMode ? '33' : '19'}>
+      <svg className={`${bookmarkButtonMode}__bookmark-icon`} width={isOfferMode ? '31' : '18'} height={isOfferMode ? '33' : '19'} data-testid='bookmark img'>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>

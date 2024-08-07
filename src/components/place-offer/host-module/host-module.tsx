@@ -6,15 +6,15 @@ type HostModuleProps = {
 }
 
 export default function HostModule({hostInfo, description}: HostModuleProps): React.JSX.Element {
-  const hostStatus = hostInfo.isPro ? (<span className="offer__user-status">Pro</span>) : null;
+  const hostStatus = hostInfo.isPro ? (<span className="offer__user-status" data-testid='pro marker element'>Pro</span>) : null;
   return (
     <div className="offer__host">
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
         <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-          <img className="offer__avatar user__avatar" src={hostInfo.avatarUrl} width="74" height="74" alt="Host avatar" />
+          <img className="offer__avatar user__avatar" src={hostInfo.avatarUrl} width="74" height="74" alt="Host avatar" data-testid='host avatar element'/>
         </div>
-        <span className="offer__user-name">{hostInfo.name}</span>
+        <span className="offer__user-name" data-testid='hostName element'>{hostInfo.name}</span>
         {hostStatus}
       </div>
       <div className="offer__description">

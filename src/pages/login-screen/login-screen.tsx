@@ -53,6 +53,7 @@ export default function LoginScreen(): React.JSX.Element {
                       name="email"
                       placeholder="Email"
                       required
+                      data-testid='loginElement'
                     />
                   </div>
                   <div className="login__input-wrapper form__input-wrapper">
@@ -64,9 +65,16 @@ export default function LoginScreen(): React.JSX.Element {
                       name="password"
                       placeholder="Password"
                       required
+                      data-testid='passwordElement'
                     />
                   </div>
-                  <button className="login__submit form__submit button" type="submit">Sign in</button>
+                  <button
+                    className="login__submit form__submit button"
+                    type="submit"
+                    data-testid='submitButtonElement'
+                  >
+                    Sign in
+                  </button>
                 </form>
               </section>
               <section className="locations locations--login locations--current">

@@ -19,6 +19,8 @@ export const cities = Object.values(CityPack);
 export const stubFavoriteCities = new Set<string>([CityPack.Cologne.name, CityPack.Hamburg.name]);
 export const getRandomCity = (): TCity => getRandomArrayItem<TCity>(cities);
 export const getRandomSortType = () => getRandomArrayItem(Object.values(SortPack));
+export const makeFakeCityImageUrl = () => image.imageUrl(100, 100, 'city', true);
+export const makeFakeDescription = () => lorem.sentences();
 
 export const makeFakeBaseUser = () => ({
   name: `${name.firstName()} ${name.lastName()}`,

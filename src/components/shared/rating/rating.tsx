@@ -15,9 +15,9 @@ function Rating({
 }: RatingProps): React.JSX.Element {
   const ratingWidthValue = `${2 * roundToInteger(offerRating)}0%`;
   return (
-    <div className={`${ratingViewMode}__rating rating`}>
+    <div className={`${ratingViewMode}__rating rating`} data-testid='rating container'>
       <div className={`${ratingViewMode}__stars rating__stars`}>
-        <span style={{width: ratingWidthValue}}></span>
+        <span style={{width: ratingWidthValue}} data-testid='rating stars'></span>
         <span className="visually-hidden">Rating</span>
       </div>
     </div>
