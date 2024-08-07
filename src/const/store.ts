@@ -10,7 +10,8 @@ enum APIAction {
   DataFetchNearbyOffers = 'data/fetchNearbyOffers',
   DataFetchOfferScreenInfo = 'data/fetchOfferScreenInfo',
   UserCheckAuth = 'user/checkAuth',
-  UserLogin = 'user/login'
+  UserLogin = 'user/login',
+  UserLogout = 'user/logout'
 }
 
 enum StoreNameSpace {

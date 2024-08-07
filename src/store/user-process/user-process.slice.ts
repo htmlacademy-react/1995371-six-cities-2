@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StoreNameSpace } from '../../const/store';
 import { TUserProcessInitialState } from '../../types/state';
 import { AuthorizationStatus } from '../../const/const';
-import { checkAuthAction } from '../api-action';
+import { checkAuthAction, logoutAction } from '../api-action';
 
 
 const initialState: TUserProcessInitialState = {
@@ -25,6 +25,10 @@ export const userProcess = createSlice({
         if (state.userEmail) {
           state.userEmail = '';
         }
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.userEmail = '';
       });
   }
 });

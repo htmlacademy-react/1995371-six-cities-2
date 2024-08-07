@@ -28,7 +28,7 @@ export default function FavoritesScreen(): React.JSX.Element {
           {'page__main--favorites-empty': !isFavoriteOffers}
         )}
       >
-        <div className="page__favorites-container container">
+        <div className="page__favorites-container container" data-testid='favorites container'>
           {isFavoriteOffers
             ? <FavoritesSection />
             : <FavoritesSectionEmpty />}

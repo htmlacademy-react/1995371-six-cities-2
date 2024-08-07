@@ -16,12 +16,12 @@ export default function ProfileLink({
   const ProfileLinkInner = isAuthorized
     ? (
       <>
-        <span className="header__user-name user__name">{userEmail}</span>
-        <span className="header__favorite-count">{favoriteOffers.length}</span>
+        <span className="header__user-name user__name" data-testid='username element'>{userEmail}</span>
+        <span className="header__favorite-count" data-testid='favorites count element'>{favoriteOffers.length}</span>
       </>
     )
     : (
-      <span className="header__login">Sign in</span>
+      <span className="header__login" data-testid='sign in element'>Sign in</span>
     );
 
   return (

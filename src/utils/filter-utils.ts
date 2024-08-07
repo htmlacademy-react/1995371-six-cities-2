@@ -33,11 +33,7 @@ const getFilteredOffers = <T>(
 const getCityFilteredOffers = (
   offers: TShortOffers,
   city: string
-) => {
-  const test = getFilteredOffers<string>(offers, FilterType.City, city);
-  // console.log(test);
-  return test;
-};
+) => getFilteredOffers<string>(offers, FilterType.City, city);
 
 export {
   getFilteredOffers,

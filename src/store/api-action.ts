@@ -4,7 +4,7 @@ import { TAppDispatch, TState } from '../types/state';
 import { TAuthData, TFavoriteInfo, TNewReviewInfo, TOfferId, TOfferInfo, TUserInfo } from '../types/api';
 import { TShortOffers, TOffer, TFullOffers, TFullOffer } from '../types/offers';
 import { TReview, TReviews } from '../types/reviews';
-import { saveToken } from '../services/token';
+import { removeToken, saveToken } from '../services/token';
 import { AppRoute } from '../const/const';
 import { APIRoute, FavoriteStatusPathNumber } from '../const/api';
 import { APIAction } from '../const/store';
@@ -22,7 +22,7 @@ export const fetchOffersAction = createAsyncThunk<TShortOffers, undefined, {
   }
 );
 
-export const fetchFavoriteOffers = createAsyncThunk<TFullOffers, undefined, {
+export const fetchFavoriteOffersAction = createAsyncThunk<TFullOffers, undefined, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
@@ -34,7 +34,7 @@ export const fetchFavoriteOffers = createAsyncThunk<TFullOffers, undefined, {
   }
 );
 
-export const setOfferFavoriteStatus = createAsyncThunk<TFullOffer, TFavoriteInfo, {
+export const setOfferFavoriteStatusAction = createAsyncThunk<TFullOffer, TFavoriteInfo, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
@@ -47,7 +47,7 @@ export const setOfferFavoriteStatus = createAsyncThunk<TFullOffer, TFavoriteInfo
   }
 );
 
-export const fetchOfferScreenInfo = createAsyncThunk<TOfferInfo, TOfferId, {
+export const fetchOfferScreenInfoAction = createAsyncThunk<TOfferInfo, TOfferId, {
   dispatch: TAppDispatch;
   state: TState;
   extra: AxiosInstance;
@@ -112,9 +112,26 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
 }>(
   APIAction.UserLogin,
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
-    saveToken(data.token);
-    dispatch(checkAuthAction());
-    dispatch(redirectToRoute({route: AppRoute.Main}));
+    try {
+      const {data} = await api.post<TUserInfo>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      await dispatch(checkAuthAction()).unwrap();
+      dispatch(redirectToRoute({route: AppRoute.Main}));
+    } catch {
+      throw new Error('Login or authentication failed');
+    }
+
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: TAppDispatch;
+  state: TState;
+  extra: AxiosInstance;
+}>(
+  APIAction.UserLogout,
+  async (_arg, {extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    removeToken();
   }
 );

@@ -7,12 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CityPack } from './const/citypack';
 
 import App from './components/app/app';
-import { checkAuthAction, fetchFavoriteOffers, fetchOffersAction } from './store/api-action';
+import { checkAuthAction, fetchFavoriteOffersAction, fetchOffersAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
+import HistoryRouter from './components/history-router/history-router';
+import browserHistory from './browser-history';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
-store.dispatch(fetchFavoriteOffers());
+store.dispatch(fetchFavoriteOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,10 +23,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer />
-      <App
-        cityPack={CityPack}
-      />
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer />
+        <App
+          cityPack={CityPack}
+        />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

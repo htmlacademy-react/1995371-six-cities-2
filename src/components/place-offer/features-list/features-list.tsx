@@ -14,9 +14,27 @@ function FeaturesList({
 }: FeaturesListProps) {
   return (
     <ul className="offer__features">
-      <li className="offer__feature offer__feature--entire" key="accommodationType">{accommodationType}</li>
-      <li className="offer__feature offer__feature--bedrooms" key="bedroomsAmount">{`${bedroomsAmount} ${bedroomsAmount === 1 ? 'Bedroom' : 'Bedrooms'}`}</li>
-      <li className="offer__feature offer__feature--adults" key="maxAdultsAmount">{`Max ${maxAdultsAmount} ${maxAdultsAmount === 1 ? 'adult' : 'adults'}`}</li>
+      <li
+        className="offer__feature offer__feature--entire"
+        key="accommodationType"
+        data-testid='accommodationType element'
+      >
+        {accommodationType}
+      </li>
+      <li
+        className="offer__feature offer__feature--bedrooms"
+        key="bedroomsAmount"
+        data-testid='bedroomsAmount element'
+      >
+        {`${bedroomsAmount} ${bedroomsAmount === 1 ? 'Bedroom' : 'Bedrooms'}`}
+      </li>
+      <li
+        className="offer__feature offer__feature--adults"
+        key="maxAdultsAmount"
+        data-testid='maxAdultsAmount element'
+      >
+        {`Max ${maxAdultsAmount} ${maxAdultsAmount === 1 ? 'adult' : 'adults'}`}
+      </li>
     </ul>
   );
 }

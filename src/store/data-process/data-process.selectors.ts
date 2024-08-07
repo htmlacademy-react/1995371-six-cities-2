@@ -4,10 +4,11 @@ import { TState } from '../../types/state';
 import { TShortOffers } from '../../types/offers';
 import { getCityFilteredOffers } from '../../utils/filter-utils';
 
-const getCurrentCity = (state: TState) => state[StoreNameSpace.Data].currentCity;
-const getOffers = (state: TState) => state[StoreNameSpace.Data].offers;
+type TStateData = Pick<TState, StoreNameSpace.Data>;
+const getCurrentCity = (state: TStateData) => state[StoreNameSpace.Data].currentCity;
+const getOffers = (state: TStateData) => state[StoreNameSpace.Data].offers;
 
-const getFavoriteOffers = (state: TState) => state[StoreNameSpace.Data].favoriteOffers;
+const getFavoriteOffers = (state: TStateData) => state[StoreNameSpace.Data].favoriteOffers;
 const getFavoriteCities = createSelector(
   getFavoriteOffers,
   (favoriteOffers) => new Set(favoriteOffers.map((offer) => offer.city.name))
@@ -24,19 +25,19 @@ const getFavoriteCityOffers = createSelector(
   }
 );
 
-const getCityOffers = (state: TState) => state[StoreNameSpace.Data].cityOffers;
+const getCityOffers = (state: TStateData) => state[StoreNameSpace.Data].cityOffers;
 const getIsCityOffers = createSelector(
   getCityOffers,
   (cityOffers) => !!cityOffers.length
 );
 
-const getNearbyOffers = (state: TState) => state[StoreNameSpace.Data].nearbyOffers;
-const getCurrentOffer = (state: TState) => state[StoreNameSpace.Data].currentOffer;
-const getCurrentOfferReviews = (state: TState) => state[StoreNameSpace.Data].currentOfferReviews;
-const getCurrentSortType = (state: TState) => state[StoreNameSpace.Data].sortType;
-const getIsLoading = (state: TState) => state[StoreNameSpace.Data].isLoading;
-const getIsNoCurrentOffer = (state: TState) => state[StoreNameSpace.Data].isNoCurrentOffer;
-const getIsFormDisabled = (state: TState) => state[StoreNameSpace.Data].isFormDisabled;
+const getNearbyOffers = (state: TStateData) => state[StoreNameSpace.Data].nearbyOffers;
+const getCurrentOffer = (state: TStateData) => state[StoreNameSpace.Data].currentOffer;
+const getCurrentOfferReviews = (state: TStateData) => state[StoreNameSpace.Data].currentOfferReviews;
+const getCurrentSortType = (state: TStateData) => state[StoreNameSpace.Data].sortType;
+const getIsLoading = (state: TStateData) => state[StoreNameSpace.Data].isLoading;
+const getIsNoCurrentOffer = (state: TStateData) => state[StoreNameSpace.Data].isNoCurrentOffer;
+const getIsFormDisabled = (state: TStateData) => state[StoreNameSpace.Data].isFormDisabled;
 
 export {
   getCurrentCity,
