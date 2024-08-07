@@ -15,8 +15,16 @@ export default function PlacesSorting(): React.JSX.Element {
   const currentSortType = useAppSelector(getCurrentSortType);
 
   useEffect(() => {
-    dispatch(updateSortType(defaultSort));
-    dispatch(updateCityOffersList());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(updateSortType(defaultSort));
+      dispatch(updateCityOffersList());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [currentCity, dispatch]);
 
   function handleSortOptionsList(action: TSortActionMode = SortActionMode.Close) {

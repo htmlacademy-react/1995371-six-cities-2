@@ -25,20 +25,29 @@ export default function OfferScreen(): React.JSX.Element {
   const isNoCurrentOffer = useAppSelector(getIsNoCurrentOffer);
 
   useEffect(() => {
-    if (currentOfferId) {
+    let isMounted = true;
+
+    if (isMounted && currentOfferId) {
       dispatch(fetchOfferScreenInfoAction({offerId: currentOfferId}));
     }
 
     return () => {
       dispatch(clearOfferScreenInfo());
+      isMounted = false;
     };
 
   }, [currentOfferId, dispatch]);
 
   useEffect(() => {
-    if (isNoCurrentOffer) {
+    let isMounted = true;
+
+    if (isMounted && isNoCurrentOffer) {
       dispatch(redirectToRoute({route: AppRoute.Page404}));
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isNoCurrentOffer, dispatch]);
 
   if (!currentOfferId) {
