@@ -17,7 +17,7 @@ export default function Error404Screen(): React.JSX.Element {
             backgroundColor: '#f5f5f5'
           }}
         >
-          <h1>404 Страница не найдена.</h1>
+          <h1 data-testid='screen title element'>404. Страница не найдена.</h1>
           <Link
             to='/'
             style={{

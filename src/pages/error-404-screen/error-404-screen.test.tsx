@@ -4,7 +4,7 @@ import Error404Screen from './error-404-screen';
 
 describe('Component: Error 404 screen', () => {
   it('should render correctly', () => {
-    const expectedTitleText = '404 Страница не найдена.';
+    const expectedTitleText = '404. Страница не найдена.';
     const expectedLinkText = 'Вернуться на главную страницу';
 
     render(withHistory(<Error404Screen />));

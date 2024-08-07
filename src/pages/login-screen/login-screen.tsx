@@ -37,7 +37,7 @@ export default function LoginScreen(): React.JSX.Element {
           <main className="page__main page__main--login">
             <div className="page__login-container container">
               <section className="login">
-                <h1 className="login__title">Sign in</h1>
+                <h1 className="login__title" data-testid='screen title element'>Sign in</h1>
                 <form
                   className="login__form form"
                   action="#"

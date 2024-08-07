@@ -54,7 +54,7 @@ export default function OfferScreen(): React.JSX.Element {
         <title>Six cities. Offer</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--offer">
+      <main className="page__main page__main--offer" data-testid='offerScreen main element'>
         {currentOffer
           ? (
             <PlaceOffer

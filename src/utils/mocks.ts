@@ -2,14 +2,15 @@ import {datatype, lorem, image, commerce, name, date, internet} from 'faker';
 
 import { TCity } from '../types/city';
 import { TFullOffer, TOffer, TOfferBase, TShortOffer } from '../types/offers';
-import { CityPack } from '../const/citypack';
+import { CityPack, DEFAULT_CITY } from '../const/citypack';
 import { getRandomArrayItem, getRandomInteger } from './utils';
-import { AccommodationType } from '../const/const';
-import { SortPack } from './sort-utils';
+import { AccommodationType, AuthorizationStatus } from '../const/const';
+import { defaultSort, SortPack } from './sort-utils';
 import { TReview } from '../types/reviews';
 import { TState } from '../types/state';
 import { createAPI } from '../services/api';
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
+import { StoreNameSpace } from '../const/store';
 
 export type AppThunkDispatch = ThunkDispatch<TState, ReturnType<typeof createAPI>, Action>
 
@@ -74,7 +75,7 @@ type makeFakeOfferProps = {
 export const makeFakeFullOffer = ({shortOffer, city}: makeFakeOfferProps): TFullOffer => {
   const baseOffer = shortOffer ?? makeFakeShortOffer({city});
   const goods = Array.from({length: getRandomInteger(0, 8)}, () => commerce.productName());
-  const images = Array.from({length: getRandomInteger(1, 4)}, () => image.city());
+  const images = Array.from({length: getRandomInteger(1, 4)}, () => makeFakeCityImageUrl());
 
   return {
     ...baseOffer,
@@ -105,3 +106,29 @@ export const makeFakeReview = (): TReview => ({
   comment: lorem.sentences(),
   rating: getRandomInteger(1, 5)
 });
+
+export const makeFakeStoreState = (initialState: Partial<TState> = {}): TState => {
+  const stubshortOffer = makeFakeShortOffer({city: DEFAULT_CITY});
+  return (
+    {
+      [StoreNameSpace.Data]: {
+        currentCity: DEFAULT_CITY,
+        offers: [stubshortOffer, makeFakeShortOffer({})],
+        favoriteOffers: [makeFakeFullOffer({city: DEFAULT_CITY})],
+        cityOffers: [makeFakeShortOffer({city: DEFAULT_CITY})],
+        nearbyOffers: [makeFakeShortOffer({city: DEFAULT_CITY})],
+        currentOffer: makeFakeOffer({shortOffer: stubshortOffer}),
+        currentOfferReviews: [makeFakeReview()],
+        sortType: defaultSort,
+        isLoading: false,
+        isNoCurrentOffer: false,
+        isFormDisabled: false
+      },
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.Unknown,
+        userEmail: ''
+      },
+      ...initialState
+    }
+  );
+};
