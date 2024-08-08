@@ -296,13 +296,7 @@ describe('Async actions', () => {
     });
 
     it('should call "onSuccess" in case of server\'s response 200 and onSuccess', async () => {
-      const stubOnsuccessStorage = {
-        stubOnSuccess: () => {
-          setTimeout(() => 'success', 100);
-        }
-      };
-      const mockOnSuccess = vi.spyOn(stubOnsuccessStorage, 'stubOnSuccess');
-
+      const stubOnsuccessStorage = vi.fn();
       const stubReview = makeFakeReview();
       const stubReviewInfo = {
         offerId: 'testId',
@@ -310,14 +304,14 @@ describe('Async actions', () => {
           rating: stubReview.rating,
           comment: stubReview.comment
         },
-        onSuccess: stubOnsuccessStorage.stubOnSuccess
+        onSuccess: stubOnsuccessStorage
       };
       const url = new RegExp(`${APIRoute.Comments}/*`);
       mockAxiosAdapter.onPost(url).reply(200, stubReview);
 
       await store.dispatch(postNewOfferReviewAction(stubReviewInfo));
 
-      expect(mockOnSuccess).toBeCalledTimes(1);
+      expect(stubOnsuccessStorage).toBeCalledTimes(1);
     });
 
     it('should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.rejected" in case of server\'s response 400', async () => {
