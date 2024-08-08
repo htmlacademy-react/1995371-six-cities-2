@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import RatingStarButton from './rating-star-button';
 
+
 describe('Component: RatingStarButton', () => {
   const inputTestid = 'starButton input';
   const svgTestid = 'starButton input';
   const stubTitle = 'test title text';
-  const stubOnRatingChangeFunction = (newValue: number) => {
-    setTimeout(() => newValue, 3000);
-  };
+  const stubOnRatingChangeFunction = vi.fn();
   const stubValue = 4;
 
   it('should render correctly', () => {
