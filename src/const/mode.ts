@@ -24,6 +24,11 @@ enum RatingViewMode {
   Reviews = 'reviews'
 }
 
+enum PremiumMarkMode {
+  Card = 'place-card',
+  Offer = 'offer',
+}
+
 enum BookmarkButtonMode {
   Card = 'place-card',
   Offer = 'offer',
@@ -40,6 +45,7 @@ export {
   PlaceCardMode,
   HeaderMode,
   RatingViewMode,
+  PremiumMarkMode,
   BookmarkButtonMode,
   PriceViewMode,
 };

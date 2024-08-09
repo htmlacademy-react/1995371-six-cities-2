@@ -46,7 +46,7 @@ describe('Async actions', () => {
   });
 
   describe('fetchOffersAction', () => {
-    it('should dispatch "fetchOffersAction.pending" and "fetchOffersAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "fetchOffersAction.pending" and "fetchOffersAction.fulfilled" in case of server\'s response 200', async () => {
       const stubOffers = [makeFakeShortOffer({})];
       mockAxiosAdapter.onGet(APIRoute.Offers).reply(200, stubOffers);
 
@@ -64,7 +64,7 @@ describe('Async actions', () => {
       expect(fetchOffersFulfilledAction.payload).toEqual(stubOffers);
     });
 
-    it('should dispatch "fetchOffersAction.pending" and "fetchOffersAction.rejected" in case of server\'s response 404', async () => {
+    it('Should dispatch "fetchOffersAction.pending" and "fetchOffersAction.rejected" in case of server\'s response 404', async () => {
       mockAxiosAdapter.onGet(APIRoute.Offers).reply(404);
       await store.dispatch(fetchOffersAction());
       const actionTypes = extractActionsTypes(store.getActions());
@@ -77,7 +77,7 @@ describe('Async actions', () => {
   });
 
   describe('fetchFavoriteOffersAction', () => {
-    it('should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffersAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffersAction.fulfilled" in case of server\'s response 200', async () => {
       const stubFavoriteOffers = [makeFakeFullOffer({})];
       mockAxiosAdapter.onGet(APIRoute.FavoriteOffers).reply(200, stubFavoriteOffers);
 
@@ -95,7 +95,7 @@ describe('Async actions', () => {
       expect(fetchFavoriteOffersFulfilledAction.payload).toEqual(stubFavoriteOffers);
     });
 
-    it('should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffersAction.rejected" in case of server\'s response 401', async () => {
+    it('Should dispatch "fetchFavoriteOffersAction.pending" and "fetchFavoriteOffersAction.rejected" in case of server\'s response 401', async () => {
       mockAxiosAdapter.onGet(APIRoute.FavoriteOffers).reply(401);
       await store.dispatch(fetchFavoriteOffersAction());
       const actionTypes = extractActionsTypes(store.getActions());
@@ -108,7 +108,7 @@ describe('Async actions', () => {
   });
 
   describe('setOfferFavoriteStatusAction', () => {
-    it('should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.fulfilled" in case of server\'s response 200', async () => {
       const stubFullOffer = makeFakeFullOffer({});
       stubFullOffer.isFavorite = false;
 
@@ -133,7 +133,7 @@ describe('Async actions', () => {
       expect(setOfferFavoriteStatusFulfilledAction.payload).toEqual(stubFullOffer);
     });
 
-    it('should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.fulfilled" in case of server\'s response 201', async () => {
+    it('Should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.fulfilled" in case of server\'s response 201', async () => {
       const stubFullOffer = makeFakeFullOffer({});
       stubFullOffer.isFavorite = true;
 
@@ -158,7 +158,7 @@ describe('Async actions', () => {
       expect(setOfferFavoriteStatusFulfilledAction.payload).toEqual(stubFullOffer);
     });
 
-    it('should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.rejected" in case of server\'s response 400', async () => {
+    it('Should dispatch "setOfferFavoriteStatusAction.pending" and "setOfferFavoriteStatusAction.rejected" in case of server\'s response 400', async () => {
 
       const stubFavoriteInfo = {
         offerId: '',
@@ -179,7 +179,7 @@ describe('Async actions', () => {
   });
 
   describe('fetchOfferScreenInfoAction', () => {
-    it('should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.fulfilled" in case of server\'s response 200', async () => {
       const stubCurrentOffer = makeFakeOffer({});
       const {id} = stubCurrentOffer;
       const stubReviews = [makeFakeReview()];
@@ -209,7 +209,7 @@ describe('Async actions', () => {
       expect(fetchOfferScreenInfoFulfilledAction.payload).toEqual(expectedPayload);
     });
 
-    it('should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
+    it('Should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
       const stubCurrentOffer = makeFakeOffer({});
       const {id} = stubCurrentOffer;
       const stubReviews = [makeFakeReview()];
@@ -229,7 +229,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
+    it('Should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
       const stubCurrentOffer = makeFakeOffer({});
       const {id} = stubCurrentOffer;
       const stubNearbyOffers = [makeFakeShortOffer({})];
@@ -248,7 +248,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
+    it('Should dispatch "fetchOfferScreenInfoAction.pending" and "fetchOfferScreenInfoAction.rejected" in case of any server\'s response 404', async () => {
       const stubCurrentOffer = makeFakeOffer({});
       const {id} = stubCurrentOffer;
       const stubReviews = [makeFakeReview()];
@@ -269,7 +269,7 @@ describe('Async actions', () => {
   });
 
   describe('postNewOfferReviewAction', () => {
-    it('should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.fulfilled" in case of server\'s response 200', async () => {
       const stubReview = makeFakeReview();
       const stubReviewInfo = {
         offerId: 'testId',
@@ -295,7 +295,7 @@ describe('Async actions', () => {
       expect(postNewOfferReviewFulfilledAction.payload).toEqual(stubReview);
     });
 
-    it('should call "onSuccess" in case of server\'s response 200 and onSuccess', async () => {
+    it('Should call "onSuccess" in case of server\'s response 200 and onSuccess', async () => {
       const stubOnsuccessStorage = vi.fn();
       const stubReview = makeFakeReview();
       const stubReviewInfo = {
@@ -314,7 +314,7 @@ describe('Async actions', () => {
       expect(stubOnsuccessStorage).toBeCalledTimes(1);
     });
 
-    it('should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.rejected" in case of server\'s response 400', async () => {
+    it('Should dispatch "postNewOfferReviewAction.pending" and "postNewOfferReviewAction.rejected" in case of server\'s response 400', async () => {
       const stubReview = makeFakeReview();
       const url = new RegExp(`${APIRoute.Comments}/*`);
       mockAxiosAdapter.onPost(url).reply(400);
@@ -337,7 +337,7 @@ describe('Async actions', () => {
   });
 
   describe('checkAuthAction', () => {
-    it('should dispatch "checkAuthAction.pending" and "checkAuthAction.fulfilled" in case of server\'s response 200', async () => {
+    it('Should dispatch "checkAuthAction.pending" and "checkAuthAction.fulfilled" in case of server\'s response 200', async () => {
       const stubUser = makeFakeUser();
       mockAxiosAdapter.onGet(APIRoute.Login).reply(200, stubUser);
 
@@ -355,7 +355,7 @@ describe('Async actions', () => {
       expect(checkAuthFulfilledAction.payload).toEqual(stubUser);
     });
 
-    it('should dispatch "checkAuthAction.pending" and "checkAuthAction.rejected" in case of server\'s response 401', async () => {
+    it('Should dispatch "checkAuthAction.pending" and "checkAuthAction.rejected" in case of server\'s response 401', async () => {
       mockAxiosAdapter.onGet(APIRoute.Login).reply(401);
 
       await store.dispatch(checkAuthAction());
@@ -370,7 +370,7 @@ describe('Async actions', () => {
   });
 
   describe('loginAction', () => {
-    it('should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.fulfilled", "redirectToRoute" and "loginAction.fulfilled" in case of  server\'s responses 200', async () => {
+    it('Should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.fulfilled", "redirectToRoute" and "loginAction.fulfilled" in case of  server\'s responses 200', async () => {
       const stubUser = makeFakeUser();
       const stubAuthData = {
         email: stubUser.email,
@@ -391,7 +391,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should call "saveToken" once in case of received token', async () => {
+    it('Should call "saveToken" once in case of received token', async () => {
       const stubUser = makeFakeUser();
       const stubAuthData = {
         email: stubUser.email,
@@ -407,7 +407,7 @@ describe('Async actions', () => {
       expect(mockSaveToken).toBeCalledWith(stubUser.token);
     });
 
-    it('should dispatch "loginAction.pending" and "loginAction.rejected" in case of  server\'s response 400', async () => {
+    it('Should dispatch "loginAction.pending" and "loginAction.rejected" in case of  server\'s response 400', async () => {
       const stubUser = makeFakeUser();
       const stubAuthData = {
         email: stubUser.email,
@@ -424,7 +424,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.rejected" and "loginAction.rejected" in case of  server\'s responses 200 and 400', async () => {
+    it('Should dispatch "loginAction.pending", "checkAuthAction.pending", "checkAuthAction.rejected" and "loginAction.rejected" in case of  server\'s responses 200 and 400', async () => {
       const stubUser = makeFakeUser();
       const stubAuthData = {
         email: stubUser.email,
@@ -448,7 +448,7 @@ describe('Async actions', () => {
   });
 
   describe('logoutAction', () => {
-    it('should dispatch "logoutAction.pending" and "logoutAction.fulfilled" in case of server\'s response 204', async () => {
+    it('Should dispatch "logoutAction.pending" and "logoutAction.fulfilled" in case of server\'s response 204', async () => {
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
 
       await store.dispatch(logoutAction());
@@ -459,7 +459,7 @@ describe('Async actions', () => {
       ]);
     });
 
-    it('should call "removeToken" once in case of server\'s response 204', async () => {
+    it('Should call "removeToken" once in case of server\'s response 204', async () => {
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204);
       const mockRemoveToken = vi.spyOn(tokenStorage, 'removeToken');
 
@@ -467,7 +467,7 @@ describe('Async actions', () => {
       expect(mockRemoveToken).toBeCalledTimes(1);
     });
 
-    it('should dispatch "logoutAction.pending" and "logoutAction.rejected" in case of server\'s response 404', async () => {
+    it('Should dispatch "logoutAction.pending" and "logoutAction.rejected" in case of server\'s response 404', async () => {
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(404);
 
       await store.dispatch(logoutAction());

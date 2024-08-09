@@ -41,28 +41,28 @@ describe('DataProcess selectors', () => {
     }
   };
 
-  it('should return currentCity from state', () => {
+  it('Should return currentCity from state', () => {
     const result = getCurrentCity(state);
     expect(result).toBe(mockCity);
   });
 
-  it('should return offers from state', () => {
+  it('Should return offers from state', () => {
     const result = getOffers(state);
     expect(result).toBe(offers);
   });
 
-  it('should return favoriteOffers from state', () => {
+  it('Should return favoriteOffers from state', () => {
     const result = getFavoriteOffers(state);
     expect(result).toBe(favoriteOffers);
   });
 
-  it('should return favorite offers cities from state', () => {
+  it('Should return favorite offers cities from state', () => {
     const mockFavoriteCities = stubFavoriteCities;
     const result = getFavoriteCities(state);
     expect(result).toEqual(mockFavoriteCities);
   });
 
-  it('should return favoriteCityOffers from state', () => {
+  it('Should return favoriteCityOffers from state', () => {
     const mockFavoriteCities = stubFavoriteCities;
     const mockCityFavoriteOffers = new Map<string, TShortOffers>();
     mockFavoriteCities.forEach((cityName) => {
@@ -78,12 +78,12 @@ describe('DataProcess selectors', () => {
     expect(result).toEqual(mockCityFavoriteOffers);
   });
 
-  it('should return cityOffers from state', () => {
+  it('Should return cityOffers from state', () => {
     const result = getCityOffers(state);
     expect(result).toBe(cityOffers);
   });
 
-  it('should return nearbyOffers from state', () => {
+  it('Should return nearbyOffers from state', () => {
     const result = getNearbyOffers(state);
     expect(result).toBe(nearbyOffers);
   });
@@ -93,30 +93,30 @@ describe('DataProcess selectors', () => {
     expect(result).toBe(currentOffer);
   });
 
-  it('should return currentOffer reviews from state', () => {
+  it('Should return currentOffer reviews from state', () => {
     const result = getCurrentOffer(state);
     expect(result).toBe(currentOffer);
   });
 
-  it('should return current sortType from state', () => {
+  it('Should return current sortType from state', () => {
     const {sortType} = state[StoreNameSpace.Data];
     const result = getCurrentSortType(state);
     expect(result).toBe(sortType);
   });
 
-  it('should return isLoading flag from state', () => {
+  it('Should return isLoading flag from state', () => {
     const {isLoading} = state[StoreNameSpace.Data];
     const result = getIsLoading(state);
     expect(result).toBe(isLoading);
   });
 
-  it('should return isNoCurrentoffer flag from state', () => {
+  it('Should return isNoCurrentoffer flag from state', () => {
     const {isNoCurrentOffer} = state[StoreNameSpace.Data];
     const result = getIsNoCurrentOffer(state);
     expect(result).toBe(isNoCurrentOffer);
   });
 
-  it('should return isFormDisabled flag from state', () => {
+  it('Should return isFormDisabled flag from state', () => {
     const {isFormDisabled} = state[StoreNameSpace.Data];
     const result = getIsFormDisabled(state);
     expect(result).toBe(isFormDisabled);

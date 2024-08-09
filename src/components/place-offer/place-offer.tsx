@@ -1,8 +1,8 @@
 import { TShortOffer, TOffer, TShortOffers } from '../../types/offers';
-import { BookmarkButtonMode, PriceViewMode } from '../../const/mode';
+import { BookmarkButtonMode, PremiumMarkMode, PriceViewMode } from '../../const/mode';
 
 import Gallery from './gallery/gallery';
-import OfferMark from './offer-mark/offer-mark';
+import PremiumMark from '../shared/premium-mark/premium-mark';
 import BookmarkButton from '../shared/bookmark-button/bookmark-button';
 import Rating from '../shared/rating/rating';
 import FeaturesList from './features-list/features-list';
@@ -36,7 +36,7 @@ export default function PlaceOffer({
       </div>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          {currentOffer.isPremium && <OfferMark />}
+          {currentOffer.isPremium && <PremiumMark premiumMarkViewMode={PremiumMarkMode.Offer} />}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">{currentOffer.title}</h1>
             <BookmarkButton offer={currentOffer} bookmarkButtonMode={BookmarkButtonMode.Offer}/>

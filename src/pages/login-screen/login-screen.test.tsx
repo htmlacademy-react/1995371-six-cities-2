@@ -5,13 +5,15 @@ import { AuthorizationStatus } from '../../const/const';
 import { StoreNameSpace } from '../../const/store';
 
 describe('Component: Login screen', () => {
-  it('should render correctly', () => {
-    const expectedTitleText = 'Sign in';
-    const loginLabelText = 'E-mail';
-    const loginDataTestid = 'loginElement';
-    const passwordLabelText = 'Password';
-    const passwordDataTestid = 'passwordElement';
-    const submitButtonDataTestid = 'submitButtonElement';
+  const screenTitleElementTestid = 'screen title element';
+  const loginScreenTitleText = 'Sign in';
+  const loginLabelText = 'E-mail';
+  const loginDataTestid = 'loginElement';
+  const passwordLabelText = 'Password';
+  const passwordDataTestid = 'passwordElement';
+  const submitButtonDataTestid = 'submitButtonElement';
+
+  it('Should render correctly in case of user\'s authorizations status is unknown', () => {
 
     const initialState = {
       [StoreNameSpace.User]: {
@@ -25,11 +27,33 @@ describe('Component: Login screen', () => {
 
     render(preparedComponent);
 
-    expect(screen.getAllByText(expectedTitleText).length).toBe(2);
+    expect(screen.getByTestId(screenTitleElementTestid).textContent).toBe(loginScreenTitleText);
+    expect(screen.getAllByText(loginScreenTitleText).length).toBe(2);
     expect(screen.getByText(loginLabelText)).toBeInTheDocument();
     expect(screen.getByTestId(loginDataTestid)).toBeInTheDocument();
     expect(screen.getByText(passwordLabelText)).toBeInTheDocument();
     expect(screen.getByTestId(passwordDataTestid)).toBeInTheDocument();
     expect(screen.getByTestId(submitButtonDataTestid)).toBeInTheDocument();
+  });
+
+  it('Should render correctly in case of user is authorized', () => {
+    const initialState = {
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.Auth,
+        userEmail: ''
+      }
+    };
+
+    const {withStoreComponent} = withStore(<LoginScreen />, initialState);
+    const preparedComponent = withHistory(withStoreComponent);
+
+    render(preparedComponent);
+
+    expect(screen.queryAllByText(loginScreenTitleText).length).toBe(0);
+    expect(screen.queryByText(loginLabelText)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(loginDataTestid)).not.toBeInTheDocument();
+    expect(screen.queryByText(passwordLabelText)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(passwordDataTestid)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(submitButtonDataTestid)).not.toBeInTheDocument();
   });
 });

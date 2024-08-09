@@ -28,20 +28,20 @@ describe('Redirect middleware', () => {
     browserHistory.push('');
   });
 
-  it('should redirect to "/login"', () => {
+  it('Should redirect to "/login"', () => {
     const redirectToLoginPageAction = redirectToRoute({route: AppRoute.Login});
     store.dispatch(redirectToLoginPageAction);
     expect(browserHistory.location.pathname).toBe(AppRoute.Login);
   });
 
-  it('should redirect to "/offer/someId"', () => {
+  it('Should redirect to "/offer/someId"', () => {
     const route = `${AppRoute.OfferBase}/someId`;
     const redirectToOfferPageAction = redirectToRoute({route: AppRoute.OfferBase, parameter: 'someId'});
     store.dispatch(redirectToOfferPageAction);
     expect(browserHistory.location.pathname).toBe(route);
   });
 
-  it('should not redirect to "/offer/someId" in case of emptyAction', () => {
+  it('Should not redirect to "/offer/someId" in case of emptyAction', () => {
     const route = `${AppRoute.OfferBase}/someId`;
     const emptyAction = {
       type: '',
