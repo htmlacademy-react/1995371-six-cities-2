@@ -35,7 +35,7 @@ export default function PlacesList({
   };
 
   return (
-    <div className={className}>
+    <div className={className} data-testid='places list container'>
       {isLoading && <Spinner description='Ищем лучшие варианты'></Spinner>}
       {offers.map((offer): React.JSX.Element => (
         <PlaceCard

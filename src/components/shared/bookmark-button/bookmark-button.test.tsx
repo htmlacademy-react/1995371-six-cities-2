@@ -20,7 +20,7 @@ describe('Component: BookmarkButton', () => {
     }
   };
 
-  it('should render correctly in case of is favorite', () => {
+  it('Should render correctly in case of is favorite', () => {
     const activeButtonClassName = `${defaultBookmarkButtonMode}__bookmark-button--active`;
 
     const { withStoreComponent } = withStore(<BookmarkButton offer={{...stubOffer, isFavorite: true}} />, initialState);
@@ -31,7 +31,7 @@ describe('Component: BookmarkButton', () => {
     expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of is not favorite', () => {
+  it('Should render correctly in case of is not favorite', () => {
     const buttonClassName = `${defaultBookmarkButtonMode}__bookmark-button`;
     const activeButtonClassName = `${defaultBookmarkButtonMode}__bookmark-button--active`;
 
@@ -44,7 +44,7 @@ describe('Component: BookmarkButton', () => {
     expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of specific mode', () => {
+  it('Should render correctly in case of specific mode', () => {
     const stubMode = BookmarkButtonMode.Offer;
     const buttonClassName = `${stubMode}__bookmark-button`;
 

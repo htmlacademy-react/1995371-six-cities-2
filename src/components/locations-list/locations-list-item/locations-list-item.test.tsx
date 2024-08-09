@@ -11,14 +11,14 @@ describe('Component: LocationsListItem', () => {
   const isCurrentClassName = `${isNotCurrentClassName} tabs__item--active`;
   const locationItemLinkTestid = 'locationsListItem link';
 
-  it('should render correctly in case of is current', () => {
+  it('Should render correctly in case of is current', () => {
     render(<LocationsListItem city={stubCity} handleCityButtonClick={stubHandleCityButtonClickFunction} isCurrent />);
     expect(screen.getByTestId(locationItemLinkTestid)).toBeInTheDocument();
     expect(screen.getByTestId(locationItemLinkTestid).className).toBe(isCurrentClassName);
     expect(screen.getByText(stubCity.name)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of is not current', () => {
+  it('Should render correctly in case of is not current', () => {
     render(<LocationsListItem city={stubCity} handleCityButtonClick={stubHandleCityButtonClickFunction} isCurrent={false} />);
     expect(screen.getByTestId(locationItemLinkTestid)).toBeInTheDocument();
     expect(screen.getByTestId(locationItemLinkTestid).className).toBe(isNotCurrentClassName);

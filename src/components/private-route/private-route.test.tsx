@@ -18,7 +18,7 @@ describe('Component: PrivateRoute', () => {
     mockHistory.push(AppRoute.Favorites);
   });
 
-  it('should render component for public route when user not authorized', () => {
+  it('Should render component for public route when user not authorized', () => {
     const privateText = 'private text';
     const publicText = 'public text';
 
@@ -45,7 +45,7 @@ describe('Component: PrivateRoute', () => {
     expect(screen.queryByText(privateText)).not.toBeInTheDocument();
   });
 
-  it('should render component for private route when user is authorized', () => {
+  it('Should render component for private route when user is authorized', () => {
     const privateText = 'private text';
     const publicText = 'public text';
 
@@ -72,7 +72,7 @@ describe('Component: PrivateRoute', () => {
     expect(screen.queryByText(publicText)).not.toBeInTheDocument();
   });
 
-  it('should render component for private route when authorizationStatus is unknown', () => {
+  it('Should render component for private route when authorizationStatus is unknown', () => {
     const privateText = 'private text';
     const publicText = 'public text';
 

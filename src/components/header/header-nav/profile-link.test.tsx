@@ -38,7 +38,7 @@ describe('Component: ProfileLink', () => {
     }
   };
 
-  it('should render correctly in case of athorized', () => {
+  it('Should render correctly in case of athorized', () => {
 
     const { withStoreComponent } = withStore(<ProfileLink isAuthorized/>, initialState);
     const preparedComponent = withHistory(withStoreComponent);
@@ -49,7 +49,7 @@ describe('Component: ProfileLink', () => {
     expect(screen.getByTestId(favoritesCountTestid)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of unathorized', () => {
+  it('Should render correctly in case of unathorized', () => {
     const { withStoreComponent } = withStore(<ProfileLink isAuthorized={false}/>, initialState);
     const preparedComponent = withHistory(withStoreComponent);
 

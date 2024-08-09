@@ -9,7 +9,7 @@ describe('Component: RatingStarButton', () => {
   const stubOnRatingChangeFunction = vi.fn();
   const stubValue = 4;
 
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
 
     render(
       <RatingStarButton
@@ -28,7 +28,7 @@ describe('Component: RatingStarButton', () => {
     expect(screen.getByTestId(svgTestid)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of isDisabled', () => {
+  it('Should render correctly in case of isDisabled', () => {
 
     render(
       <RatingStarButton

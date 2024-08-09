@@ -11,7 +11,7 @@ describe('Component: HostModule', () => {
   const stubDescription = makeFakeDescription();
   const expectedTitleText = 'Meet the host';
 
-  it('should render correctly in case of is Pro', () => {
+  it('Should render correctly in case of is Pro', () => {
     const stubHost = {
       ...stubBaseHost,
       isPro: true
@@ -25,7 +25,7 @@ describe('Component: HostModule', () => {
     expect(screen.getByText(stubDescription)).toBeInTheDocument();
   });
 
-  it('should render correctly in case of is not Pro', () => {
+  it('Should render correctly in case of is not Pro', () => {
     const stubHost = {
       ...stubBaseHost,
       isPro: false

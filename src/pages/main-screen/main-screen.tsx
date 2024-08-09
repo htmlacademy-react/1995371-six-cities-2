@@ -29,6 +29,7 @@ export default function MainScreen({cityPack}: MainScreenProps): React.JSX.Eleme
           'page__main page__main--index',
           {'page__main--index-empty': isNoOffers}
         )}
+        data-testid='main element'
       >
         <h1 className="visually-hidden" data-testid='screen title element'>Cities</h1>
         <div className="tabs">

@@ -7,7 +7,7 @@ describe('Component: OfferPrice', () => {
   const expectedPriceValueText = `€${stubPrice}`;
   const expectedPriceText = '/ night';
 
-  it('should render correctly in case of default mode', () => {
+  it('Should render correctly in case of default mode', () => {
     const defaultMode = PriceViewMode.Card;
     const priceValueElementClassname = `${defaultMode}__price-value`;
     const priceTextElementClassname = `${defaultMode}__price-text`;
@@ -17,11 +17,11 @@ describe('Component: OfferPrice', () => {
     const priceTextElement = screen.getByText(expectedPriceText);
     expect(priceValueElement).toBeInTheDocument();
     expect(priceTextElement).toBeInTheDocument();
-    expect(priceValueElement.classList.contains(priceValueElementClassname)).toBeTruthy();
-    expect(priceTextElement.classList.contains(priceTextElementClassname)).toBeTruthy();
+    expect(priceValueElement.className).toBe(priceValueElementClassname);
+    expect(priceTextElement.className).toBe(priceTextElementClassname);
   });
 
-  it('should render correctly in case of specific mode', () => {
+  it('Should render correctly in case of specific mode', () => {
     const mode = PriceViewMode.Offer;
     const priceValueElementClassname = `${mode}__price-value`;
     const priceTextElementClassname = `${mode}__price-text`;
@@ -31,7 +31,7 @@ describe('Component: OfferPrice', () => {
     const priceTextElement = screen.getByText(expectedPriceText);
     expect(priceValueElement).toBeInTheDocument();
     expect(priceTextElement).toBeInTheDocument();
-    expect(priceValueElement.classList.contains(priceValueElementClassname)).toBeTruthy();
-    expect(priceTextElement.classList.contains(priceTextElementClassname)).toBeTruthy();
+    expect(priceValueElement.className).toBe(priceValueElementClassname);
+    expect(priceTextElement.className).toBe(priceTextElementClassname);
   });
 });

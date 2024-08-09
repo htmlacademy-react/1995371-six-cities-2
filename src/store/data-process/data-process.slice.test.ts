@@ -27,7 +27,7 @@ describe('DataProcess slice', () => {
     type: ''
   };
 
-  it('should return initial state in case of initialState and emptyAction', () => {
+  it('Should return initial state in case of initialState and emptyAction', () => {
     const initialState = {
       currentCity: DEFAULT_CITY,
       offers: [makeFakeShortOffer({})],
@@ -46,19 +46,19 @@ describe('DataProcess slice', () => {
     expect(result).toEqual(initialState);
   });
 
-  it('should return default initial state in case of undefined state and emptyAction', () => {
+  it('Should return default initial state in case of undefined state and emptyAction', () => {
     const result = dataProcess.reducer(undefined, emptyAction);
     expect(result).toEqual(defaultState);
   });
 
   describe('reducers\' tests', () => {
-    it('should set "currentCity" to another City in case of "updateCurrentCity"', () => {
+    it('Should set "currentCity" to another City in case of "updateCurrentCity"', () => {
       const newCity = getRandomCity();
       const result = dataProcess.reducer(undefined, updateCurrentCity(newCity));
       expect(result.currentCity).toEqual(newCity);
     });
 
-    it('should throw error in case of "updateCurrentCity" and invalid city', () => {
+    it('Should throw error in case of "updateCurrentCity" and invalid city', () => {
       const newCity = {
         name: '',
         location: {
@@ -72,14 +72,14 @@ describe('DataProcess slice', () => {
       }).toThrow('Unknown city');
     });
 
-    it('should set "sortType" to another sortType in case of "updateSortType"', () => {
+    it('Should set "sortType" to another sortType in case of "updateSortType"', () => {
       const newSortTypeAlias = getRandomSortType().Alias;
       const result = dataProcess.reducer(undefined, updateSortType(newSortTypeAlias));
       expect(result.sortType).toBe(newSortTypeAlias);
     });
 
     describe('cityOffers tests', () => {
-      it('should set cityOffers to default array of TSHortOffers in case of updateCityOffersList', () => {
+      it('Should set cityOffers to default array of TSHortOffers in case of updateCityOffersList', () => {
         const firstOffer = {
           ...makeFakeShortOffer({city: DEFAULT_CITY}),
           price: 2,
@@ -110,7 +110,7 @@ describe('DataProcess slice', () => {
         expect(result.cityOffers).toEqual(initialState.offers);
       });
 
-      it('should set cityOffers to rating sorted array of TSHortOffers in case of updateCityOffersList and ToLowerRating sortType', () => {
+      it('Should set cityOffers to rating sorted array of TSHortOffers in case of updateCityOffersList and ToLowerRating sortType', () => {
         const firstOffer = {
           ...makeFakeShortOffer({city: DEFAULT_CITY}),
           price: 2,
@@ -144,7 +144,7 @@ describe('DataProcess slice', () => {
       });
     });
 
-    it('should set "currentOffer", "currentOfferReviews", "nearbyOffers" and "isNoCurrentOffer" to default values in case of "clearOfferScreenInfo" action', () => {
+    it('Should set "currentOffer", "currentOfferReviews", "nearbyOffers" and "isNoCurrentOffer" to default values in case of "clearOfferScreenInfo" action', () => {
       const initialState = {
         ...defaultState,
         nearbyOffers: stubNearbyOffers,
@@ -160,12 +160,12 @@ describe('DataProcess slice', () => {
 
   describe('extraReducers\' tests', () => {
     describe('fetchOffersAction tests', () => {
-      it('should set "isLoading" to "true" in case of "fetchOffersAction.pending"', () => {
+      it('Should set "isLoading" to "true" in case of "fetchOffersAction.pending"', () => {
         const result = dataProcess.reducer(undefined, fetchOffersAction.pending);
         expect(result.isLoading).toBe(true);
       });
 
-      it('should set offers to array of offers, "isLoading" to "false" and update cityOffers in case of "fetchOffersAction.fulfilled"', () => {
+      it('Should set offers to array of offers, "isLoading" to "false" and update cityOffers in case of "fetchOffersAction.fulfilled"', () => {
         const stubOffers = [makeFakeShortOffer({city: DEFAULT_CITY}), makeFakeShortOffer({city: DEFAULT_CITY})];
         const expectedState = {
           currentCity: DEFAULT_CITY,
@@ -185,19 +185,19 @@ describe('DataProcess slice', () => {
         expect(result).toEqual(expectedState);
       });
 
-      it('should set "isLoading" to "false" in case of "fetchOffersAction.rejected"', () => {
+      it('Should set "isLoading" to "false" in case of "fetchOffersAction.rejected"', () => {
         const result = dataProcess.reducer(undefined, fetchOffersAction.rejected);
         expect(result.isLoading).toBe(false);
       });
     });
 
-    it('should set "favoriteOffers" to array of FullOffers in case of "fetchFavoriteOffersAction.fulfilled"', () => {
+    it('Should set "favoriteOffers" to array of FullOffers in case of "fetchFavoriteOffersAction.fulfilled"', () => {
       const stubFavoriteOffers = [makeFakeFullOffer({}), makeFakeFullOffer({})];
       const result = dataProcess.reducer(undefined, fetchFavoriteOffersAction.fulfilled(stubFavoriteOffers, '', undefined));
       expect(result.favoriteOffers).toEqual(stubFavoriteOffers);
     });
 
-    it('should update "isFavorite" value for specific offer in offers, favoriteOffers, cityOffers, nearbyOffers and (conditionally) currentOffer in case of "setOfferFavoriteStatusAction.fulfilled"', () => {
+    it('Should update "isFavorite" value for specific offer in offers, favoriteOffers, cityOffers, nearbyOffers and (conditionally) currentOffer in case of "setOfferFavoriteStatusAction.fulfilled"', () => {
       const stubShortOffer = makeFakeShortOffer({});
       const stubOffer = makeFakeOffer({shortOffer: stubShortOffer});
       const stubFullOffer = {
@@ -245,7 +245,7 @@ describe('DataProcess slice', () => {
     });
 
     describe('fetchOfferScreenInfo tests', () => {
-      it('should set "currentOffer" to Offer, "currentOfferReviews" to array of Reviews, "nearbyOffers" to array of ShortOffers and "isNoCurrentOffer" to "false" in case of "fetchOfferScreenInfoAction.fulfilled"', () => {
+      it('Should set "currentOffer" to Offer, "currentOfferReviews" to array of Reviews, "nearbyOffers" to array of ShortOffers and "isNoCurrentOffer" to "false" in case of "fetchOfferScreenInfoAction.fulfilled"', () => {
         const expectedState = {
           ...defaultState,
           nearbyOffers: stubNearbyOffers,
@@ -267,19 +267,19 @@ describe('DataProcess slice', () => {
         expect(result).toEqual(expectedState);
       });
 
-      it('should set "isNoCurrentOffer" to "true" in case of "fetchOfferScreenInfoAction.rejected"', () => {
+      it('Should set "isNoCurrentOffer" to "true" in case of "fetchOfferScreenInfoAction.rejected"', () => {
         const result = dataProcess.reducer(undefined, fetchOfferScreenInfoAction.rejected);
         expect(result.isNoCurrentOffer).toBe(true);
       });
     });
 
     describe('postNewOfferReview', () => {
-      it('should set "isFormDisabled" to "true" in case of "postNewOfferReviewAction.pending"', () => {
+      it('Should set "isFormDisabled" to "true" in case of "postNewOfferReviewAction.pending"', () => {
         const result = dataProcess.reducer(undefined, postNewOfferReviewAction.pending);
         expect(result.isFormDisabled).toBe(true);
       });
 
-      it('should add newReview to currentOfferReviews and set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.fulfilled"', () => {
+      it('Should add newReview to currentOfferReviews and set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.fulfilled"', () => {
         const newReview = makeFakeReview();
 
         const initialState = {
@@ -306,13 +306,13 @@ describe('DataProcess slice', () => {
         expect(result).toEqual(expectedState);
       });
 
-      it('should set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.rejected"', () => {
+      it('Should set "isFormDisabled" to "false" in case of "postNewOfferReviewAction.rejected"', () => {
         const result = dataProcess.reducer(undefined, postNewOfferReviewAction.rejected);
         expect(result.isFormDisabled).toBe(false);
       });
     });
 
-    it('should set "favoriteOffers" to empty array in case of "logoutAction.fulfilled"', () => {
+    it('Should set "favoriteOffers" to empty array in case of "logoutAction.fulfilled"', () => {
       const initialState = {
         ...defaultState,
         favoriteOffers: [makeFakeFullOffer({})]

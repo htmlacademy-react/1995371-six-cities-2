@@ -19,6 +19,7 @@ export default function ReviewItem({review}: ReviewProps): React.JSX.Element {
             width="54"
             height="54"
             alt="Reviews avatar"
+            data-testid='review author avatar'
           />
         </div>
         <span className="reviews__user-name">{review.user.name}</span>

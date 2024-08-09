@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import FavoritesSectionEmpty from './favorites-section-empty';
 
 describe('Component: FavoritesSectionEmpty', () => {
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const expectedTitleText = 'Favorites (empty)';
     const expectedStatusText = 'Nothing yet saved.';
     const expectedDescriptionText = 'Save properties to narrow down search or plan your future trips.';

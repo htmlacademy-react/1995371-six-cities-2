@@ -17,6 +17,7 @@ export default function FavoritesScreen(): React.JSX.Element {
         'page',
         {'page--favorites-empty': !isFavoriteOffers}
       )}
+      data-testid='screen container'
     >
       <Helmet>
         <title>Six cities. Favorite offers</title>

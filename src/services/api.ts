@@ -13,7 +13,7 @@ const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.NOT_FOUND]: true
 };
 
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const ShouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 import { toast } from 'react-toastify';
 import { getToken } from './token';
@@ -39,7 +39,7 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response && shouldDisplayError(error.response)) {
+      if (error.response && ShouldDisplayError(error.response)) {
         const detailMessage = (error);
         toast.warn(detailMessage.message);
       }

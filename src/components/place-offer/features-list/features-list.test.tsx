@@ -9,7 +9,7 @@ describe('Component: FeaturesList', () => {
 
   const stubAccommodationType = AccommodationType.House;
 
-  it('should render correctly in case of singular props values', () => {
+  it('Should render correctly in case of singular props values', () => {
     const stubBedroomsAmount = 1;
     const stubMaxAdultsAmount = 1;
     const bedroomsAmountText = '1 Bedroom';
@@ -32,7 +32,7 @@ describe('Component: FeaturesList', () => {
     expect(screen.getByTestId(maxAdultsAmountTestid).textContent).toBe(maxAdultsAmountText);
   });
 
-  it('should render correctly in case of plural props values', () => {
+  it('Should render correctly in case of plural props values', () => {
     const stubBedroomsAmount = 3;
     const stubMaxAdultsAmount = 3;
     const bedroomsAmountText = '3 Bedrooms';

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import GoodsInsideModule from './goods-inside-module';
 
 describe('Component: GoodsInsideModule', () => {
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const goodsListTestid = 'goods list';
     const expectedTitleText = 'What\'s inside';
     const stubGoods = [
