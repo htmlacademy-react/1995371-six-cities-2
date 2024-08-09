@@ -9,7 +9,6 @@ import { PlaceCardMode } from '../../../../const/mode';
 import Rating from '../../rating/rating';
 import BookmarkButton from '../../bookmark-button/bookmark-button';
 import OfferPrice from '../../offer-price/offer-price';
-import { useRef } from 'react';
 
 type PlaceCardProps = {
   offer: TShortOffer;
@@ -24,7 +23,6 @@ export default function PlaceCard({
   onMouseEnter,
   onMouseLeave
 }: PlaceCardProps): React.JSX.Element {
-  const cardRef = useRef<HTMLElement | null>(null);
   const isFavoriteMode = cardMode === PlaceCardMode.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
@@ -43,7 +41,6 @@ export default function PlaceCard({
       className={`place-card ${classNamePrefix}__card`}
       onMouseEnter={handleMouseEnterEvent}
       onMouseLeave={handleMouseLeaveEvent}
-      ref={cardRef}
     >
       {offer.isPremium && (
         <div className="place-card__mark">
