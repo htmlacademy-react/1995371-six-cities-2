@@ -1,11 +1,13 @@
+import { TCity } from '../types/city';
 import { TShortOffers } from '../types/offers';
+import { getCityFilteredOffers } from './filter-utils';
 
 const SORT_OPTIONS_OPEN_CLASSNAME = 'places__options--opened';
 
-const sortToHigherPrice = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => currentOffer.price - nextOffer.price);
-const sortToLowerPrice = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.price - currentOffer.price);
-const sortToLowerRating = (offers: TShortOffers | []) => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.rating - currentOffer.rating);
-const sortPopular = (offers: TShortOffers | []) => offers;
+const sortToHigherPrice = (offers: TShortOffers): TShortOffers => offers.slice().sort((currentOffer, nextOffer): number => currentOffer.price - nextOffer.price);
+const sortToLowerPrice = (offers: TShortOffers): TShortOffers => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.price - currentOffer.price);
+const sortToLowerRating = (offers: TShortOffers): TShortOffers => offers.slice().sort((currentOffer, nextOffer): number => nextOffer.rating - currentOffer.rating);
+const sortPopular = (offers: TShortOffers, city: TCity): TShortOffers => getCityFilteredOffers(offers, city.name);
 
 const SortPack = {
   Popular: {

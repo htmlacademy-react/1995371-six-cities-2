@@ -1,7 +1,7 @@
 import { TBookmarkButtonMode } from '../../../types/common';
 import { TOfferBase } from '../../../types/offers';
 import { BookmarkButtonMode } from '../../../const/mode';
-import { setOfferFavoriteStatus } from '../../../store/api-action';
+import { setOfferFavoriteStatusAction } from '../../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
 import { AppRoute, AuthorizationStatus } from '../../../const/const';
@@ -28,7 +28,7 @@ export default function BookmarkButton({
       return;
     }
 
-    dispatch(setOfferFavoriteStatus({
+    dispatch(setOfferFavoriteStatusAction({
       offerId: offer.id,
       isFavorite: !offer.isFavorite
     }));
@@ -39,8 +39,9 @@ export default function BookmarkButton({
       className={`button ${bookmarkButtonMode}__bookmark-button ${offer.isFavorite ? `${bookmarkButtonMode}__bookmark-button--active` : ''}`}
       type="button"
       onClick={handleBookmarkButtonClick}
+      data-testid='bookmark button element'
     >
-      <svg className={`${bookmarkButtonMode}__bookmark-icon`} width={isOfferMode ? '31' : '18'} height={isOfferMode ? '33' : '19'}>
+      <svg className={`${bookmarkButtonMode}__bookmark-icon`} width={isOfferMode ? '31' : '18'} height={isOfferMode ? '33' : '19'} data-testid='bookmark img'>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>

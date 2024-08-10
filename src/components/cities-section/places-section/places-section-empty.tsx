@@ -1,8 +1,8 @@
-type NoPlacesSectionProps = {
+type PlacesSectionEmptyProps = {
   cityTitle: string;
 }
 
-export default function NoPlacesSection({cityTitle}: NoPlacesSectionProps): React.JSX.Element {
+export default function PlacesSectionEmpty({cityTitle}: PlacesSectionEmptyProps): React.JSX.Element {
   return (
     <section className="cities__no-places">
       <div className="cities__status-wrapper tabs__content">

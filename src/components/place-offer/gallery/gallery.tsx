@@ -7,7 +7,7 @@ export default function Gallery({imageUrls}: GalleryProps): React.JSX.Element {
     <div className="offer__gallery">
       {imageUrls.map((url) => (
         <div className="offer__image-wrapper" key={url}>
-          <img className="offer__image" src={url} alt="Photo studio" />
+          <img className="offer__image" src={url} alt="Photo studio" data-testid='gallery image'/>
         </div>
       ))}
     </div>

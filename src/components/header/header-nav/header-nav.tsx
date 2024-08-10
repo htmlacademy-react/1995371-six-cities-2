@@ -1,8 +1,8 @@
 import { AuthorizationStatus } from '../../../const/const';
 import { useAppSelector } from '../../../hooks';
 import { getAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
-import ProfileLink from '../links/profile-link';
-import SignOutLink from '../links/sign-out-link';
+import ProfileLink from './profile-link';
+import SignOutLink from './sign-out-link';
 
 export default function HeaderNav() {
   const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);

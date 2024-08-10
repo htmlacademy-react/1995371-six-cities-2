@@ -3,7 +3,7 @@ import { TSortActionMode, } from '../../types/sort';
 import { updateSortType, updateCityOffersList } from '../../store/data-process/data-process.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isKnownSortName } from '../../utils/type-guard';
-import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../const/sort';
+import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../utils/sort-utils';
 import { ClassnameActionMode, SortActionMode } from '../../const/mode';
 import { handleClassName } from '../../utils/utils';
 import { getCurrentCity, getCurrentSortType } from '../../store/data-process/data-process.selectors';
@@ -15,8 +15,16 @@ export default function PlacesSorting(): React.JSX.Element {
   const currentSortType = useAppSelector(getCurrentSortType);
 
   useEffect(() => {
-    dispatch(updateSortType(defaultSort));
-    dispatch(updateCityOffersList());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(updateSortType(defaultSort));
+      dispatch(updateCityOffersList());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [currentCity, dispatch]);
 
   function handleSortOptionsList(action: TSortActionMode = SortActionMode.Close) {

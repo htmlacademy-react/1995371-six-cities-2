@@ -35,31 +35,35 @@ export default function Map({
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    if (!map) {
-      return;
-    }
+    let isMounted = true;
 
-    map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    if (isMounted && map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
 
-    const markerLayer = layerGroup().addTo(map);
-    points.forEach((point) => {
-      const marker = new Marker({
-        lat: point.location.latitude,
-        lng: point.location.longitude
+      const markerLayer = layerGroup().addTo(map);
+      points.forEach((point) => {
+        const marker = new Marker({
+          lat: point.location.latitude,
+          lng: point.location.longitude
+        });
+
+        marker
+          .setIcon(
+            selectedPoints && selectedPoints.some((selectedPoint) => selectedPoint.id === point.id)
+              ? currentCustomIcon
+              : defaultCustomIcon)
+          .addTo(markerLayer);
       });
 
-      marker
-        .setIcon(
-          selectedPoints && selectedPoints.some((selectedPoint) => selectedPoint.id === point.id)
-            ? currentCustomIcon
-            : defaultCustomIcon)
-        .addTo(markerLayer);
-    });
+      return () => {
+        map.removeLayer(markerLayer);
+        isMounted = false;
+      };
+    }
 
     return () => {
-      map.removeLayer(markerLayer);
+      isMounted = false;
     };
-
   }, [map, city, points, selectedPoints]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;

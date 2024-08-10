@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, PlacesListWrapperClassName, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
 import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
-import { fetchOfferScreenInfo } from '../../store/api-action';
+import { fetchOfferScreenInfoAction } from '../../store/api-action';
 import { useEffect } from 'react';
 import { getCurrentOffer, getIsNoCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
 import { clearOfferScreenInfo } from '../../store/data-process/data-process.slice';
@@ -25,20 +25,29 @@ export default function OfferScreen(): React.JSX.Element {
   const isNoCurrentOffer = useAppSelector(getIsNoCurrentOffer);
 
   useEffect(() => {
-    if (currentOfferId) {
-      dispatch(fetchOfferScreenInfo({offerId: currentOfferId}));
+    let isMounted = true;
+
+    if (isMounted && currentOfferId) {
+      dispatch(fetchOfferScreenInfoAction({offerId: currentOfferId}));
     }
 
     return () => {
       dispatch(clearOfferScreenInfo());
+      isMounted = false;
     };
 
   }, [currentOfferId, dispatch]);
 
   useEffect(() => {
-    if (isNoCurrentOffer) {
+    let isMounted = true;
+
+    if (isMounted && isNoCurrentOffer) {
       dispatch(redirectToRoute({route: AppRoute.Page404}));
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isNoCurrentOffer, dispatch]);
 
   if (!currentOfferId) {
@@ -54,7 +63,7 @@ export default function OfferScreen(): React.JSX.Element {
         <title>Six cities. Offer</title>
       </Helmet>
       <Header />
-      <main className="page__main page__main--offer">
+      <main className="page__main page__main--offer" data-testid='offerScreen main element'>
         {currentOffer
           ? (
             <PlaceOffer

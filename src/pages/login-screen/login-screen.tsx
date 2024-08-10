@@ -1,12 +1,12 @@
-import { HeaderMode } from '../../const/mode';
-import Header from '../../components/header/header';
-import { Helmet } from 'react-helmet-async';
 import { useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
-import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
+import { HeaderMode } from '../../const/mode';
+import Header from '../../components/header/header';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export default function LoginScreen(): React.JSX.Element {
           <main className="page__main page__main--login">
             <div className="page__login-container container">
               <section className="login">
-                <h1 className="login__title">Sign in</h1>
+                <h1 className="login__title" data-testid='screen title element'>Sign in</h1>
                 <form
                   className="login__form form"
                   action="#"
@@ -53,6 +53,7 @@ export default function LoginScreen(): React.JSX.Element {
                       name="email"
                       placeholder="Email"
                       required
+                      data-testid='loginElement'
                     />
                   </div>
                   <div className="login__input-wrapper form__input-wrapper">
@@ -64,9 +65,16 @@ export default function LoginScreen(): React.JSX.Element {
                       name="password"
                       placeholder="Password"
                       required
+                      data-testid='passwordElement'
                     />
                   </div>
-                  <button className="login__submit form__submit button" type="submit">Sign in</button>
+                  <button
+                    className="login__submit form__submit button"
+                    type="submit"
+                    data-testid='submitButtonElement'
+                  >
+                    Sign in
+                  </button>
                 </form>
               </section>
               <section className="locations locations--login locations--current">
