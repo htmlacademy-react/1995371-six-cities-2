@@ -10,7 +10,7 @@ import OfferPrice from '../shared/offer-price/offer-price';
 import GoodsInsideModule from './goods-inside-module/goods-inside-module';
 import HostModule from './host-module/host-module';
 import ReviewsSection from '../reviews-section/reviews-section';
-import Map from '../ map/map';
+import Map from '../map/map';
 import { getOffer } from '../../utils/offers-utils';
 
 type PlaceOfferProps = {
