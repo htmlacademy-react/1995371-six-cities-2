@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
-import LoginScreen from './login-screen';
+import userEvent from '@testing-library/user-event';
 import { AuthorizationStatus } from '../../const/const';
 import { StoreNameSpace } from '../../const/store';
+import { withHistory, withStore } from '../../utils/mock-component';
+import LoginScreen from './login-screen';
 
 describe('Component: Login screen', () => {
   const screenTitleElementTestid = 'screen title element';

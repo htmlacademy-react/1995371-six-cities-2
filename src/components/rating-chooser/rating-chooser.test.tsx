@@ -9,8 +9,8 @@ vi.mock('./rating-star-button/rating-star-button', () => ({
 
 const stubOnRatingChangeFunction = vi.fn();
 
-describe('', () => {
-  it('', () => {
+describe('Component: RatingChooser', () => {
+  it('Should render correctly', () => {
     const expectedButtonsAmount = Object.keys(RatingStarTitle).length;
     render(<RatingChooser currentRatingValue={1} onRatingChange={stubOnRatingChangeFunction} isDisabled={false} />);
     expect(screen.getAllByTestId(starButtonTestid).length).toBe(expectedButtonsAmount);
