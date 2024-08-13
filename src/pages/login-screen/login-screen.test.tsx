@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AuthorizationStatus } from '../../const/const';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { StoreNameSpace } from '../../const/store';
 import { withHistory, withStore } from '../../utils/mock-component';
 import LoginScreen from './login-screen';
+import { Route, Routes } from 'react-router-dom';
+import { createMemoryHistory, MemoryHistory } from 'history';
 
 describe('Component: Login screen', () => {
   const screenTitleElementTestid = 'screen title element';
@@ -13,6 +15,14 @@ describe('Component: Login screen', () => {
   const passwordLabelText = 'Password';
   const passwordDataTestid = 'passwordElement';
   const submitButtonDataTestid = 'submitButtonElement';
+  const isAuthText = 'is authorized';
+
+  let mockHistory: MemoryHistory;
+
+  beforeEach(() => {
+    mockHistory = createMemoryHistory();
+    mockHistory.push(AppRoute.Login);
+  });
 
   it('Should render correctly in case of user\'s authorizations status is unknown', () => {
 
@@ -23,11 +33,18 @@ describe('Component: Login screen', () => {
       }
     };
 
-    const {withStoreComponent} = withStore(<LoginScreen />, initialState);
-    const preparedComponent = withHistory(withStoreComponent);
+    const {withStoreComponent} = withStore(
+      <Routes>
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Main} element={<div>{isAuthText}</div>} />
+      </Routes>,
+      initialState
+    );
+    const preparedComponent = withHistory(withStoreComponent, mockHistory);
 
     render(preparedComponent);
 
+    expect(screen.queryByText(isAuthText)).not.toBeInTheDocument();
     expect(screen.getByTestId(screenTitleElementTestid).textContent).toBe(loginScreenTitleText);
     expect(screen.getAllByText(loginScreenTitleText).length).toBe(2);
     expect(screen.getByText(loginLabelText)).toBeInTheDocument();
@@ -45,11 +62,18 @@ describe('Component: Login screen', () => {
       }
     };
 
-    const {withStoreComponent} = withStore(<LoginScreen />, initialState);
-    const preparedComponent = withHistory(withStoreComponent);
+    const {withStoreComponent} = withStore(
+      <Routes>
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Main} element={<div>{isAuthText}</div>} />
+      </Routes>,
+      initialState
+    );
+    const preparedComponent = withHistory(withStoreComponent, mockHistory);
 
     render(preparedComponent);
 
+    expect(screen.getByText(isAuthText)).toBeInTheDocument();
     expect(screen.queryAllByText(loginScreenTitleText).length).toBe(0);
     expect(screen.queryByText(loginLabelText)).not.toBeInTheDocument();
     expect(screen.queryByTestId(loginDataTestid)).not.toBeInTheDocument();
