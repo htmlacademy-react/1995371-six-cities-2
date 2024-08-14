@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { getRandomCity } from '../../../utils/mocks';
 import LocationsListItem from './locations-list-item';
+import userEvent from '@testing-library/user-event';
 
 describe('Component: LocationsListItem', () => {
   const stubCity = getRandomCity();
-  const stubHandleCityButtonClickFunction = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    evt.preventDefault();
-  };
+  const stubHandleCityButtonClickFunction = vi.fn();
   const isNotCurrentClassName = 'locations__item-link tabs__item';
   const isCurrentClassName = `${isNotCurrentClassName} tabs__item--active`;
   const locationItemLinkTestid = 'locationsListItem link';
@@ -23,5 +22,13 @@ describe('Component: LocationsListItem', () => {
     expect(screen.getByTestId(locationItemLinkTestid)).toBeInTheDocument();
     expect(screen.getByTestId(locationItemLinkTestid).className).toBe(isNotCurrentClassName);
     expect(screen.getByText(stubCity.name)).toBeInTheDocument();
+  });
+
+  it('Should call onClick function when user clicks', async () => {
+    render(<LocationsListItem city={stubCity} handleCityButtonClick={stubHandleCityButtonClickFunction} isCurrent={false} />);
+
+    await userEvent.click(screen.getByTestId(locationItemLinkTestid));
+
+    expect(stubHandleCityButtonClickFunction).toBeCalledTimes(1);
   });
 });
