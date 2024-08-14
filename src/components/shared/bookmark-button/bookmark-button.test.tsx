@@ -1,10 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { AuthorizationStatus } from '../../../const/const';
+import { AppRoute, AuthorizationStatus } from '../../../const/const';
 import { StoreNameSpace } from '../../../const/store';
 import { BookmarkButtonMode } from '../../../const/mode';
 import { makeFakeShortOffer } from '../../../utils/mocks';
 import { withStore } from '../../../utils/mock-component';
 import BookmarkButton from './bookmark-button';
+import userEvent from '@testing-library/user-event';
+import * as action from '../../../store/action';
+import * as apiAction from '../../../store/api-action';
 
 describe('Component: BookmarkButton', () => {
   const bookmarkButtonTestid = 'bookmark button element';
@@ -54,5 +57,34 @@ describe('Component: BookmarkButton', () => {
     expect(screen.getByTestId(bookmarkButtonTestid).classList.contains(buttonClassName)).toBeTruthy();
     expect(screen.getByTestId(bookmarkImgTestid)).toBeInTheDocument();
     expect(screen.getByText(expectedText)).toBeInTheDocument();
+  });
+
+  it('should dispatch redirect to login screen in case of click and user is not authorized', async () => {
+    const stubState = {
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        userEmail: ''
+      }
+    };
+
+    const redirectToRouteSpy = vi.spyOn(action, 'redirectToRoute');
+
+    const { withStoreComponent } = withStore(<BookmarkButton offer={stubOffer} />, stubState);
+    render(withStoreComponent);
+
+    await userEvent.click(screen.getByTestId(bookmarkButtonTestid));
+
+    expect(redirectToRouteSpy).toHaveBeenCalledWith({ route: AppRoute.Login });
+  });
+
+  it('should dispatch setOfferFavoriteStatusAction in case of click and user is authorized', async () => {
+    const setOfferFavoriteStatusActionSpy = vi.spyOn(apiAction, 'setOfferFavoriteStatusAction');
+
+    const { withStoreComponent } = withStore(<BookmarkButton offer={stubOffer} />, initialState);
+    render(withStoreComponent);
+
+    await userEvent.click(screen.getByTestId(bookmarkButtonTestid));
+
+    expect(setOfferFavoriteStatusActionSpy).toHaveBeenCalledWith({offerId: stubOffer.id, isFavorite: !stubOffer.isFavorite});
   });
 });
