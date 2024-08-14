@@ -49,7 +49,7 @@ vi.mock('../reviews-section/reviews-section', () => ({
   default: () => <div data-testid='mocked ReviewsSection'>Mocked location item</div>
 }));
 
-vi.mock('../ map/map', () => ({
+vi.mock('../map/map', () => ({
   default: () => <div data-testid='mocked Map'>Mocked map</div>
 }));
 
