@@ -3,6 +3,7 @@ import { PlaceCardMode } from '../../../../const/mode';
 import { makeFakeShortOffer } from '../../../../utils/mocks';
 import { withHistory } from '../../../../utils/mock-component';
 import PlaceCard from './place-card';
+import userEvent from '@testing-library/user-event';
 
 const premiumMarkTestid = 'mocked PremiumMark';
 const priceTestid = 'mocked OfferPrice';
@@ -32,18 +33,19 @@ describe('Component: PlaceCard', () => {
   const titleTestid = 'card title';
   const typeTestid = 'card type';
 
+  const stubDefaultOffer = makeFakeShortOffer({});
   const stubMouseEventHandler = vi.fn();
+  const defaultCardMode = PlaceCardMode.Default;
   const defaultInfoClassname = 'place-card__info';
   const favoriteInfoClassname = 'place-card__info favorites__card-info';
 
   it('Should render correctly in case of default place card mode and premium offer, ', () => {
-    const cardMode = PlaceCardMode.Default;
     const stubOffer = {
-      ...makeFakeShortOffer({}),
+      ...stubDefaultOffer,
       isPremium: true
     };
     const expectedCardClassname = 'place-card cities__card';
-    const preparedComponent = withHistory(<PlaceCard offer={stubOffer} cardMode={cardMode} onMouseEnter={stubMouseEventHandler} onMouseLeave={stubMouseEventHandler} />);
+    const preparedComponent = withHistory(<PlaceCard offer={stubOffer} cardMode={defaultCardMode} onMouseEnter={stubMouseEventHandler} onMouseLeave={stubMouseEventHandler} />);
 
     render(preparedComponent);
     expect(screen.getByTestId(cardTestid).className).toBe(expectedCardClassname);
@@ -60,7 +62,7 @@ describe('Component: PlaceCard', () => {
   it('Should render correctly in case of default place card mode and premium offer, ', () => {
     const cardMode = PlaceCardMode.Favorite;
     const stubOffer = {
-      ...makeFakeShortOffer({}),
+      ...stubDefaultOffer,
       isPremium: false
     };
     const expectedCardClassname = 'place-card favorites__card';
@@ -76,5 +78,45 @@ describe('Component: PlaceCard', () => {
     expect(screen.getByTestId(ratingTestid)).toBeInTheDocument();
     expect(screen.getByTestId(titleTestid).textContent).toBe(stubOffer.title);
     expect(screen.getByTestId(typeTestid).textContent).toBe(stubOffer.type);
+  });
+
+  it('Should call onMouseEnter function when user hovers place card', async () => {
+    const stubHoverHandler = vi.fn();
+    const stubUnhoverHandler = vi.fn();
+    const preparedComponent = withHistory(
+      <PlaceCard
+        offer={stubDefaultOffer}
+        cardMode={defaultCardMode}
+        onMouseEnter={stubHoverHandler}
+        onMouseLeave={stubUnhoverHandler}
+      />
+    );
+    render(preparedComponent);
+
+    await userEvent.hover(
+      screen.getByTestId(cardTestid)
+    );
+
+    expect(stubHoverHandler).toBeCalledTimes(1);
+  });
+
+  it('Should call onMouseLeave function when user unhovers place card', async () => {
+    const stubHoverHandler = vi.fn();
+    const stubUnhoverHandler = vi.fn();
+    const preparedComponent = withHistory(
+      <PlaceCard
+        offer={stubDefaultOffer}
+        cardMode={defaultCardMode}
+        onMouseEnter={stubHoverHandler}
+        onMouseLeave={stubUnhoverHandler}
+      />
+    );
+    render(preparedComponent);
+
+    await userEvent.unhover(
+      screen.getByTestId(cardTestid)
+    );
+
+    expect(stubUnhoverHandler).toBeCalledTimes(1);
   });
 });
