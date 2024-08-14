@@ -48,6 +48,7 @@ export default function CitiesSection(): React.JSX.Element {
           'cities__places-container container',
           {'cities__places-container--empty': isNoOffers}
         )}
+        data-testid='cities section container'
       >
         {isNoOffers
           ? (<PlacesSectionEmpty cityTitle={currentCity.name}/>)
