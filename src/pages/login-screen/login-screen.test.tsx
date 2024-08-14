@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { StoreNameSpace } from '../../const/store';
@@ -6,6 +6,7 @@ import { withHistory, withStore } from '../../utils/mock-component';
 import LoginScreen from './login-screen';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import * as apiAction from '../../store/api-action';
 
 describe('Component: Login screen', () => {
   const screenTitleElementTestid = 'screen title element';
@@ -80,5 +81,84 @@ describe('Component: Login screen', () => {
     expect(screen.queryByText(passwordLabelText)).not.toBeInTheDocument();
     expect(screen.queryByTestId(passwordDataTestid)).not.toBeInTheDocument();
     expect(screen.queryByTestId(submitButtonDataTestid)).not.toBeInTheDocument();
+  });
+
+  it('Should render correctly when user enter login and password', async () => {
+    const initialState = {
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        userEmail: ''
+      }
+    };
+
+    const expectedLoginValue = 'testLogin';
+    const expectedPasswordValue = 'testPassword1234';
+
+    const {withStoreComponent} = withStore(
+      <Routes>
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Main} element={<div>{isAuthText}</div>} />
+      </Routes>,
+      initialState
+    );
+    const preparedComponent = withHistory(withStoreComponent, mockHistory);
+
+    render(preparedComponent);
+
+    await userEvent.type(
+      screen.getByTestId(loginDataTestid),
+      expectedLoginValue
+    );
+
+    await userEvent.type(
+      screen.getByTestId(passwordDataTestid),
+      expectedPasswordValue
+    );
+
+    expect(screen.getByDisplayValue(expectedLoginValue)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(expectedPasswordValue)).toBeInTheDocument();
+  });
+
+  it('Should dispatch loginAction in case of submit with login and password', async () => {
+    const initialState = {
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.NoAuth,
+        userEmail: ''
+      }
+    };
+
+    const expectedLoginValue = 'testLogin@mail.com';
+    const expectedPasswordValue = 'testPassword1234';
+
+    const loginActionSpy = vi.spyOn(apiAction, 'loginAction');
+    const loginFormTestid = 'login form element';
+
+    const {withStoreComponent} = withStore(
+      <Routes>
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Main} element={<div>{isAuthText}</div>} />
+      </Routes>,
+      initialState
+    );
+    const preparedComponent = withHistory(withStoreComponent, mockHistory);
+
+    render(preparedComponent);
+
+    await userEvent.type(
+      screen.getByTestId(loginDataTestid),
+      expectedLoginValue
+    );
+
+    await userEvent.type(
+      screen.getByTestId(passwordDataTestid),
+      expectedPasswordValue
+    );
+
+    fireEvent.submit(screen.getByTestId(loginFormTestid));
+
+    expect(loginActionSpy).toHaveBeenCalledWith({
+      email: expectedLoginValue,
+      password: expectedPasswordValue
+    });
   });
 });

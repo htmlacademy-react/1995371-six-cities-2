@@ -43,6 +43,7 @@ export default function LoginScreen(): React.JSX.Element {
                   action="#"
                   method="post"
                   onSubmit={handleFormSubmit}
+                  data-testid='login form element'
                 >
                   <div className="login__input-wrapper form__input-wrapper">
                     <label className="visually-hidden">E-mail</label>
