@@ -38,6 +38,7 @@ export default function RatingStarButton({
         htmlFor={idValue}
         className='reviews__rating-label form__rating-label'
         title={title}
+        data-testid='starButton label'
       >
         <svg className='form__star-image' width='37' height='33' data-testid='starButton img'>
           <use xlinkHref='#icon-star'></use>
