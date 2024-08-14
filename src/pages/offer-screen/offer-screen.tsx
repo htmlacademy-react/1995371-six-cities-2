@@ -1,18 +1,18 @@
 import { Navigate, useParams } from 'react-router-dom';
 
-import Header from '../../components/header/header';
-import PlaceOffer from '../../components/place-offer/place-offer';
-import PlacesList from '../../components/shared/places-list/places-list';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, PlacesListWrapperClassName, SHOWED_NEARBY_OFFERS_AMOUNT } from '../../const/const';
-import Spinner from '../../components/shared/spinner/spinner';
 import { getRandomArrayItems } from '../../utils/utils';
 import { fetchOfferScreenInfoAction } from '../../store/api-action';
 import { useEffect } from 'react';
 import { getCurrentOffer, getIsNoCurrentOffer, getNearbyOffers, getOffers } from '../../store/data-process/data-process.selectors';
 import { clearOfferScreenInfo } from '../../store/data-process/data-process.slice';
 import { redirectToRoute } from '../../store/action';
+import Header from '../../components/header/header';
+import PlaceOffer from '../../components/place-offer/place-offer';
+import PlacesList from '../../components/shared/places-list/places-list';
+import Spinner from '../../components/shared/spinner/spinner';
 
 export default function OfferScreen(): React.JSX.Element {
   const params = useParams();
