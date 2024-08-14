@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 
 import { ReviewInitStateValue, ReviewLength } from '../../../const/review-const';
-import RatingChooser from '../../rating-chooser/rating-chooser';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { postNewOfferReviewAction } from '../../../store/api-action';
 import { isCommentsLengthValid } from '../../../utils/offers-utils';
 import { getCurrentOffer, getIsFormDisabled } from '../../../store/data-process/data-process.selectors';
+import RatingChooser from '../../rating-chooser/rating-chooser';
 
 export default function ReviewForm(): React.JSX.Element {
 
@@ -43,7 +43,13 @@ export default function ReviewForm(): React.JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+      data-testid='review form element'
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <RatingChooser
         currentRatingValue={reviewData.rating}
@@ -60,9 +66,10 @@ export default function ReviewForm(): React.JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewTextChange}
         disabled={isFormDisabled}
+        data-testid='review text element'
       />
       <div className="reviews__button-wrapper">
-        <p className="reviews__help">
+        <p className="reviews__help" data-testid='help text element'>
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isFormDisabled || !isDataValid}>Submit</button>
