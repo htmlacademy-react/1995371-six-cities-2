@@ -7,6 +7,7 @@ import { defaultSort, SORT_OPTIONS_OPEN_CLASSNAME, SortPack } from '../../utils/
 import { ClassnameActionMode, SortActionMode } from '../../const/mode';
 import { handleClassName } from '../../utils/utils';
 import { getCurrentCity, getCurrentSortType } from '../../store/data-process/data-process.selectors';
+import PlacesSortingOption from './places-sorting-option/places-sorting-option';
 
 export default function PlacesSorting(): React.JSX.Element {
   const sortOptionsListRef = useRef<HTMLUListElement>(null);
@@ -59,27 +60,23 @@ export default function PlacesSorting(): React.JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleSortTypeClick}>
+      <span className="places__sorting-type" tabIndex={0} onClick={handleSortTypeClick} data-testid='sort type title'>
         {SortPack[currentSortType].Title}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className="places__options places__options--custom" ref={sortOptionsListRef}>
-        {Object.values(SortPack).map((sortItem) => {
-          const sortOptionClassName = `places__option ${sortItem.Alias === currentSortType ? 'places__option--active' : ''}`;
-          return (
-            <li
-              key={sortItem.Alias}
-              className={sortOptionClassName}
-              data-sort-name={sortItem.Alias}
-              tabIndex={0}
-              onClick={handleSortItemClick}
-            >
-              {sortItem.Title}
-            </li>
-          );
-        })}
+      <ul className="places__options places__options--custom" ref={sortOptionsListRef} data-testid='sort options list'>
+        {Object.values(SortPack).map((sortItem) => (
+          <PlacesSortingOption
+            key={sortItem.Alias}
+            sortItemAlias={sortItem.Alias}
+            sortItemTitle={sortItem.Title}
+            currentSortType={currentSortType}
+            onClick={handleSortItemClick}
+          />
+        )
+        )}
       </ul>
     </form>
   );
