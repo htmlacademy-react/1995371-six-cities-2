@@ -7,7 +7,7 @@ type ReviewsListProps = {
 
 export default function ReviewsList({reviews}: ReviewsListProps): React.JSX.Element {
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid='reviews list element'>
       {reviews.map((review) => (
         <ReviewItem review={review} key={review.id}/>
       ))}

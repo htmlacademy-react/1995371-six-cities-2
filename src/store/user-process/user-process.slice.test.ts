@@ -20,23 +20,23 @@ describe('userProcess slice', () => {
     type: ''
   };
 
-  it('should return initialState in case of initialState and emptyAction', () => {
+  it('Should return initialState in case of initialState and emptyAction', () => {
     const result = userProcess.reducer(initialState, emptyAction);
     expect(result).toEqual(initialState);
   });
 
-  it('should return defaultState in case of undefined state and emptyAction', () => {
+  it('Should return defaultState in case of undefined state and emptyAction', () => {
     const result = userProcess.reducer(undefined, emptyAction);
     expect(result).toEqual(defaultState);
   });
 
-  it('should set authorizationStatus to "AUTH" and set userEmail in case of "checkAuthAction.fulfilled" action', () => {
+  it('Should set authorizationStatus to "AUTH" and set userEmail in case of "checkAuthAction.fulfilled" action', () => {
     const expectedState = initialState;
     const result = userProcess.reducer(undefined, checkAuthAction.fulfilled(stubUser, '', undefined));
     expect(result).toEqual(expectedState);
   });
 
-  it('should set authorizationStatus to "AUTH" and clear userEmail in case of "checkAuthAction.rejected" action', () => {
+  it('Should set authorizationStatus to "AUTH" and clear userEmail in case of "checkAuthAction.rejected" action', () => {
     const expectedState = {
       authorizationStatus: AuthorizationStatus.NoAuth,
       userEmail: '',
@@ -46,7 +46,7 @@ describe('userProcess slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "authorizationStatus" to "AuthorizationStatus.NoAuth" and "userEmail" to "" in case of "logoutAction.fulfilled"', () => {
+  it('Should set "authorizationStatus" to "AuthorizationStatus.NoAuth" and "userEmail" to "" in case of "logoutAction.fulfilled"', () => {
     const expectedState = {
       authorizationStatus: AuthorizationStatus.NoAuth,
       userEmail: '',

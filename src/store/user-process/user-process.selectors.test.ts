@@ -12,13 +12,13 @@ describe('UserProcess selectors', () => {
     }
   };
 
-  it('should return authorization status from state', () => {
+  it('Should return authorization status from state', () => {
     const {authorizationStatus} = state[StoreNameSpace.User];
     const result = getAuthorizationStatus(state);
     expect(result).toBe(authorizationStatus);
   });
 
-  it('should return user email from state', () => {
+  it('Should return user email from state', () => {
     const {userEmail} = state[StoreNameSpace.User];
     const result = getUserEmail(state);
     expect(result).toBe(userEmail);

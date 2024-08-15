@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { TShortOffers } from '../../types/offers';
 import { useAppSelector } from '../../hooks';
 import { getOffer } from '../../utils/offers-utils';
-import Map from '../ map/map';
+import Map from '../map/map';
 import PlacesSection from './places-section/places-section';
 import PlacesSectionEmpty from './places-section/places-section-empty';
 import {
@@ -48,6 +48,7 @@ export default function CitiesSection(): React.JSX.Element {
           'cities__places-container container',
           {'cities__places-container--empty': isNoOffers}
         )}
+        data-testid='cities section container'
       >
         {isNoOffers
           ? (<PlacesSectionEmpty cityTitle={currentCity.name}/>)

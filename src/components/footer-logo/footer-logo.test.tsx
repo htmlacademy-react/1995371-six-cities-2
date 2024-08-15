@@ -3,7 +3,7 @@ import FooterLogo from './footer-logo';
 import { withHistory } from '../../utils/mock-component';
 
 describe('Component: Footer Logo', () => {
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const expectedAlt = '6 cities logo';
     const preparedComponent = withHistory(<FooterLogo />);
 

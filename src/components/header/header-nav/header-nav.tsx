@@ -1,13 +1,21 @@
 import { AuthorizationStatus } from '../../../const/const';
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { logoutAction } from '../../../store/api-action';
 import { getAuthorizationStatus } from '../../../store/user-process/user-process.selectors';
 import ProfileLink from './profile-link';
 import SignOutLink from './sign-out-link';
 
 export default function HeaderNav() {
+  const dispatch = useAppDispatch();
+
+  const handleSignoutLinkClick = (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
+
   const currentAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = currentAuthorizationStatus === AuthorizationStatus.Auth;
-  const signOutElement = isAuthorized && <SignOutLink />;
+  const signOutElement = isAuthorized && <SignOutLink onClick={handleSignoutLinkClick} />;
 
   return (
     <nav className="header__nav">

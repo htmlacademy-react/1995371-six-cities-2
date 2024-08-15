@@ -9,7 +9,7 @@ import { PlaceCardMode } from '../../../../const/mode';
 import Rating from '../../rating/rating';
 import BookmarkButton from '../../bookmark-button/bookmark-button';
 import OfferPrice from '../../offer-price/offer-price';
-import { useRef } from 'react';
+import PremiumMark from '../../premium-mark/premium-mark';
 
 type PlaceCardProps = {
   offer: TShortOffer;
@@ -24,7 +24,6 @@ export default function PlaceCard({
   onMouseEnter,
   onMouseLeave
 }: PlaceCardProps): React.JSX.Element {
-  const cardRef = useRef<HTMLElement | null>(null);
   const isFavoriteMode = cardMode === PlaceCardMode.Favorite;
   const classNamePrefix = isFavoriteMode ? 'favorites' : 'cities';
 
@@ -43,13 +42,9 @@ export default function PlaceCard({
       className={`place-card ${classNamePrefix}__card`}
       onMouseEnter={handleMouseEnterEvent}
       onMouseLeave={handleMouseLeaveEvent}
-      ref={cardRef}
+      data-testid='place card element'
     >
-      {offer.isPremium && (
-        <div className="place-card__mark">
-          <span>Premium</span>
-        </div>
-      )}
+      {offer.isPremium && <PremiumMark />}
       <div className={`place-card__image-wrapper ${classNamePrefix}__image-wrapper`}>
         <Link to={`${AppRoute.OfferBase}/${offer.id}`}>
           <img
@@ -58,6 +53,7 @@ export default function PlaceCard({
             width={isFavoriteMode ? '150' : '260'}
             height={isFavoriteMode ? '110' : '200'}
             alt="Place image"
+            data-testid='card image'
           />
         </Link>
       </div>
@@ -66,6 +62,7 @@ export default function PlaceCard({
           'place-card__info',
           {'favorites__card-info': isFavoriteMode}
         )}
+        data-testid='card info element'
       >
         <div className="place-card__price-wrapper">
           <OfferPrice offerPrice={offer.price} />
@@ -73,9 +70,9 @@ export default function PlaceCard({
         </div>
         <Rating offerRating={offer.rating} />
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.OfferBase}${offer.id}`}>{offer.title}</Link>
+          <Link to={`${AppRoute.OfferBase}${offer.id}`} data-testid='card title'>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type" data-testid='card type'>{offer.type}</p>
       </div>
     </article>
   );

@@ -4,7 +4,7 @@ import { roundToInteger } from '../../../utils/utils';
 import Rating from './rating';
 
 describe('Component: Rating', () => {
-  it('should render correctly in case of default rating mode', () => {
+  it('Should render correctly in case of default rating mode', () => {
     const ratingContainerTestid = 'rating container';
     const ratingStarsTestid = 'rating stars';
     const defaultRatingMode = RatingViewMode.Card;
@@ -22,7 +22,7 @@ describe('Component: Rating', () => {
     expect(screen.getByTestId(ratingStarsTestid).style.width).toBe(ratingWidthValue);
   });
 
-  it('should render correctly in case of specific rating mode', () => {
+  it('Should render correctly in case of specific rating mode', () => {
     const ratingContainerTestid = 'rating container';
     const ratingStarsTestid = 'rating stars';
     const ratingMode = RatingViewMode.Reviews;

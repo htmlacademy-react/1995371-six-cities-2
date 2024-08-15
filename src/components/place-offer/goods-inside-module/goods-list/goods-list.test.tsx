@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import GoodsList from './goods-list';
 
 describe('Component: GoodsList', () => {
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const goodItemTestid = 'good item';
     const stubGoods = [
       'product1',

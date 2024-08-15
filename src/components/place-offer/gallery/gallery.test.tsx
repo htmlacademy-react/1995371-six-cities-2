@@ -4,7 +4,7 @@ import Gallery from './gallery';
 
 describe('Component: Gallery', () => {
   const imageTestid = 'gallery image';
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const stubImageUrls = [
       makeFakeCityImageUrl(),
       makeFakeCityImageUrl()

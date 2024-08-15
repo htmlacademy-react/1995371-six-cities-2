@@ -30,7 +30,7 @@ export default function LocationsList({cityPack}: LocationsListProps): React.JSX
   }, [cityPack, currentCity, dispatch]);
 
   return (
-    <ul className="locations__list tabs__list">
+    <ul className="locations__list tabs__list" data-testid='locations list element'>
       {cities.map((city) => {
         const isCurrent = (city.name === currentCity.name) && (city.location.latitude === currentCity.location.latitude);
 

@@ -15,14 +15,14 @@ export default function FavoriteLocationsList({cities, cityOffers}: FavoriteLoca
       }
 
       return (
-        <FavoriteLocationItem key={city} city={city} filteredOffers={filteredOffers}/>
+        <FavoriteLocationItem key={city} cityName={city} filteredOffers={filteredOffers}/>
       );
 
     })
     .filter((element) => !!element);
 
   return (
-    <ul className="favorites__list">
+    <ul className="favorites__list" data-testid='favorites list element'>
       {locationItemsLists}
     </ul>
   );

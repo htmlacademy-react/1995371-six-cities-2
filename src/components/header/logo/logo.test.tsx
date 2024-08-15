@@ -3,7 +3,7 @@ import { withHistory } from '../../../utils/mock-component';
 import Logo from './logo';
 
 describe('Component: Logo', () => {
-  it('should render correctly', () => {
+  it('Should render correctly', () => {
     const imgAltText = '6 cities logo';
     const preparedComponent = withHistory(<Logo />);
 
