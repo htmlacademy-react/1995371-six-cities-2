@@ -7,7 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import LoginScreen from './login-screen';
 import * as apiAction from '../../store/api-action';
-import { cities } from '../../utils/mocks';
+import { dataProcess } from '../../store/data-process/data-process.slice';
+import { cities, makeFakeStoreState } from '../../utils/mocks';
 
 describe('Component: Login screen', () => {
   const screenTitleElementTestid = 'screen title element';
@@ -164,5 +165,37 @@ describe('Component: Login screen', () => {
       email: expectedLoginValue,
       password: expectedPasswordValue
     });
+  });
+
+  it('Should dispatch updateCurrentCity and updateCityOffersList in case of user\'s click', async () => {
+    const dataActions = dataProcess.actions;
+    // const updateCurrentCitySpy = vi.spyOn(actions, 'updateCurrentCity');
+    const initialState = {
+      ...makeFakeStoreState(),
+      [StoreNameSpace.User]: {
+        authorizationStatus: AuthorizationStatus.Unknown,
+        userEmail: ''
+      }
+    };
+
+    const {withStoreComponent, mockStore} = withStore(
+      <Routes>
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route path={AppRoute.Main} element={<div>{isAuthText}</div>} />
+      </Routes>,
+      initialState
+    );
+
+
+    const preparedComponent = withHistory(withStoreComponent, mockHistory);
+
+    render(preparedComponent);
+
+    await userEvent.click(screen.getByTestId(cityFilterButtonTestid));
+
+    const actions = mockStore.getActions();
+    expect(actions.length).toBe(2);
+    expect(actions[0].type).toBe(dataActions.updateCurrentCity.type);
+    expect(actions[1].type).toBe(dataActions.updateCityOffersList.type);
   });
 });
