@@ -1,12 +1,14 @@
 import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { HeaderMode } from '../../const/mode';
 import Header from '../../components/header/header';
+import { getRandomCity } from '../../utils/mocks';
+import { updateCurrentCity, updateCityOffersList } from '../../store/data-process/data-process.slice';
 
 export default function LoginScreen(): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,6 +16,8 @@ export default function LoginScreen(): React.JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const randomCity = getRandomCity();
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -23,6 +27,11 @@ export default function LoginScreen(): React.JSX.Element {
         password: passwordRef.current.value
       }));
     }
+  };
+
+  const handleCityFilterButtonClick = () => {
+    dispatch(updateCurrentCity(randomCity));
+    dispatch(updateCityOffersList());
   };
 
   return (
@@ -54,7 +63,7 @@ export default function LoginScreen(): React.JSX.Element {
                       name="email"
                       placeholder="Email"
                       required
-                      data-testid='loginElement'
+                      data-testid='login element'
                     />
                   </div>
                   <div className="login__input-wrapper form__input-wrapper">
@@ -66,13 +75,13 @@ export default function LoginScreen(): React.JSX.Element {
                       name="password"
                       placeholder="Password"
                       required
-                      data-testid='passwordElement'
+                      data-testid='password element'
                     />
                   </div>
                   <button
                     className="login__submit form__submit button"
                     type="submit"
-                    data-testid='submitButtonElement'
+                    data-testid='submit button element'
                   >
                     Sign in
                   </button>
@@ -80,9 +89,14 @@ export default function LoginScreen(): React.JSX.Element {
               </section>
               <section className="locations locations--login locations--current">
                 <div className="locations__item">
-                  <a className="locations__item-link" href="#">
-                    <span>Amsterdam</span>
-                  </a>
+                  <Link
+                    to={AppRoute.Main}
+                    className="locations__item-link"
+                    onClick={handleCityFilterButtonClick}
+                    data-testid='city filter button element'
+                  >
+                    <span>{randomCity.name}</span>
+                  </Link>
                 </div>
               </section>
             </div>

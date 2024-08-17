@@ -3,19 +3,21 @@ import userEvent from '@testing-library/user-event';
 import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { StoreNameSpace } from '../../const/store';
 import { withHistory, withStore } from '../../utils/mock-component';
-import LoginScreen from './login-screen';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import LoginScreen from './login-screen';
 import * as apiAction from '../../store/api-action';
+import { cities } from '../../utils/mocks';
 
 describe('Component: Login screen', () => {
   const screenTitleElementTestid = 'screen title element';
   const loginScreenTitleText = 'Sign in';
   const loginLabelText = 'E-mail';
-  const loginDataTestid = 'loginElement';
+  const loginDataTestid = 'login element';
   const passwordLabelText = 'Password';
-  const passwordDataTestid = 'passwordElement';
-  const submitButtonDataTestid = 'submitButtonElement';
+  const passwordDataTestid = 'password element';
+  const submitButtonDataTestid = 'submit button element';
+  const cityFilterButtonTestid = 'city filter button element';
   const isAuthText = 'is authorized';
 
   let mockHistory: MemoryHistory;
@@ -53,6 +55,7 @@ describe('Component: Login screen', () => {
     expect(screen.getByText(passwordLabelText)).toBeInTheDocument();
     expect(screen.getByTestId(passwordDataTestid)).toBeInTheDocument();
     expect(screen.getByTestId(submitButtonDataTestid)).toBeInTheDocument();
+    expect(cities.some((city) => city.name === screen.getByTestId(cityFilterButtonTestid).textContent)).toBeTruthy();
   });
 
   it('Should render correctly in case of user is authorized', () => {
@@ -81,6 +84,7 @@ describe('Component: Login screen', () => {
     expect(screen.queryByText(passwordLabelText)).not.toBeInTheDocument();
     expect(screen.queryByTestId(passwordDataTestid)).not.toBeInTheDocument();
     expect(screen.queryByTestId(submitButtonDataTestid)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(cityFilterButtonTestid)).not.toBeInTheDocument();
   });
 
   it('Should render correctly when user enter login and password', async () => {
