@@ -148,7 +148,7 @@ export const dataProcess = createSlice({
         state.isFormDisabled = true;
       })
       .addCase(postNewOfferReviewAction.fulfilled, (state, action) => {
-        state.currentOfferReviews = [...state.currentOfferReviews, action.payload];
+        state.currentOfferReviews = [action.payload, ...state.currentOfferReviews];
         state.isFormDisabled = false;
       })
       .addCase(postNewOfferReviewAction.rejected, (state) => {
